@@ -469,35 +469,6 @@ footer p {
   padding: 0 25px 20px;
 }
 
-/* تحسين التجاوب مع شاشات الجوال */
-@media (max-width: 768px) {
-    .faq-section {
-        padding: 15px 10px; /* تقليل الهوامش الجانبية */
-        width: 92%; /* جعل القسم يأخذ معظم عرض الشاشة */
-        margin: 0 auto;
-    }
-
-    .faq-item {
-        margin-bottom: 12px;
-    }
-
-    .faq-question {
-        font-size: 0.95rem; /* تصغير حجم الخط قليلاً ليناسب الشاشة */
-        padding: 12px;
-        flex-direction: row-reverse; /* للتأكد من اتجاه العناصر من اليمين لليسار */
-    }
-
-    .faq-answer {
-        font-size: 0.85rem;
-        padding: 10px;
-    }
-
-    /* تعديل حجم الخط لشريط التنقل (الهيدر) إذا كان مزدحماً على الجوال */
-    nav a {
-        font-size: 0.8rem;
-        padding: 5px 3px;
-    }
-}
 /* تنسيقات الهيدر الأساسية للشاشات الكبيرة */
 header {
     display: flex;
