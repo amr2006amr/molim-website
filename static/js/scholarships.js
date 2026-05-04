@@ -35,6 +35,7 @@ function renderCards(list) {
       </span>
       <p class="desc">${s.description}</p>
       <p class="deadline">📅 آخر موعد: ${s.deadline}</p>
+      <a href="scholarship.html?id=${s.id}" class="btn-details">تفاصيل المنحة كاملة ←</a>
       <a href="${s.link}" target="_blank">زيارة الموقع الرسمي ↗</a>
     `;
     grid.appendChild(card);

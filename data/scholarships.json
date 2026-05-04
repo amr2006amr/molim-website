@@ -1,20 +1,34 @@
 [
   {
-    
+    "id": "study-in-saudi",
     "name": "منحة ادرس في السعودية",
     "name_en": "Study in Saudi Arabia",
     "country": "المملكة العربية السعودية",
     "flag": "https://flagcdn.com/w40/sa.png",
-    "degree": "بكالوريوس، ماجستير، دكتوراه",
+    "degree": "بكالوريوس، ماجستير، دكتوراه, دبلوم",
     "description": "منصة حكومية موحدة تجمع أكبر الجامعات السعودية وتقدم منحاً مجانية كاملة للطلاب الدوليين من جميع دول العالم.",
-    "benefits": ["رسوم دراسية كاملة", "سكن جامعي", "تأمين صحي", "مكافأة شهرية", "تذاكر سفر سنوية"],
-    "requirements": ["شهادة ثانوية, جواز سفر ", "ألا يمضي على التخرج أكثر من 5 سنوات", "عدم الحصول على منحة سعودية سابقة"],
+    "benefits": ["رسوم دراسية كاملة", "سكن جامعي", "تأمين صحي", "مكافأة شهرية 990 ريال", "تذاكر سفر سنوية"],
+    "requirements": ["شهادة ثانوية, جواز سفر ", "ألا يمضي على التخرج أكثر من 5 سنوات", "عدم الحصول على منحة سعودية سابقة, التلخيص الامني"],
+    "documents": {
+  "required": [
+    "جواز سفر ساري المفعول — إجباري",
+    "شهادة الثانوية العامة موثقة — إجباري",
+    "شهادة خلو سوابق — إجباري",
+    "خطاب سبب الرغبة بالدراسة في السعودية — إجباري"
+  ],
+  "optional": [
+    "خطاب توصية",
+    "CV",
+    "فحص طبي",
+    "شهادة لغة"
+  ]
+},
     "deadline": "2026-5-21",
     "link": "https://studyinsaudi.moe.gov.sa/",
     "open": true
   },
   {
-    
+    "id": "china-csc",
     "name": "منحة الحكومة الصينية",
     "name_en": "Chinese Government Scholarship (CSC)",
     "country": "الصين",
@@ -28,6 +42,7 @@
     "open": false
   },
   {
+    "id": "turkey-gov",
     "name": "منحة الحكومة التركية",
     "name_en": "Türkiye Scholarships",
     "country": "تركيا",
@@ -41,6 +56,7 @@
     "open": false
   },
   {
+    "id": "brunei-gov",
     "name": "منحة حكومة بروناي",
     "name_en": "Brunei Government Scholarship",
     "country": "بروناي",
@@ -54,6 +70,7 @@
     "open": false
   },
   {
+    "id": "russia=gov",
     "name": "منحة الحكومة الروسية",
     "name_en": "Russian Government Scholarship",
     "country": "روسيا",
@@ -67,6 +84,7 @@
     "open": false
   },
   {
+    "id": "open-doors",
     "name": "منحة أوبن دورز",
     "name_en": "Open Doors Olympiad Scholarship",
     "country": "روسيا",
@@ -80,6 +98,7 @@
     "open": false
   },
   {
+    "id": "kazakhstan-gov",
     "name": "منحة حكومة كازاخستان",
     "name_en": "Kazakhstan Government Scholarship",
     "country": "كازاخستان",
@@ -93,6 +112,7 @@
     "open": true
   },
   {
+    "id": "india-iccr",
     "name": "منحة حكومة الهند",
     "name_en": "ICCR India Scholarship",
     "country": "الهند",

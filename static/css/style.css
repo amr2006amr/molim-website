@@ -319,3 +319,100 @@ footer p {
 .youtube   { background: #ff0000; }
 .instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 .twitter   { background: #1a1a2e; border-color: #fff2; }
+.btn-details {
+  display: block;
+  text-align: center;
+  background: transparent;
+  color: #6c63ff;
+  padding: 10px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  border: 2px solid #6c63ff;
+  margin-top: 8px;
+  transition: all 0.3s;
+}
+
+.btn-details:hover {
+  background: #6c63ff;
+  color: white;
+}
+/* ===== DETAILS PAGE ===== */
+.details-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.details-hero {
+  text-align: center;
+  padding: 40px 20px;
+  background: #16213e;
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.details-flag {
+  width: 80px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.details-hero h1 {
+  font-size: 36px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.details-hero p {
+  color: #aaa;
+  margin-bottom: 15px;
+}
+
+.details-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.details-card {
+  background: #1a1a2e;
+  border-radius: 12px;
+  padding: 25px;
+  border: 1px solid #2a2a4a;
+}
+
+.details-card h2 {
+  font-size: 20px;
+  color: #6c63ff;
+  margin-bottom: 15px;
+}
+
+.details-card p {
+  color: #ccc;
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+.details-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.details-card ul li {
+  color: #ccc;
+  padding: 8px 0;
+  border-bottom: 1px solid #2a2a4a;
+  line-height: 1.6;
+}
+
+.details-card ul li:last-child {
+  border-bottom: none;
+}
+
+.details-card ul li::before {
+  content: "✓ ";
+  color: #6c63ff;
+  font-weight: 700;
+}
