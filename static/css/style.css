@@ -8,7 +8,7 @@
 
 body {
   font-family: 'Tajawal', sans-serif;
-  background: #0f0f1a;
+  background: #1a0a2e;
   color: #f0f0f0;
   direction: rtl;
 }
@@ -19,8 +19,8 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-  background: #1a1a2e;
-  border-bottom: 2px solid #6c63ff;
+  background: #2d1b4e;
+  border-bottom: 2px solid #5b2d8e;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -35,7 +35,7 @@ header {
 .logo-ar {
   font-size: 28px;
   font-weight: 900;
-  color: #6c63ff;
+  color: #5b2d8e;
 }
 
 .logo-en {
@@ -53,20 +53,20 @@ nav a {
 }
 
 nav a:hover {
-  color: #6c63ff;
+  color: #5b2d8e;
 }
 
 /* ===== HERO ===== */
 .hero {
   text-align: center;
   padding: 100px 20px;
-  background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+  background: linear-gradient(135deg, #2d1b4e, #3b1f6b, #0f3460);
 }
 
 .hero h1 {
   font-size: 72px;
   font-weight: 900;
-  color: #6c63ff;
+  color: #5b2d8e;
   margin-bottom: 15px;
 }
 
@@ -77,7 +77,7 @@ nav a:hover {
 }
 
 .btn-main {
-  background: #6c63ff;
+  background: #5b2d8e;
   color: white;
   padding: 14px 40px;
   border-radius: 30px;
@@ -99,8 +99,8 @@ nav a:hover {
 .featured h2 {
   font-size: 30px;
   margin-bottom: 30px;
-  color: #6c63ff;
-  border-right: 4px solid #6c63ff;
+  color: #5b2d8e;
+  border-right: 4px solid #5b2d8e;
   padding-right: 15px;
 }
 
@@ -112,7 +112,7 @@ nav a:hover {
 
 /* ===== CARD ===== */
 .card {
-  background: #1a1a2e;
+  background: #2d1b4e;
   border-radius: 12px;
   padding: 20px;
   border: 1px solid #2a2a4a;
@@ -121,7 +121,7 @@ nav a:hover {
 
 .card:hover {
   transform: translateY(-5px);
-  border-color: #6c63ff;
+  border-color: #5b2d8e;
 }
 
 .card-flag {
@@ -144,7 +144,7 @@ nav a:hover {
 }
 
 .card .degree {
-  color: #6c63ff;
+  color: #5b2d8e;
   font-size: 13px;
   margin-bottom: 12px;
 }
@@ -171,7 +171,7 @@ nav a:hover {
 .card a {
   display: block;
   text-align: center;
-  background: #6c63ff;
+  background: #5b2d8e;
   color: white;
   padding: 10px;
   border-radius: 8px;
@@ -188,8 +188,8 @@ nav a:hover {
 footer {
   text-align: center;
   padding: 40px 20px;
-  background: #1a1a2e;
-  border-top: 2px solid #6c63ff;
+  background: #2d1b4e;
+  border-top: 2px solid #5b2d8e;
   margin-top: 60px;
 }
 
@@ -199,7 +199,7 @@ footer p {
 }
 
 .tg-btn {
-  background: #0088cc;
+  background: #5b2d8e;
   color: white;
   padding: 12px 30px;
   border-radius: 25px;
@@ -216,12 +216,12 @@ footer p {
 .page-hero {
   text-align: center;
   padding: 50px 20px 30px;
-  background: #16213e;
+  background: #3b1f6b;
 }
 
 .page-hero h1 {
   font-size: 40px;
-  color: #6c63ff;
+  color: #5b2d8e;
   margin-bottom: 10px;
 }
 
@@ -234,7 +234,7 @@ footer p {
   display: flex;
   gap: 15px;
   padding: 25px 40px;
-  background: #1a1a2e;
+  background: #2d1b42;
   flex-wrap: wrap;
 }
 
@@ -245,7 +245,7 @@ footer p {
   padding: 12px 15px;
   border-radius: 8px;
   border: 1px solid #2a2a4a;
-  background: #0f0f1a;
+  background: #1a0a2e;
   color: #f0f0f0;
   font-family: 'Tajawal', sans-serif;
   font-size: 15px;
@@ -254,7 +254,7 @@ footer p {
 .filters input:focus,
 .filters select:focus {
   outline: none;
-  border-color: #6c63ff;
+  border-color: #5b2d8e;
 }
 
 .card .desc {
@@ -314,27 +314,27 @@ footer p {
   opacity: 0.85;
 }
 
-.telegram  { background: #0088cc; }
+.telegram  { background: #5b2d8e; }
 .tiktok    { background: #010101; border-color: #fff2; }
 .youtube   { background: #ff0000; }
 .instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-.twitter   { background: #1a1a2e; border-color: #fff2; }
+.twitter   { background: #2d1b4e; border-color: #fff2; }
 .btn-details {
   display: block;
   text-align: center;
   background: transparent;
-  color: #6c63ff;
+  color: #5b2d8e;
   padding: 10px;
   border-radius: 8px;
   text-decoration: none;
   font-weight: 700;
-  border: 2px solid #6c63ff;
+  border: 2px solid #5b2d8e;
   margin-top: 8px;
   transition: all 0.3s;
 }
 
 .btn-details:hover {
-  background: #6c63ff;
+  background: #5b2d8e;
   color: white;
 }
 /* ===== DETAILS PAGE ===== */
@@ -347,7 +347,7 @@ footer p {
 .details-hero {
   text-align: center;
   padding: 40px 20px;
-  background: #16213e;
+  background: #3b1f6b;
   border-radius: 12px;
   margin-bottom: 30px;
 }
@@ -377,7 +377,7 @@ footer p {
 }
 
 .details-card {
-  background: #1a1a2e;
+  background: #2d1b4e;
   border-radius: 12px;
   padding: 25px;
   border: 1px solid #2a2a4a;
@@ -385,7 +385,7 @@ footer p {
 
 .details-card h2 {
   font-size: 20px;
-  color: #6c63ff;
+  color: #5b2d8e;
   margin-bottom: 15px;
 }
 
@@ -413,7 +413,7 @@ footer p {
 
 .details-card ul li::before {
   content: "✓ ";
-  color: #6c63ff;
+  color: #5b2d8e;
   font-weight: 700;
 }
 /* ===== FAQ PAGE ===== */
@@ -424,7 +424,7 @@ footer p {
 }
 
 .faq-item {
-  background: #1a1a2e;
+  background: #2d1b4e;
   border-radius: 12px;
   margin-bottom: 15px;
   border: 1px solid #2a2a4a;
@@ -444,12 +444,12 @@ footer p {
 }
 
 .faq-question:hover {
-  background: #16213e;
+  background: #3b1f6b;
 }
 
 .faq-icon {
   font-size: 24px;
-  color: #6c63ff;
+  color: #5b2d8e;
   font-weight: 900;
   min-width: 20px;
   text-align: center;
@@ -509,4 +509,20 @@ nav {
         padding: 4px 6px;
         white-space: nowrap; /* منع انقسام كلمة "الأسئلة الشائعة" */
     }
+}
+.logo-img {
+  height: 50px;
+  width: auto;
+}
+.hero-logo {
+  width: 350px;
+  max-width: 85%;
+  margin-bottom: 25px;
+  filter: drop-shadow(0 0 20px rgba(91, 45, 142, 0.6));
+  transition: transform 0.3s, filter 0.3s;
+}
+
+.hero-logo:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 35px rgba(91, 45, 142, 0.9));
 }
