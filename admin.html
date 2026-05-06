@@ -80,6 +80,38 @@
     }
     .btn-save:hover { background: #0f2550; }
     #edit-msg { text-align: center; margin-top: 12px; font-weight: 700; font-size: 15px; }
+
+    /* ===== ستايل قسم الملفات ===== */
+    .files-section {
+      border: 1px solid #ff4500; border-radius: 10px;
+      padding: 15px; margin-bottom: 15px; background: #fff8f5;
+    }
+    .files-section h4 {
+      color: #ff4500; margin: 0 0 12px 0; font-size: 15px;
+    }
+    .file-row {
+      display: flex; gap: 8px; align-items: center; margin-bottom: 8px;
+    }
+    .file-row input {
+      flex: 1; padding: 8px; border-radius: 8px;
+      border: 1px solid #ccc; font-family: 'Tajawal', sans-serif;
+      font-size: 14px; box-sizing: border-box;
+    }
+    .btn-add-file {
+      padding: 7px 14px; background: #1a3a6e; color: white;
+      border: none; border-radius: 8px; cursor: pointer;
+      font-family: 'Tajawal', sans-serif; font-size: 13px; font-weight: 700;
+      margin-top: 5px;
+    }
+    .btn-add-file:hover { background: #0f2550; }
+    .btn-remove-file {
+      padding: 6px 10px; background: #cc0000; color: white;
+      border: none; border-radius: 7px; cursor: pointer; font-size: 13px;
+    }
+    .section-divider {
+      border: none; border-top: 1px dashed #ff4500;
+      margin: 15px 0;
+    }
   </style>
 </head>
 <body>
@@ -104,6 +136,7 @@
     <button class="tab-btn inactive" onclick="showTab('manage')">📋 إدارة المنح</button>
   </div>
 
+  <!-- ===== قسم الإضافة ===== -->
   <div id="section-add">
     <div class="form-group">
       <label>اسم المنحة *</label>
@@ -124,10 +157,17 @@
         <option value="closed">مغلق</option>
       </select>
     </div>
+
+    <!-- موعد الفتح قبل موعد الإغلاق -->
     <div class="form-group">
-      <label>آخر موعد للتقديم</label>
+      <label>📅 موعد فتح التقديم</label>
+      <input type="date" id="open_date"/>
+    </div>
+    <div class="form-group">
+      <label>📅 آخر موعد للتقديم</label>
       <input type="date" id="deadline"/>
     </div>
+
     <div class="form-group">
       <label>وصف المنحة</label>
       <textarea id="desc" placeholder="اكتب وصفاً مختصراً..."></textarea>
@@ -140,6 +180,22 @@
       <label>الشروط (افصل بينها بفاصلة)</label>
       <input type="text" id="requirements" placeholder="مثال: شهادة ثانوية، إجادة الإنجليزية"/>
     </div>
+
+    <!-- ===== الملفات المطلوبة ===== -->
+    <div class="files-section">
+      <h4>📂 الملفات المطلوبة</h4>
+
+      <p style="font-weight:700; color:#1a3a6e; margin:0 0 8px;">📌 الملفات الإجبارية</p>
+      <div id="required-files-add"></div>
+      <button class="btn-add-file" onclick="addFileRow('required-files-add')">+ إضافة ملف إجباري</button>
+
+      <hr class="section-divider"/>
+
+      <p style="font-weight:700; color:#1a3a6e; margin:0 0 8px;">📎 الملفات الاختيارية</p>
+      <div id="optional-files-add"></div>
+      <button class="btn-add-file" onclick="addFileRow('optional-files-add')">+ إضافة ملف اختياري</button>
+    </div>
+
     <div class="form-group">
       <label>رابط التقديم الرسمي</label>
       <input type="url" id="link" placeholder="https://..."/>
@@ -156,6 +212,7 @@
     <p id="msg"></p>
   </div>
 
+  <!-- ===== قسم الإدارة ===== -->
   <div id="section-manage" style="display:none;">
     <button class="btn-submit" onclick="loadScholarships()" style="margin-bottom:15px;">🔄 تحميل المنح</button>
     <div id="scholarships-list"></div>
@@ -163,6 +220,7 @@
   </div>
 </div>
 
+<!-- ===== مودال التعديل ===== -->
 <div class="modal-overlay" id="editModal">
   <div class="modal-box">
     <button class="modal-close" onclick="closeEditModal()">✕</button>
@@ -186,10 +244,17 @@
         <option value="closed">مغلق</option>
       </select>
     </div>
+
+    <!-- موعد الفتح قبل موعد الإغلاق -->
     <div class="form-group">
-      <label>آخر موعد للتقديم</label>
+      <label>📅 موعد فتح التقديم</label>
+      <input type="date" id="e_open_date"/>
+    </div>
+    <div class="form-group">
+      <label>📅 آخر موعد للتقديم</label>
       <input type="date" id="e_deadline"/>
     </div>
+
     <div class="form-group">
       <label>وصف المنحة</label>
       <textarea id="e_desc" placeholder="وصف المنحة..."></textarea>
@@ -202,6 +267,22 @@
       <label>الشروط (افصل بينها بفاصلة)</label>
       <input type="text" id="e_requirements" placeholder="مثال: شهادة ثانوية"/>
     </div>
+
+    <!-- ===== الملفات المطلوبة في التعديل ===== -->
+    <div class="files-section">
+      <h4>📂 الملفات المطلوبة</h4>
+
+      <p style="font-weight:700; color:#1a3a6e; margin:0 0 8px;">📌 الملفات الإجبارية</p>
+      <div id="required-files-edit"></div>
+      <button class="btn-add-file" onclick="addFileRow('required-files-edit')">+ إضافة ملف إجباري</button>
+
+      <hr class="section-divider"/>
+
+      <p style="font-weight:700; color:#1a3a6e; margin:0 0 8px;">📎 الملفات الاختيارية</p>
+      <div id="optional-files-edit"></div>
+      <button class="btn-add-file" onclick="addFileRow('optional-files-edit')">+ إضافة ملف اختياري</button>
+    </div>
+
     <div class="form-group">
       <label>رابط التقديم الرسمي</label>
       <input type="url" id="e_link" placeholder="https://..."/>
@@ -230,7 +311,6 @@ function getToken() {
   return document.getElementById('tokenInput').value;
 }
 
-// ✅ تحويل النص إلى Base64 مع دعم كامل للعربية و Unicode
 function toBase64(str) {
   const bytes = new TextEncoder().encode(str);
   let binary = '';
@@ -238,7 +318,6 @@ function toBase64(str) {
   return btoa(binary);
 }
 
-// ✅ قراءة Base64 مع دعم كامل للعربية و Unicode
 function decodeContent(content) {
   const clean = content.replace(/\n/g, '');
   const bytes = Uint8Array.from(atob(clean), c => c.charCodeAt(0));
@@ -253,6 +332,33 @@ function showTab(tab) {
   });
 }
 
+// ===== دوال الملفات =====
+function addFileRow(containerId, value = '') {
+  const container = document.getElementById(containerId);
+  const row = document.createElement('div');
+  row.className = 'file-row';
+  row.innerHTML = `
+    <input type="text" placeholder="مثال: جواز السفر، شهادة الميلاد..." value="${value}"/>
+    <button class="btn-remove-file" onclick="this.parentElement.remove()">✕</button>
+  `;
+  container.appendChild(row);
+}
+
+function getFileRows(containerId) {
+  return Array.from(document.querySelectorAll(`#${containerId} .file-row input`))
+    .map(i => i.value.trim()).filter(Boolean);
+}
+
+function clearFileRows(containerId) {
+  document.getElementById(containerId).innerHTML = '';
+}
+
+function populateFileRows(containerId, items = []) {
+  clearFileRows(containerId);
+  items.forEach(val => addFileRow(containerId, val));
+}
+
+// ===== GitHub =====
 async function getFile() {
   const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`, {
     headers: { Authorization: `token ${getToken()}` }
@@ -277,12 +383,13 @@ async function saveFile(data, scholarships, message) {
   }
 }
 
+// ===== الإضافة =====
 async function addScholarship() {
   const msg = document.getElementById('msg');
   msg.style.color = '#1a3a6e';
   msg.textContent = '⏳ جاري الإضافة...';
 
-  const titleVal = document.getElementById('title').value.trim();
+  const titleVal   = document.getElementById('title').value.trim();
   const countryVal = document.getElementById('country').value.trim();
 
   if (!titleVal || !countryVal) {
@@ -291,25 +398,27 @@ async function addScholarship() {
     return;
   }
 
-  // توليد ID من الاسم الإنجليزي إن وجد، وإلا رقم عشوائي
   const enTitleVal = document.getElementById('enTitle').value.trim();
   const generatedId = enTitleVal
     ? enTitleVal.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')
     : 'scholarship-' + Date.now();
 
   const newEntry = {
-    id: generatedId,
-    name: titleVal,
-    name_en: enTitleVal,
-    country: countryVal,
-    flag: document.getElementById('flag').value.trim(),
-    degree: document.getElementById('degree').value.trim(),
-    description: document.getElementById('desc').value.trim(),
-    benefits: document.getElementById('benefits').value.split(',').map(s => s.trim()).filter(Boolean),
+    id:           generatedId,
+    name:         titleVal,
+    name_en:      enTitleVal,
+    country:      countryVal,
+    flag:         document.getElementById('flag').value.trim(),
+    degree:       document.getElementById('degree').value.trim(),
+    description:  document.getElementById('desc').value.trim(),
+    benefits:     document.getElementById('benefits').value.split(',').map(s => s.trim()).filter(Boolean),
     requirements: document.getElementById('requirements').value.split(',').map(s => s.trim()).filter(Boolean),
-    deadline: document.getElementById('deadline').value,
-    link: document.getElementById('link').value.trim(),
-    open: document.getElementById('status').value === 'open',
+    open_date:    document.getElementById('open_date').value,
+    deadline:     document.getElementById('deadline').value,
+    required_files: getFileRows('required-files-add'),
+    optional_files: getFileRows('optional-files-add'),
+    link:         document.getElementById('link').value.trim(),
+    open:         document.getElementById('status').value === 'open',
   };
 
   try {
@@ -319,18 +428,21 @@ async function addScholarship() {
     await saveFile(data, current, `إضافة منحة: ${newEntry.name}`);
     msg.style.color = 'green';
     msg.textContent = '✅ تمت إضافة المنحة بنجاح! ستظهر خلال دقائق.';
-    // مسح الحقول بعد الإضافة
     ['title','country','degree','desc','benefits','requirements','link','flag','enTitle'].forEach(id => {
       document.getElementById(id).value = '';
     });
-    document.getElementById('deadline').value = '';
-    document.getElementById('status').value = 'open';
+    document.getElementById('open_date').value = '';
+    document.getElementById('deadline').value  = '';
+    document.getElementById('status').value    = 'open';
+    clearFileRows('required-files-add');
+    clearFileRows('optional-files-add');
   } catch(e) {
     msg.style.color = 'red';
     msg.textContent = '❌ حدث خطأ: ' + e.message;
   }
 }
 
+// ===== تحميل المنح =====
 async function loadScholarships() {
   const list = document.getElementById('scholarships-list');
   list.innerHTML = '⏳ جاري التحميل...';
@@ -363,6 +475,7 @@ async function loadScholarships() {
   }
 }
 
+// ===== الحذف =====
 async function deleteScholarship(index) {
   if (!confirm('هل أنت متأكد من حذف هذه المنحة؟')) return;
   try {
@@ -378,6 +491,7 @@ async function deleteScholarship(index) {
   }
 }
 
+// ===== فتح مودال التعديل =====
 async function openEditModal(index) {
   editingIndex = index;
   document.getElementById('edit-msg').textContent = '';
@@ -391,6 +505,7 @@ async function openEditModal(index) {
     document.getElementById('e_country').value      = s.country || '';
     document.getElementById('e_degree').value       = s.degree || s.degrees || '';
     document.getElementById('e_status').value       = (s.open === true || s.status === 'open') ? 'open' : 'closed';
+    document.getElementById('e_open_date').value    = s.open_date || '';
     document.getElementById('e_deadline').value     = s.deadline || '';
     document.getElementById('e_desc').value         = s.description || s.desc || '';
     document.getElementById('e_benefits').value     = Array.isArray(s.benefits) ? s.benefits.join(', ') : (s.benefits || '');
@@ -398,6 +513,10 @@ async function openEditModal(index) {
     document.getElementById('e_link').value         = s.link || '';
     document.getElementById('e_flag').value         = s.flag || '';
     document.getElementById('e_enTitle').value      = s.name_en || s.enTitle || '';
+
+    // تعبئة الملفات
+    populateFileRows('required-files-edit', Array.isArray(s.required_files) ? s.required_files : []);
+    populateFileRows('optional-files-edit', Array.isArray(s.optional_files) ? s.optional_files : []);
 
     document.getElementById('editModal').classList.add('open');
   } catch(e) {
@@ -410,6 +529,7 @@ function closeEditModal() {
   editingIndex = -1;
 }
 
+// ===== حفظ التعديل =====
 async function saveEdit() {
   const msg = document.getElementById('edit-msg');
   msg.style.color = '#1a3a6e';
@@ -431,17 +551,20 @@ async function saveEdit() {
 
     scholarships[editingIndex] = {
       ...old,
-      name:         updatedTitle,
-      name_en:      document.getElementById('e_enTitle').value.trim(),
-      country:      updatedCountry,
-      flag:         document.getElementById('e_flag').value.trim(),
-      degree:       document.getElementById('e_degree').value.trim(),
-      description:  document.getElementById('e_desc').value.trim(),
-      benefits:     document.getElementById('e_benefits').value.split(',').map(s => s.trim()).filter(Boolean),
-      requirements: document.getElementById('e_requirements').value.split(',').map(s => s.trim()).filter(Boolean),
-      deadline:     document.getElementById('e_deadline').value,
-      link:         document.getElementById('e_link').value.trim(),
-      open:         document.getElementById('e_status').value === 'open',
+      name:           updatedTitle,
+      name_en:        document.getElementById('e_enTitle').value.trim(),
+      country:        updatedCountry,
+      flag:           document.getElementById('e_flag').value.trim(),
+      degree:         document.getElementById('e_degree').value.trim(),
+      description:    document.getElementById('e_desc').value.trim(),
+      benefits:       document.getElementById('e_benefits').value.split(',').map(s => s.trim()).filter(Boolean),
+      requirements:   document.getElementById('e_requirements').value.split(',').map(s => s.trim()).filter(Boolean),
+      open_date:      document.getElementById('e_open_date').value,
+      deadline:       document.getElementById('e_deadline').value,
+      required_files: getFileRows('required-files-edit'),
+      optional_files: getFileRows('optional-files-edit'),
+      link:           document.getElementById('e_link').value.trim(),
+      open:           document.getElementById('e_status').value === 'open',
     };
 
     await saveFile(data, scholarships, `تعديل منحة: ${updatedTitle}`);
