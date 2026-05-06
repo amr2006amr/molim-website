@@ -1,7 +1,7 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
 
-fetch('data/scholarships.json')
+fetch('data/scholarships.json?v=' + Date.now())
   .then(res => res.json())
   .then(scholarships => {
     const s = scholarships.find(s => s.id === id);

@@ -1,6 +1,6 @@
 let allScholarships = [];
 
-fetch('data/scholarships.json')
+fetch('data/scholarships.json?v=' + Date.now())
   .then(res => res.json())
   .then(data => {
     allScholarships = data;
