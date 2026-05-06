@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <title>لوحة تحكم مُلم</title>
+  <link rel="stylesheet" href="static/css/style.css"/>
+  <style>
+    .admin-container { max-width: 700px; margin: 40px auto; padding: 20px; }
+    .admin-container h1 { color: #ff4500; text-align: center; margin-bottom: 30px; }
+    .form-group { margin-bottom: 15px; }
+    .form-group label { display: block; font-weight: 700; color: #1a3a6e; margin-bottom: 5px; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 10px; border-radius: 8px;
+      border: 1px solid #ff4500; font-family: 'Tajawal', sans-serif;
+      font-size: 15px; box-sizing: border-box;
+    }
+    .form-group textarea { height: 100px; }
+    .btn-submit {
+      width: 100%; padding: 15px; background: #ff4500; color: white;
+      border: none; border-radius: 10px; font-size: 18px;
+      font-weight: 700; cursor: pointer; font-family: 'Tajawal', sans-serif;
+    }
+    .btn-submit:hover { background: #cc3300; }
+    #msg { text-align: center; margin-top: 15px; font-weight: 700; font-size: 16px; }
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo"><img src="static/logo.png" alt="مُلم" class="logo-img"/></div>
+  <nav>
+    <a href="index.html">الرئيسية</a>
+    <a href="scholarships.html">المنح</a>
+  </nav>
+</header>
+
+<div class="admin-container">
+  <h1>➕ إضافة منحة جديدة</h1>
+
+  <div class="form-group">
+    <label>اسم المنحة *</label>
+    <input type="text" id="title" placeholder="مثال: منحة الحكومة التركية"/>
+  </div>
+  <div class="form-group">
+    <label>الدولة *</label>
+    <input type="text" id="country" placeholder="مثال: تركيا"/>
+  </div>
+  <div class="form-group">
+    <label>المراحل الدراسية *</label>
+    <input type="text" id="degree" placeholder="مثال: بكالوريوس، ماجستير، دكتوراه"/>
+  </div>
+  <div class="form-group">
+    <label>حالة التقديم</label>
+    <select id="status">
+      <option value="open">مفتوح</option>
+      <option value="closed">مغلق</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>آخر موعد للتقديم</label>
+    <input type="date" id="deadline"/>
+  </div>
+  <div class="form-group">
+    <label>وصف المنحة</label>
+    <textarea id="desc" placeholder="اكتب وصفاً مختصراً..."></textarea>
+  </div>
+  <div class="form-group">
+    <label>المميزات (افصل بينها بفاصلة)</label>
+    <input type="text" id="benefits" placeholder="مثال: رسوم دراسية، سكن مجاني، راتب شهري"/>
+  </div>
+  <div class="form-group">
+    <label>الشروط (افصل بينها بفاصلة)</label>
+    <input type="text" id="requirements" placeholder="مثال: شهادة ثانوية، إجادة الإنجليزية"/>
+  </div>
+  <div class="form-group">
+    <label>رابط التقديم الرسمي</label>
+    <input type="url" id="link" placeholder="https://..."/>
+  </div>
+  <div class="form-group">
+    <label>رمز الدولة (emoji علم)</label>
+    <input type="text" id="flag" placeholder="مثال: 🇹🇷"/>
+  </div>
+  <div class="form-group">
+    <label>الاسم الإنجليزي للمنحة</label>
+    <input type="text" id="enTitle" placeholder="مثال: Turkey Government Scholarship"/>
+  </div>
+
+  <button class="btn-submit" onclick="addScholarship()">✅ إضافة المنحة</button>
+  <p id="msg"></p>
+</div>
+
+<script>
+const TOKEN = 'ادخل التوكن للمتابعة';
+const OWNER = 'amr2006amr';
+const REPO  = 'molim-website';
+const FILE  = 'data/scholarships.json';
+
+async function addScholarship() {
+  const msg = document.getElementById('msg');
+  msg.style.color = '#1a3a6e';
+  msg.textContent = '⏳ جاري الإضافة...';
+
+  const newEntry = {
+    id: document.getElementById('title').value.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, ''),
+    title: document.getElementById('title').value.trim(),
+    country: document.getElementById('country').value.trim(),
+    degree: document.getElementById('degree').value.trim(),
+    status: document.getElementById('status').value,
+    deadline: document.getElementById('deadline').value,
+    desc: document.getElementById('desc').value.trim(),
+    benefits: document.getElementById('benefits').value.split(',').map(s => s.trim()).filter(Boolean),
+    requirements: document.getElementById('requirements').value.split(',').map(s => s.trim()).filter(Boolean),
+    link: document.getElementById('link').value.trim(),
+    flag: document.getElementById('flag').value.trim(),
+    enTitle: document.getElementById('enTitle').value.trim(),
+  };
+
+  if (!newEntry.title || !newEntry.country) {
+    msg.style.color = 'red';
+    msg.textContent = '❌ اسم المنحة والدولة مطلوبان!';
+    return;
+  }
+
+  try {
+    // جلب الملف الحالي
+    const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`, {
+      headers: { Authorization: `token ${TOKEN}` }
+    });
+    const data = await res.json();
+    const current = JSON.parse(atob(data.content));
+    current.push(newEntry);
+
+    // رفع الملف المحدث
+    await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`, {
+      method: 'PUT',
+      headers: { Authorization: `token ${TOKEN}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: `إضافة منحة: ${newEntry.title}`,
+        content: btoa(unescape(encodeURIComponent(JSON.stringify(current, null, 2)))),
+        sha: data.sha
+      })
+    });
+
+    msg.style.color = 'green';
+    msg.textContent = '✅ تمت إضافة المنحة بنجاح! ستظهر خلال دقائق.';
+  } catch(e) {
+    msg.style.color = 'red';
+    msg.textContent = '❌ حدث خطأ، تحقق من الـ Token.';
+  }
+}
+</script>
+</body>
+</html>
