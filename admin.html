@@ -84,12 +84,17 @@
     <input type="text" id="enTitle" placeholder="مثال: Turkey Government Scholarship"/>
   </div>
 
+  <div class="form-group">
+  <label>🔑 التوكن (مطلوب)</label>
+  <input type="password" id="tokenInput" placeholder="أدخل التوكن هنا..."/>
+</div>
+
   <button class="btn-submit" onclick="addScholarship()">✅ إضافة المنحة</button>
   <p id="msg"></p>
 </div>
 
 <script>
-const TOKEN = 'ادخل التوكن للمتابعة';
+const TOKEN = document.getElementById('tokenInput').value;
 const OWNER = 'amr2006amr';
 const REPO  = 'molim-website';
 const FILE  = 'data/scholarships.json';
