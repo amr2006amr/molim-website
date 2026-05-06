@@ -83,7 +83,19 @@
     ],
     "deadline": "2026-02-20",
     "link": "https://tbbs.turkiyeburslari.gov.tr/",
-    "open": false
+    "open": false,
+    "open_date": "2027-01-20",
+    "required_files": [
+      "جواز سفر او بطاقة شخصية",
+      "شهادة ثانوية و كشف درجات",
+      "خطاب نية",
+      "خطاب توصية"
+    ],
+    "optional_files": [
+      "CV",
+      "شهادة لغة",
+      "شهادات داعمة و تطوع"
+    ]
   },
   {
     "id": "brunei-gov",
