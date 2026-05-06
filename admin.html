@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="static/css/style.css"/>
   <style>
     .admin-container { max-width: 700px; margin: 40px auto; padding: 20px; }
-    .admin-container h1 { color: #ff4500; text-align: center; margin-bottom: 30px; }
+    .admin-container h1 { color: #ff4500; text-align: center; margin-bottom: 20px; }
     .form-group { margin-bottom: 15px; }
     .form-group label { display: block; font-weight: 700; color: #1a3a6e; margin-bottom: 5px; }
     .form-group input, .form-group select, .form-group textarea {
@@ -22,6 +22,36 @@
     }
     .btn-submit:hover { background: #cc3300; }
     #msg { text-align: center; margin-top: 15px; font-weight: 700; font-size: 16px; }
+    .tabs { display: flex; gap: 10px; margin-bottom: 25px; justify-content: center; }
+    .tab-btn {
+      padding: 10px 25px; border-radius: 10px; border: none; cursor: pointer;
+      font-family: 'Tajawal', sans-serif; font-size: 16px; font-weight: 700;
+    }
+    .tab-btn.active { background: #ff4500; color: white; }
+    .tab-btn.inactive { background: #1a3a6e; color: white; }
+    .scholarship-item {
+      background: white; border-radius: 12px; padding: 15px 20px;
+      margin-bottom: 12px; border: 1px solid #e0e0e0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .scholarship-item h3 { color: #ff4500; margin: 0; font-size: 16px; }
+    .scholarship-item p { color: #1a3a6e; margin: 4px 0 0; font-size: 13px; }
+    .item-btns { display: flex; gap: 8px; }
+    .btn-edit {
+      padding: 7px 15px; background: #1a3a6e; color: white;
+      border: none; border-radius: 8px; cursor: pointer;
+      font-family: 'Tajawal', sans-serif; font-weight: 700;
+    }
+    .btn-delete {
+      padding: 7px 15px; background: #cc0000; color: white;
+      border: none; border-radius: 8px; cursor: pointer;
+      font-family: 'Tajawal', sans-serif; font-weight: 700;
+    }
+    .token-bar {
+      background: white; border-radius: 12px; padding: 15px;
+      margin-bottom: 20px; border: 1px solid #ff4500;
+    }
   </style>
 </head>
 <body>
@@ -34,63 +64,79 @@
 </header>
 
 <div class="admin-container">
-  <h1>➕ إضافة منحة جديدة</h1>
+  <h1>🎛️ لوحة تحكم مُلم</h1>
 
-  <div class="form-group">
-    <label>اسم المنحة *</label>
-    <input type="text" id="title" placeholder="مثال: منحة الحكومة التركية"/>
-  </div>
-  <div class="form-group">
-    <label>الدولة *</label>
-    <input type="text" id="country" placeholder="مثال: تركيا"/>
-  </div>
-  <div class="form-group">
-    <label>المراحل الدراسية *</label>
-    <input type="text" id="degree" placeholder="مثال: بكالوريوس، ماجستير، دكتوراه"/>
-  </div>
-  <div class="form-group">
-    <label>حالة التقديم</label>
-    <select id="status">
-      <option value="open">مفتوح</option>
-      <option value="closed">مغلق</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label>آخر موعد للتقديم</label>
-    <input type="date" id="deadline"/>
-  </div>
-  <div class="form-group">
-    <label>وصف المنحة</label>
-    <textarea id="desc" placeholder="اكتب وصفاً مختصراً..."></textarea>
-  </div>
-  <div class="form-group">
-    <label>المميزات (افصل بينها بفاصلة)</label>
-    <input type="text" id="benefits" placeholder="مثال: رسوم دراسية، سكن مجاني، راتب شهري"/>
-  </div>
-  <div class="form-group">
-    <label>الشروط (افصل بينها بفاصلة)</label>
-    <input type="text" id="requirements" placeholder="مثال: شهادة ثانوية، إجادة الإنجليزية"/>
-  </div>
-  <div class="form-group">
-    <label>رابط التقديم الرسمي</label>
-    <input type="url" id="link" placeholder="https://..."/>
-  </div>
-  <div class="form-group">
-    <label>رمز الدولة (emoji علم)</label>
-    <input type="text" id="flag" placeholder="مثال: 🇹🇷"/>
-  </div>
-  <div class="form-group">
-    <label>الاسم الإنجليزي للمنحة</label>
-    <input type="text" id="enTitle" placeholder="مثال: Turkey Government Scholarship"/>
+  <!-- التوكن -->
+  <div class="token-bar">
+    <label style="font-weight:700; color:#1a3a6e;">🔑 التوكن (مطلوب لجميع العمليات)</label>
+    <input type="password" id="tokenInput" placeholder="أدخل التوكن هنا..." style="width:100%; padding:10px; border-radius:8px; border:1px solid #ff4500; font-size:15px; margin-top:8px; box-sizing:border-box;"/>
   </div>
 
-  <div class="form-group">
-  <label>🔑 التوكن (مطلوب)</label>
-  <input type="password" id="tokenInput" placeholder="أدخل التوكن هنا..."/>
-</div>
+  <!-- التبويبات -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('add')">➕ إضافة منحة</button>
+    <button class="tab-btn inactive" onclick="showTab('manage')">📋 إدارة المنح</button>
+  </div>
 
-  <button class="btn-submit" onclick="addScholarship()">✅ إضافة المنحة</button>
-  <p id="msg"></p>
+  <!-- قسم الإضافة -->
+  <div id="section-add">
+    <div class="form-group">
+      <label>اسم المنحة *</label>
+      <input type="text" id="title" placeholder="مثال: منحة الحكومة التركية"/>
+    </div>
+    <div class="form-group">
+      <label>الدولة *</label>
+      <input type="text" id="country" placeholder="مثال: تركيا"/>
+    </div>
+    <div class="form-group">
+      <label>المراحل الدراسية</label>
+      <input type="text" id="degree" placeholder="مثال: بكالوريوس، ماجستير، دكتوراه"/>
+    </div>
+    <div class="form-group">
+      <label>حالة التقديم</label>
+      <select id="status">
+        <option value="open">مفتوح</option>
+        <option value="closed">مغلق</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>آخر موعد للتقديم</label>
+      <input type="date" id="deadline"/>
+    </div>
+    <div class="form-group">
+      <label>وصف المنحة</label>
+      <textarea id="desc" placeholder="اكتب وصفاً مختصراً..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>المميزات (افصل بينها بفاصلة)</label>
+      <input type="text" id="benefits" placeholder="مثال: رسوم دراسية، سكن مجاني، راتب شهري"/>
+    </div>
+    <div class="form-group">
+      <label>الشروط (افصل بينها بفاصلة)</label>
+      <input type="text" id="requirements" placeholder="مثال: شهادة ثانوية، إجادة الإنجليزية"/>
+    </div>
+    <div class="form-group">
+      <label>رابط التقديم الرسمي</label>
+      <input type="url" id="link" placeholder="https://..."/>
+    </div>
+    <div class="form-group">
+      <label>رمز الدولة (emoji علم)</label>
+      <input type="text" id="flag" placeholder="مثال: 🇹🇷"/>
+    </div>
+    <div class="form-group">
+      <label>الاسم الإنجليزي للمنحة</label>
+      <input type="text" id="enTitle" placeholder="مثال: Turkey Government Scholarship"/>
+    </div>
+    <button class="btn-submit" onclick="addScholarship()">✅ إضافة المنحة</button>
+    <p id="msg"></p>
+  </div>
+
+  <!-- قسم الإدارة -->
+  <div id="section-manage" style="display:none;">
+    <button class="btn-submit" onclick="loadScholarships()" style="margin-bottom:15px;">🔄 تحميل المنح</button>
+    <div id="scholarships-list"></div>
+    <p id="msg2"></p>
+  </div>
 </div>
 
 <script>
@@ -98,8 +144,42 @@ const OWNER = 'amr2006amr';
 const REPO  = 'molim-website';
 const FILE  = 'data/scholarships.json';
 
+function getToken() {
+  return document.getElementById('tokenInput').value;
+}
+
+function toBase64(str) {
+  return btoa(String.fromCharCode(...new TextEncoder().encode(str)));
+}
+
+function showTab(tab) {
+  document.getElementById('section-add').style.display = tab === 'add' ? 'block' : 'none';
+  document.getElementById('section-manage').style.display = tab === 'manage' ? 'block' : 'none';
+  document.querySelectorAll('.tab-btn').forEach((b, i) => {
+    b.className = 'tab-btn ' + ((tab === 'add' && i === 0) || (tab === 'manage' && i === 1) ? 'active' : 'inactive');
+  });
+}
+
+async function getFile() {
+  const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`, {
+    headers: { Authorization: `token ${getToken()}` }
+  });
+  return await res.json();
+}
+
+async function saveFile(data, scholarships, message) {
+  await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`, {
+    method: 'PUT',
+    headers: { Authorization: `token ${getToken()}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      message,
+      content: toBase64(JSON.stringify(scholarships, null, 2)),
+      sha: data.sha
+    })
+  });
+}
+
 async function addScholarship() {
-  const TOKEN = document.getElementById('tokenInput').value;
   const msg = document.getElementById('msg');
   msg.style.color = '#1a3a6e';
   msg.textContent = '⏳ جاري الإضافة...';
@@ -126,23 +206,10 @@ async function addScholarship() {
   }
 
   try {
-    const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`, {
-      headers: { Authorization: `token ${TOKEN}` }
-    });
-    const data = await res.json();
+    const data = await getFile();
     const current = JSON.parse(atob(data.content));
     current.push(newEntry);
-
-    await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`, {
-      method: 'PUT',
-      headers: { Authorization: `token ${TOKEN}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        message: `إضافة منحة: ${newEntry.title}`,
-        content: btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(current, null, 2)))),
-        sha: data.sha
-      })
-    });
-
+    await saveFile(data, current, `إضافة منحة: ${newEntry.title}`);
     msg.style.color = 'green';
     msg.textContent = '✅ تمت إضافة المنحة بنجاح! ستظهر خلال دقائق.';
   } catch(e) {
@@ -150,4 +217,46 @@ async function addScholarship() {
     msg.textContent = '❌ حدث خطأ: ' + e.message;
   }
 }
+
+async function loadScholarships() {
+  const list = document.getElementById('scholarships-list');
+  list.innerHTML = '⏳ جاري التحميل...';
+  try {
+    const data = await getFile();
+    const scholarships = JSON.parse(atob(data.content));
+    list.innerHTML = '';
+    scholarships.forEach((s, index) => {
+      list.innerHTML += `
+        <div class="scholarship-item">
+          <div>
+            <h3>${s.flag || ''} ${s.title}</h3>
+            <p>${s.country} — ${s.degree || ''}</p>
+          </div>
+          <div class="item-btns">
+            <button class="btn-edit" onclick="deleteScholarship(${index})">🗑️ حذف</button>
+          </div>
+        </div>`;
+    });
+  } catch(e) {
+    list.innerHTML = '❌ خطأ في التحميل — تأكد من التوكن';
+  }
+}
+
+async function deleteScholarship(index) {
+  if (!confirm('هل أنت متأكد من حذف هذه المنحة؟')) return;
+  const list = document.getElementById('scholarships-list');
+  try {
+    const data = await getFile();
+    const scholarships = JSON.parse(atob(data.content));
+    const title = scholarships[index].title;
+    scholarships.splice(index, 1);
+    await saveFile(data, scholarships, `حذف منحة: ${title}`);
+    alert('✅ تم الحذف بنجاح!');
+    loadScholarships();
+  } catch(e) {
+    alert('❌ حدث خطأ: ' + e.message);
+  }
+}
 </script>
+</body>
+</html>
