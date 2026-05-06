@@ -68,7 +68,7 @@ fetch('data/scholarships.json?v=' + Date.now())
 
         <div class="details-card">
           <h2>📝 تفاصيل إضافية</h2>
-          <p>${s.notes || s.description || ''}</p>
+          <p>${s.notes ||''}</p>
         </div>
 
         <a href="${s.link}" target="_blank" class="btn-main" style="display:block; text-align:center; margin-top:20px;">
