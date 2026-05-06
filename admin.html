@@ -230,12 +230,15 @@ function getToken() {
   return document.getElementById('tokenInput').value;
 }
 
-// الإصلاح الرئيسي — يدعم العربية بشكل صحيح
+// ✅ تحويل النص إلى Base64 مع دعم كامل للعربية و Unicode
 function toBase64(str) {
-  return btoa(unescape(encodeURIComponent(str)));
+  const bytes = new TextEncoder().encode(str);
+  let binary = '';
+  bytes.forEach(b => binary += String.fromCharCode(b));
+  return btoa(binary);
 }
 
-// قراءة الملف من GitHub مع دعم العربية
+// ✅ قراءة Base64 مع دعم كامل للعربية و Unicode
 function decodeContent(content) {
   const bytes = Uint8Array.from(atob(content), c => c.charCodeAt(0));
   return JSON.parse(new TextDecoder('utf-8').decode(bytes));
@@ -253,11 +256,12 @@ async function getFile() {
   const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`, {
     headers: { Authorization: `token ${getToken()}` }
   });
+  if (!res.ok) throw new Error('فشل الاتصال بـ GitHub — تأكد من التوكن');
   return await res.json();
 }
 
 async function saveFile(data, scholarships, message) {
-  await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`, {
+  const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`, {
     method: 'PUT',
     headers: { Authorization: `token ${getToken()}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -266,6 +270,10 @@ async function saveFile(data, scholarships, message) {
       sha: data.sha
     })
   });
+  if (!res.ok) {
+    const err = await res.json();
+    throw new Error(err.message || 'فشل الحفظ');
+  }
 }
 
 async function addScholarship() {
@@ -273,11 +281,26 @@ async function addScholarship() {
   msg.style.color = '#1a3a6e';
   msg.textContent = '⏳ جاري الإضافة...';
 
+  const titleVal = document.getElementById('title').value.trim();
+  const countryVal = document.getElementById('country').value.trim();
+
+  if (!titleVal || !countryVal) {
+    msg.style.color = 'red';
+    msg.textContent = '❌ اسم المنحة والدولة مطلوبان!';
+    return;
+  }
+
+  // توليد ID من الاسم الإنجليزي إن وجد، وإلا رقم عشوائي
+  const enTitleVal = document.getElementById('enTitle').value.trim();
+  const generatedId = enTitleVal
+    ? enTitleVal.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '')
+    : 'scholarship-' + Date.now();
+
   const newEntry = {
-    id: document.getElementById('title').value.trim().toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, ''),
-    name: document.getElementById('title').value.trim(),
-    name_en: document.getElementById('enTitle').value.trim(),
-    country: document.getElementById('country').value.trim(),
+    id: generatedId,
+    name: titleVal,
+    name_en: enTitleVal,
+    country: countryVal,
     flag: document.getElementById('flag').value.trim(),
     degree: document.getElementById('degree').value.trim(),
     description: document.getElementById('desc').value.trim(),
@@ -288,12 +311,6 @@ async function addScholarship() {
     open: document.getElementById('status').value === 'open',
   };
 
-  if (!newEntry.name || !newEntry.country) {
-    msg.style.color = 'red';
-    msg.textContent = '❌ اسم المنحة والدولة مطلوبان!';
-    return;
-  }
-
   try {
     const data = await getFile();
     const current = decodeContent(data.content);
@@ -301,6 +318,12 @@ async function addScholarship() {
     await saveFile(data, current, `إضافة منحة: ${newEntry.name}`);
     msg.style.color = 'green';
     msg.textContent = '✅ تمت إضافة المنحة بنجاح! ستظهر خلال دقائق.';
+    // مسح الحقول بعد الإضافة
+    ['title','country','degree','desc','benefits','requirements','link','flag','enTitle'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('deadline').value = '';
+    document.getElementById('status').value = 'open';
   } catch(e) {
     msg.style.color = 'red';
     msg.textContent = '❌ حدث خطأ: ' + e.message;
@@ -314,6 +337,10 @@ async function loadScholarships() {
     const data = await getFile();
     const scholarships = decodeContent(data.content);
     list.innerHTML = '';
+    if (scholarships.length === 0) {
+      list.innerHTML = '<p style="text-align:center; color:#aaa;">لا توجد منح حالياً</p>';
+      return;
+    }
     scholarships.forEach((s, index) => {
       const flagHtml = s.flag && s.flag.startsWith('http')
         ? `<img src="${s.flag}" style="width:25px; vertical-align:middle; margin-left:5px; border-radius:3px;"/>`
