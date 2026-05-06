@@ -295,6 +295,19 @@
     ],
     "deadline": "2026-09-15",
     "link": "https://admission.study-in-egypt.gov.eg/login",
-    "open": false
+    "open": false,
+    "open_date": "2026-08-01",
+    "documents": {
+      "required": [
+        "جواز سفر او بطاقة شخصية",
+        "شهادة ثانوي",
+        "خطاب نية",
+        "خطاب توصية"
+      ],
+      "optional": [
+        "شهادة لغة",
+        "شهادات داعمة"
+      ]
+    }
   }
 ]
