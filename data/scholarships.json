@@ -179,9 +179,20 @@
       "معدل جيد",
       "لا تشترط شهادة لغة إلزامية"
     ],
-    "deadline": "2026-04-01",
+    "deadline": "2026-05-31",
     "link": "https://bolashak.gov.kz/ctipendiyaly-badarlama",
-    "open": true
+    "open": true,
+    "open_date": "2026-04-01",
+    "required_files": [
+      "جواز سفر",
+      "شهادة ثانوية",
+      "فحص طبي",
+      "خطاب نية"
+    ],
+    "optional_files": [
+      "شهادة لغة",
+      "قبول من جامعة في كازاخستان"
+    ]
   },
   {
     "id": "romania-gov",
