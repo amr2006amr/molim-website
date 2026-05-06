@@ -415,8 +415,10 @@ async function addScholarship() {
     requirements: document.getElementById('requirements').value.split(',').map(s => s.trim()).filter(Boolean),
     open_date:    document.getElementById('open_date').value,
     deadline:     document.getElementById('deadline').value,
-    required_files: getFileRows('required-files-add'),
-    optional_files: getFileRows('optional-files-add'),
+    documents: {
+      required: getFileRows('required-files-add'),
+      optional: getFileRows('optional-files-add'),
+    },
     link:         document.getElementById('link').value.trim(),
     open:         document.getElementById('status').value === 'open',
   };
@@ -515,8 +517,8 @@ async function openEditModal(index) {
     document.getElementById('e_enTitle').value      = s.name_en || s.enTitle || '';
 
     // تعبئة الملفات
-    populateFileRows('required-files-edit', Array.isArray(s.required_files) ? s.required_files : []);
-    populateFileRows('optional-files-edit', Array.isArray(s.optional_files) ? s.optional_files : []);
+    populateFileRows('required-files-edit', s.documents?.required || []);
+    populateFileRows('optional-files-edit', s.documents?.optional || []);
 
     document.getElementById('editModal').classList.add('open');
   } catch(e) {
@@ -561,8 +563,10 @@ async function saveEdit() {
       requirements:   document.getElementById('e_requirements').value.split(',').map(s => s.trim()).filter(Boolean),
       open_date:      document.getElementById('e_open_date').value,
       deadline:       document.getElementById('e_deadline').value,
-      required_files: getFileRows('required-files-edit'),
-      optional_files: getFileRows('optional-files-edit'),
+      documents: {
+        required: getFileRows('required-files-edit'),
+        optional: getFileRows('optional-files-edit'),
+      },
       link:           document.getElementById('e_link').value.trim(),
       open:           document.getElementById('e_status').value === 'open',
     };
