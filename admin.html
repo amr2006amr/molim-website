@@ -138,7 +138,7 @@ async function addScholarship() {
       headers: { Authorization: `token ${TOKEN}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({
         message: `إضافة منحة: ${newEntry.title}`,
-        content: btoa(unescape(encodeURIComponent(JSON.stringify(current, null, 2)))),
+        content: btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(current, null, 2)))),
         sha: data.sha
       })
     });
