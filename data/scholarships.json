@@ -229,23 +229,5 @@
     "deadline": "2026-02-28",
     "link": "https://a2ascholarships.iccr.gov.in",
     "open": false
-  },
-  {
-    "id": "--",
-    "title": "منحة الحكومة المصرية",
-    "country": "مصر",
-    "degree": "بكالوريوس، ماجستير، دكتوراه",
-    "status": "closed",
-    "deadline": "2026-09-15",
-    "desc": "منحة مقدمة من الحكومة المصرية لجميع الجنسيات العربية، تشمل جميع التخصصات الطبية والعلمية والادبية",
-    "benefits": [
-      "تغطية الرسوم الدراسية كاملة، لا تشمل مميزات اخرى كالسكن والراتب الشهري"
-    ],
-    "requirements": [
-      "شهادة ثانوية، جواز سفر او بطاقة وطنية، خطاب نية، خطاب توصية"
-    ],
-    "link": "https://admission.study-in-egypt.gov.eg/login",
-    "flag": "🇪🇬",
-    "enTitle": "Study in Egypt"
   }
 ]
