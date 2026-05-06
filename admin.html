@@ -94,12 +94,12 @@
 </div>
 
 <script>
-const TOKEN = document.getElementById('tokenInput').value;
 const OWNER = 'amr2006amr';
 const REPO  = 'molim-website';
 const FILE  = 'data/scholarships.json';
 
 async function addScholarship() {
+  const TOKEN = document.getElementById('tokenInput').value;
   const msg = document.getElementById('msg');
   msg.style.color = '#1a3a6e';
   msg.textContent = '⏳ جاري الإضافة...';
@@ -126,7 +126,6 @@ async function addScholarship() {
   }
 
   try {
-    // جلب الملف الحالي
     const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`, {
       headers: { Authorization: `token ${TOKEN}` }
     });
@@ -134,7 +133,6 @@ async function addScholarship() {
     const current = JSON.parse(atob(data.content));
     current.push(newEntry);
 
-    // رفع الملف المحدث
     await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`, {
       method: 'PUT',
       headers: { Authorization: `token ${TOKEN}`, 'Content-Type': 'application/json' },
@@ -149,9 +147,7 @@ async function addScholarship() {
     msg.textContent = '✅ تمت إضافة المنحة بنجاح! ستظهر خلال دقائق.';
   } catch(e) {
     msg.style.color = 'red';
-    msg.textContent = '❌ حدث خطأ، تحقق من الـ Token.';
+    msg.textContent = '❌ حدث خطأ: ' + e.message;
   }
 }
 </script>
-</body>
-</html>
