@@ -1,8 +1,6 @@
-// جلب id المنحة من الرابط
 const params = new URLSearchParams(window.location.search);
 const id = params.get('id');
 
-// جلب بيانات المنح
 fetch('data/scholarships.json')
   .then(res => res.json())
   .then(scholarships => {
@@ -14,14 +12,17 @@ fetch('data/scholarships.json')
       return;
     }
 
-    // تغيير عنوان الصفحة
     document.title = `مُلم | ${s.name}`;
+
+    const flagHtml = s.flag && s.flag.startsWith('http')
+      ? `<img src="${s.flag}" alt="flag" class="details-flag"/>`
+      : `<span class="details-flag" style="font-size:60px; line-height:1;">${s.flag || ''}</span>`;
 
     container.innerHTML = `
       <div class="details-hero">
-        <img src="${s.flag}" alt="flag" class="details-flag"/>
+        ${flagHtml}
         <h1>${s.name}</h1>
-        <p>${s.name_en}</p>
+        <p>${s.name_en || ''}</p>
         <span class="status ${s.open ? 'open' : 'closed'}">
           ${s.open ? '✅ التقديم مفتوح' : '🔴 التقديم مغلق'}
         </span>
@@ -49,23 +50,24 @@ fetch('data/scholarships.json')
             ${s.requirements.map(r => `<li>${r}</li>`).join('')}
           </ul>
         </div>
+
         ${s.documents ? `
         <div class="details-card">
-        <h2>📎 الملفات المطلوبة</h2>
-        ${s.documents.required ? `
-        <p><strong>🔴 إجباري:</strong></p>
-        <ul>${s.documents.required.map(d => `<li>${d}</li>`).join('')}</ul>
-        ` : ''}
-        ${s.documents.optional ? `
-        <p style="margin-top:15px"><strong>🟡 اختياري / يقوي ملفك:</strong></p>
-        <ul>${s.documents.optional.map(d => `<li>${d}</li>`).join('')}</ul>
+          <h2>📎 الملفات المطلوبة</h2>
+          ${s.documents.required ? `
+            <p><strong>🔴 إجباري:</strong></p>
+            <ul>${s.documents.required.map(d => `<li>${d}</li>`).join('')}</ul>
+          ` : ''}
+          ${s.documents.optional ? `
+            <p style="margin-top:15px"><strong>🟡 اختياري / يقوي ملفك:</strong></p>
+            <ul>${s.documents.optional.map(d => `<li>${d}</li>`).join('')}</ul>
           ` : ''}
         </div>
         ` : ''}
 
         <div class="details-card">
           <h2>📝 تفاصيل إضافية</h2>
-          <p>${s.description}</p>
+          <p>${s.description || ''}</p>
         </div>
 
         <a href="${s.link}" target="_blank" class="btn-main" style="display:block; text-align:center; margin-top:20px;">

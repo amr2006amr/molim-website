@@ -1,6 +1,5 @@
 let allScholarships = [];
 
-// جلب البيانات
 fetch('data/scholarships.json')
   .then(res => res.json())
   .then(data => {
@@ -9,7 +8,6 @@ fetch('data/scholarships.json')
   })
   .catch(err => console.error('خطأ:', err));
 
-// عرض الكروت
 function renderCards(list) {
   const grid = document.getElementById('scholarships-grid');
   const noResults = document.getElementById('no-results');
@@ -23,17 +21,21 @@ function renderCards(list) {
   noResults.style.display = 'none';
 
   list.forEach(s => {
+    const flagHtml = s.flag && s.flag.startsWith('http')
+      ? `<img class="card-flag" src="${s.flag}" alt="flag"/>`
+      : `<span class="card-flag" style="font-size:40px; line-height:1; display:block; margin-bottom:10px;">${s.flag || ''}</span>`;
+
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-      <img class="card-flag" src="${s.flag}" alt="flag"/>
+      ${flagHtml}
       <h3>${s.name}</h3>
       <p class="country">📍 ${s.country}</p>
       <p class="degree">🎓 ${s.degree}</p>
       <span class="status ${s.open ? 'open' : 'closed'}">
         ${s.open ? '✅ التقديم مفتوح' : '🔴 التقديم مغلق'}
       </span>
-      <p class="desc">${s.description}</p>
+      <p class="desc">${s.description || ''}</p>
       <p class="deadline">📅 آخر موعد: ${s.deadline}</p>
       <a href="scholarship.html?id=${s.id}" class="btn-details">تفاصيل المنحة كاملة ←</a>
       <a href="${s.link}" target="_blank">زيارة الموقع الرسمي ↗</a>
@@ -42,7 +44,6 @@ function renderCards(list) {
   });
 }
 
-// فلترة
 function filterCards() {
   const search = document.getElementById('search').value.toLowerCase();
   const status = document.getElementById('filter-status').value;
@@ -58,7 +59,6 @@ function filterCards() {
   renderCards(filtered);
 }
 
-// ربط الفلاتر بالأحداث
 document.getElementById('search').addEventListener('input', filterCards);
 document.getElementById('filter-status').addEventListener('change', filterCards);
 document.getElementById('filter-degree').addEventListener('change', filterCards);
