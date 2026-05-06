@@ -34,6 +34,7 @@ fetch('data/scholarships.json?v=' + Date.now())
           <h2>📋 معلومات عامة</h2>
           <p><strong>الدولة:</strong> ${s.country}</p>
           <p><strong>المراحل الدراسية:</strong> ${s.degree}</p>
+          ${s.open_date ? `<p><strong>📅 موعد فتح التقديم:</strong> ${s.open_date}</p>` : ''}
           <p><strong>آخر موعد للتقديم:</strong> ${s.deadline}</p>
         </div>
 
@@ -67,7 +68,7 @@ fetch('data/scholarships.json?v=' + Date.now())
 
         <div class="details-card">
           <h2>📝 تفاصيل إضافية</h2>
-          <p>${s.description || ''}</p>
+          <p>${s.notes || s.description || ''}</p>
         </div>
 
         <a href="${s.link}" target="_blank" class="btn-main" style="display:block; text-align:center; margin-top:20px;">

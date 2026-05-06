@@ -197,6 +197,10 @@
       <label>الاسم الإنجليزي للمنحة</label>
       <input type="text" id="enTitle" placeholder="مثال: Turkey Government Scholarship"/>
     </div>
+    <div class="form-group">
+      <label>📝 تفاصيل إضافية</label>
+      <textarea id="notes" placeholder="معلومات إضافية عن المنحة..."></textarea>
+    </div>
     <button class="btn-submit" onclick="addScholarship()">✅ إضافة المنحة</button>
     <p id="msg"></p>
   </div>
@@ -275,6 +279,10 @@
       <label>الاسم الإنجليزي للمنحة</label>
       <input type="text" id="e_enTitle" placeholder="مثال: Turkey Government Scholarship"/>
     </div>
+    <div class="form-group">
+      <label>📝 تفاصيل إضافية</label>
+      <textarea id="e_notes" placeholder="معلومات إضافية عن المنحة..."></textarea>
+    </div>
     <button class="btn-save" onclick="saveEdit()">💾 حفظ التعديلات</button>
     <p id="edit-msg"></p>
   </div>
@@ -286,8 +294,8 @@ const REPO  = 'molim-website';
 const FILE  = 'data/scholarships.json';
 
 let editingIndex = -1;
-let cachedSha = '';        // ✅ إضافة: لتخزين SHA وتجنب مشكلة التعديل
-let cachedScholarships = []; // ✅ إضافة: لتخزين البيانات وتجنب جلبها مرتين
+let cachedSha = '';
+let cachedScholarships = [];
 
 function getToken() {
   return document.getElementById('tokenInput').value;
@@ -350,7 +358,6 @@ async function getFile() {
 }
 
 async function saveFile(sha, scholarships, message) {
-  // ✅ تعديل: يستقبل sha مباشرة بدل كائن data
   const res = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${FILE}`, {
     method: 'PUT',
     headers: { Authorization: `token ${getToken()}`, 'Content-Type': 'application/json' },
@@ -362,13 +369,12 @@ async function saveFile(sha, scholarships, message) {
   });
 
   const result = await res.json();
-  console.log('GitHub Response:', result); // للتشخيص عند الحاجة
+  console.log('GitHub Response:', result);
 
   if (!res.ok) {
     throw new Error(result.message || 'فشل الحفظ');
   }
 
-  // ✅ تحديث الـ SHA بعد كل حفظ ناجح لتجنب مشكلة التعديل المتكرر
   if (result.content && result.content.sha) {
     cachedSha = result.content.sha;
   }
@@ -414,16 +420,17 @@ async function addScholarship() {
     },
     link:         document.getElementById('link').value.trim(),
     open:         document.getElementById('status').value === 'open',
+    notes:        document.getElementById('notes').value.trim(),
   };
 
   try {
     const data = await getFile();
     const current = decodeContent(data.content);
     current.push(newEntry);
-    await saveFile(data.sha, current, `إضافة منحة: ${newEntry.name}`); // ✅ تمرير sha مباشرة
+    await saveFile(data.sha, current, `إضافة منحة: ${newEntry.name}`);
     msg.style.color = 'green';
     msg.textContent = '✅ تمت إضافة المنحة بنجاح! ستظهر خلال دقائق.';
-    ['title','country','degree','desc','benefits','requirements','link','flag','enTitle'].forEach(id => {
+    ['title','country','degree','desc','benefits','requirements','link','flag','enTitle','notes'].forEach(id => {
       document.getElementById(id).value = '';
     });
     document.getElementById('open_date').value = '';
@@ -443,8 +450,8 @@ async function loadScholarships() {
   list.innerHTML = '⏳ جاري التحميل...';
   try {
     const data = await getFile();
-    cachedSha = data.sha;                          // ✅ تخزين SHA عند التحميل
-    cachedScholarships = decodeContent(data.content); // ✅ تخزين البيانات
+    cachedSha = data.sha;
+    cachedScholarships = decodeContent(data.content);
     list.innerHTML = '';
     if (cachedScholarships.length === 0) {
       list.innerHTML = '<p style="text-align:center; color:#aaa;">لا توجد منح حالياً</p>';
@@ -475,14 +482,12 @@ async function loadScholarships() {
 async function deleteScholarship(index) {
   if (!confirm('هل أنت متأكد من حذف هذه المنحة؟')) return;
   try {
-    // ✅ استخدام cachedScholarships و cachedSha بدل جلب الملف مرة ثانية
     const title = cachedScholarships[index].name || cachedScholarships[index].title;
     cachedScholarships.splice(index, 1);
     await saveFile(cachedSha, cachedScholarships, `حذف منحة: ${title}`);
     alert('✅ تم الحذف بنجاح!');
     loadScholarships();
   } catch(e) {
-    // إذا فشل من الـ cache، جرب مجدداً من GitHub
     try {
       const data = await getFile();
       const scholarships = decodeContent(data.content);
@@ -498,12 +503,10 @@ async function deleteScholarship(index) {
 }
 
 // ===== فتح مودال التعديل =====
-// ✅ الآن يستخدم البيانات المخزنة مسبقاً بدل جلبها مرة ثانية
 function openEditModal(index) {
   editingIndex = index;
   document.getElementById('edit-msg').textContent = '';
 
-  // إذا ما في بيانات محملة، أعطِ رسالة للمستخدم
   if (!cachedScholarships || cachedScholarships.length === 0) {
     alert('⚠️ يرجى تحميل المنح أولاً بالضغط على زر "تحميل المنح"');
     return;
@@ -523,6 +526,7 @@ function openEditModal(index) {
   document.getElementById('e_link').value         = s.link || '';
   document.getElementById('e_flag').value         = s.flag || '';
   document.getElementById('e_enTitle').value      = s.name_en || s.enTitle || '';
+  document.getElementById('e_notes').value        = s.notes || '';
 
   populateFileRows('required-files-edit', s.documents?.required || []);
   populateFileRows('optional-files-edit', s.documents?.optional || []);
@@ -551,8 +555,6 @@ async function saveEdit() {
   }
 
   try {
-    // ✅ الإصلاح الرئيسي: استخدام cachedSha و cachedScholarships
-    // بدل جلب الملف مرة ثانية مما كان يسبب تعارض في الـ SHA
     const old = cachedScholarships[editingIndex];
 
     cachedScholarships[editingIndex] = {
@@ -573,6 +575,7 @@ async function saveEdit() {
       },
       link:           document.getElementById('e_link').value.trim(),
       open:           document.getElementById('e_status').value === 'open',
+      notes:          document.getElementById('e_notes').value.trim(),
     };
 
     await saveFile(cachedSha, cachedScholarships, `تعديل منحة: ${updatedTitle}`);

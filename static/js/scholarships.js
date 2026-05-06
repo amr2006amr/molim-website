@@ -35,7 +35,8 @@ function renderCards(list) {
       <span class="status ${s.open ? 'open' : 'closed'}">
         ${s.open ? '✅ التقديم مفتوح' : '🔴 التقديم مغلق'}
       </span>
-      <p class="desc">${s.description || ''}</p>
+      <p class="desc">${s.notes || s.description || ''}</p>
+      ${s.open_date ? `<p><strong>📅 موعد فتح التقديم:</strong> ${s.open_date}</p>` : ''}
       <p class="deadline">📅 آخر موعد: ${s.deadline}</p>
       <a href="scholarship.html?id=${s.id}" class="btn-details">تفاصيل المنحة كاملة ←</a>
       <a href="${s.link}" target="_blank">زيارة الموقع الرسمي ↗</a>
