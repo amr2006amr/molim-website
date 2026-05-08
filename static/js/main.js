@@ -72,3 +72,19 @@ fetch('data/scholarships.json')
     header.classList.remove('scrolled');
   }
 });
+
+//الدالة التي تشغل زر شارك المنحة في خانة المنح المفتوحة
+
+function shareScholarship(id, name, country) {
+  const url = `${window.location.origin}/scholarship.html?id=${id}`;
+  if (navigator.share) {
+    navigator.share({
+      title: `منحة ${name}`,
+      text: `🎓 اكتشف منحة ${name} في ${country} على منصة مُلم!`,
+      url: url
+    });
+  } else {
+    navigator.clipboard.writeText(url);
+    alert('✅ تم نسخ رابط المنحة!');
+  }
+}
