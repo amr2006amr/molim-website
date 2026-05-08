@@ -64,7 +64,7 @@ nav a:hover {
   text-align: center;
   padding: 80px 20px;
   background: 
-    linear-gradient(135deg, rgba(10,20,50,0.55), rgba(180,80,0,0.45)),
+    linear-gradient(135deg, rgba(5,15,40,0.80), rgba(20,20,20,0.65)),
     url('../images/hero-bg.jpg') center center / cover no-repeat;
   position: relative;
 }
