@@ -55,7 +55,7 @@ fetch('data/scholarships.json')
         <span class="status open">✅ التقديم مفتوح</span>
         <p class="desc">${s.description || ''}</p>
         ${s.open_date ? `<p class="deadline">📅 موعد فتح التقديم: ${s.open_date}</p>` : ''}
-        <p class="deadline">📅 آخر موعد: ${s.deadline}</p>
+        <p class="deadline">📅 آخر موعد للتقديم: ${s.deadline}</p>
         <a href="scholarship.html?id=${s.id}" class="btn-details" style="background:white; color:#ff4500; border:none;">تفاصيل المنحة كاملة ←</a>
         <a href="${s.link}" target="_blank" class="btn-details" style="background:white; color:#ff4500; border:none;">زيارة الموقع الرسمي ↗</a>
         <a class="btn-details" style="background:white; color:#ff4500; border:none; cursor:pointer;" onclick="shareScholarship('${s.id}', '${s.name}', '${s.country}')">📤 شارك المنحة</a>
@@ -74,17 +74,14 @@ fetch('data/scholarships.json')
 });
 
 //الدالة التي تشغل زر شارك المنحة في خانة المنح المفتوحة
-
 function shareScholarship(id, name, country) {
   const url = `${window.location.origin}/scholarship.html?id=${id}`;
+  const text = `🎓 اكتشف منحة ${name} في ${country} على منصة مُلم!`;
+
   if (navigator.share) {
-    navigator.share({
-      title: `منحة ${name}`,
-      text: `🎓 اكتشف منحة ${name} في ${country} على منصة مُلم!`,
-      url: url
-    });
+    navigator.share({ title: `منحة ${name}`, text, url });
   } else {
-    navigator.clipboard.writeText(url);
+    navigator.clipboard.writeText(text + '\n' + url);
     alert('✅ تم نسخ رابط المنحة!');
   }
 }
