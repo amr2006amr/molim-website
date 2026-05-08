@@ -522,14 +522,16 @@ footer p {
 
 /* ===== ABOUT SECTION ===== */
 .about-section {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-  padding: 60px 40px;
+  padding: 10px 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+.about-section .cards-wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
 .about-card {
   background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
@@ -613,7 +615,8 @@ footer p {
   color: white;
   margin-top: 5px;
 }
-/*زر مشاركة المنحة/*
+
+/* زر مشاركة المنحة*/
 .btn-share-general {
   width: 100%;
   padding: 10px;
@@ -630,4 +633,39 @@ footer p {
 
 .btn-share-general:hover {
   background: #0f2550;
+}
+
+.open-scholarships-section {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: right;
+  color: #ff4500;
+  font-size: 28px;
+  margin-bottom: 30px;
+  padding-right: 0%;
+}
+
+#open-scholarships-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 0 20px;
+  direction: rtl;
+}
+
+#open-scholarships-grid .btn-details {
+  display: block;
+  width: 100%;
+  margin: 5px 0;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+#open-scholarships-grid .card {
+  width: 100%;
+  box-sizing: border-box;
 }
