@@ -40,6 +40,9 @@ function renderCards(list) {
       <p class="deadline">📅  آخر موعد للتقديم: ${s.deadline}</p>
       <a href="scholarship.html?id=${s.id}" class="btn-details">تفاصيل المنحة كاملة ←</a>
       <a href="${s.link}" target="_blank">زيارة الموقع الرسمي ↗</a>
+      <a class="btn-details" onclick="shareScholarship('${s.id}', '${s.name}', '${s.country}')" style="cursor:pointer;">
+      📤 شارك المنحة
+      </a>
     `;
     grid.appendChild(card);
   });
@@ -63,3 +66,18 @@ function filterCards() {
 document.getElementById('search').addEventListener('input', filterCards);
 document.getElementById('filter-status').addEventListener('change', filterCards);
 document.getElementById('filter-degree').addEventListener('change', filterCards);
+
+function shareScholarship(id, name, country) {
+  const url = `${window.location.origin}/scholarship.html?id=${id}`;
+  if (navigator.share) {
+    navigator.share({
+      title: `منحة ${name}`,
+      text: `🎓 اكتشف منحة ${name} في ${country} على منصة مُلم!`,
+      url: url
+    });
+  } else {
+    // للمتصفحات اللي ما تدعم Web Share API
+    navigator.clipboard.writeText(url);
+    alert('✅ تم نسخ رابط المنحة!');
+  }
+}

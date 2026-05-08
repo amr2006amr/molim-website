@@ -29,6 +29,16 @@ header {
   box-sizing: border-box;
 }
 
+header.scrolled {
+  padding: 8px 30px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+header.scrolled .logo-img {
+  height: 55px;
+}
+
 .logo {
   display: flex;
   flex-direction: column;
@@ -602,4 +612,22 @@ footer p {
   font-size: 16px;
   color: white;
   margin-top: 5px;
+}
+/*زر مشاركة المنحة/*
+.btn-share-general {
+  width: 100%;
+  padding: 10px;
+  background: #1a3a6e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+  margin-top: 8px;
+}
+
+.btn-share-general:hover {
+  background: #0f2550;
 }
