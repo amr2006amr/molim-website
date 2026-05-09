@@ -683,24 +683,31 @@ footer p {
   box-sizing: border-box;
 }
 
-#open-scholarships-grid .card {
-  width: 100%;
-  box-sizing: border-box;
-}
 
 /* ===== HAMBURGER MENU ===== */
 .menu-toggle {
   display: none;
+  flex-direction: column;
+  gap: 5px;
   background: none;
   border: none;
-  font-size: 28px;
-  color: #ff4500;
   cursor: pointer;
+  padding: 4px;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #ff4500;
+  border-radius: 3px;
 }
 
 @media (max-width: 768px) {
   .menu-toggle {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
   }
   .logo-img{
     height: 50px;
