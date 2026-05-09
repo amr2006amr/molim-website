@@ -22,8 +22,10 @@ header {
   padding: 8px 20px;
   background: #fff;
   border-bottom: 2px solid #ff4500;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
   width: 100%;
   box-sizing: border-box;
@@ -71,12 +73,13 @@ nav a:hover {
 
 /* ===== HERO ===== */
 .hero {
+  margin-top: 76px;
   text-align: center;
   padding: 80px 20px;
   background: 
     linear-gradient(135deg, rgba(5,15,40,0.80), rgba(20,20,20,0.65)),
     url('../images/hero-bg.jpg') center center / cover no-repeat;
-    background-attachment: fixed;
+    background-attachment: scroll;
   position: relative;
 }
 
@@ -715,7 +718,7 @@ footer p {
     gap: 5px;
   }
   .logo-img{
-    height: 70px;
+    height: 90px;
   }
 
   nav {
