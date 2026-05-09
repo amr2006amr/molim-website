@@ -19,7 +19,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px;
+  padding: 8px 20px;
   background: #fff;
   border-bottom: 2px solid #ff4500;
   position: sticky;
@@ -46,7 +46,7 @@ header.scrolled .logo-img {
 }
 
 .logo-img {
-  height: 90px;
+  height: 60px;
   width: auto;
 }
 
@@ -574,6 +574,10 @@ footer p {
     gap: 12px;
     padding: 12px 10px;
   }
+  #open-scholarships-grid .card{
+    min-width: 260px;
+    max-width: 260px;
+  }
 
   nav {
     flex-wrap: wrap;
@@ -697,6 +701,9 @@ footer p {
 @media (max-width: 768px) {
   .menu-toggle {
     display: block;
+  }
+  .logo-img{
+    height: 50px;
   }
 
   nav {
