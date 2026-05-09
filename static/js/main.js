@@ -97,7 +97,7 @@ if (grid) {
         <a class="btn-details" style="background:white; color:#ff4500; border:none; cursor:pointer;" onclick="shareScholarship('${s.id}', '${s.name}', '${s.country}')">📤 شارك المنحة</a>
       `;
       grid.appendChild(card);
-      observer.observe(card);
+      setTimeout(() => card.classList.add('visible'), 100);
     });
   })
   .catch(err => console.error('خطأ:', err));
