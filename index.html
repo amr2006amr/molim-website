@@ -55,8 +55,12 @@
 
 <!-- المنح المتاحة حالياً -->
 <section class="open-scholarships-section">
-  <h2 class="section-title">🟢 المنح المتاحة حالياً</h2>
-  <div id="open-scholarships-grid" class="cards-grid"></div>
+  <h2 class="section-title">المنح المتاحة حالياً 🟢</h2>
+  <div class="slider-wrapper">
+    <button class="slider-btn prev" onclick="slideCards(-1)">&#8250;</button>
+    <div id="open-scholarships-grid" class="cards-grid"></div>
+    <button class="slider-btn next" onclick="slideCards(1)">&#8249;</button>
+  </div>
 </section>
 
   <!-- من نحن -->

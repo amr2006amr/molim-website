@@ -157,3 +157,10 @@ window.addEventListener('scroll', () => {
     observer.observe(card);
   });
 });
+
+// ازرار التمرير الافقي
+function slideCards(direction) {
+  const grid = document.getElementById('open-scholarships-grid');
+  const cardWidth = grid.querySelector('.card').offsetWidth + 20;
+  grid.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
+}

@@ -911,3 +911,28 @@ footer {
   border-radius: 3px;
 }
 }
+/*ازرار التمرير الافقي */
+.slider-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: #ff4500;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.slider-btn.prev { right: -15px; }
+.slider-btn.next { left: -15px; }
