@@ -1,5 +1,12 @@
+// حاول تقرأ من الرابط النظيف أولاً
 const pathParts = window.location.pathname.split('/');
-const id = pathParts[pathParts.length - 1];
+const pathId = pathParts[pathParts.length - 1];
+
+// وإذا مو موجود، اقرأ من query string
+const params = new URLSearchParams(window.location.search);
+const queryId = params.get('id');
+
+const id = (pathId && pathId !== 'scholarship.html') ? pathId : queryId;
 
 fetch('data/scholarships.json?v=' + Date.now())
   .then(res => res.json())
