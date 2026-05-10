@@ -8,7 +8,7 @@ const queryId = params.get('id');
 
 const id = (pathId && pathId !== 'scholarship.html') ? pathId : queryId;
 
-fetch('data/scholarships.json?v=' + Date.now())
+fetch('/data/scholarships.json?v=' + Date.now())
   .then(res => res.json())
   .then(scholarships => {
     const s = scholarships.find(s => s.id === id);
