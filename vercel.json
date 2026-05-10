@@ -2,7 +2,7 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/:id",
+      "source": "/scholarship/:id",
       "destination": "/scholarship.html?id=:id"
     }
   ]

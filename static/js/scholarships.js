@@ -70,7 +70,7 @@ document.getElementById('filter-status').addEventListener('change', filterCards)
 document.getElementById('filter-degree').addEventListener('change', filterCards);
 
 function shareScholarship(id, name, country) {
-  const url = `${window.location.origin}/${id}`;
+  const url = `${window.location.origin}/scholarship/${id}`;
   if (navigator.share) {
     navigator.share({
       title: `منحة ${name}`,
