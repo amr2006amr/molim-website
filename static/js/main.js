@@ -112,7 +112,7 @@ if (grid) {
 
 //الدالة التي تشغل زر شارك المنحة في خانة المنح المفتوحة
 function shareScholarship(id, name, country) {
-  const url = `${window.location.origin}/scholarship.html?id=${id}`;
+  const url = `${window.location.origin}/${id}`;
   const text = `🎓 اكتشف منحة ${name} في ${country} على منصة مُلم!`;
 
   if (navigator.share) {
