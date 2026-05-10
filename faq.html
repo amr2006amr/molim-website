@@ -11,23 +11,25 @@
 <body>
 
   <!-- الهيدر -->
- <header>
-  <div class="logo">
-    <img src="static/logo.png" alt="مُلم" class="logo-img"/>
-  </div>
-  <button class="menu-toggle" onclick="toggleMenu()">
-  <span></span>
-  <span></span>
-  <span></span>
-</button>
-  <nav id="main-nav">
-    <a href="index.html">الرئيسية</a>
-    <a href="scholarships.html">المنح</a>
-    <a href="faq.html">الأسئلة الشائعة</a>
-        <a href="contact.html">تواصل معنا</a>
-  </nav>
-  <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
-</header>
+  <header>
+    <div class="logo">
+      <img src="static/logo.png" alt="مُلم" class="logo-img"/>
+    </div>
+    <nav id="main-nav">
+      <a href="index.html">الرئيسية</a>
+      <a href="scholarships.html">المنح</a>
+      <a href="faq.html">الأسئلة الشائعة</a>
+      <a href="contact.html">تواصل معنا</a>
+    </nav>
+    <div class="header-left">
+      <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Toggle Dark Mode">🌙</button>
+      <button class="menu-toggle" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
 
   <!-- عنوان -->
   <section class="page-hero">
@@ -40,7 +42,7 @@
 
     <div class="faq-item">
       <div class="faq-question" onclick="toggleFaq(this)">
-        <span> كيف اقدم على منحة؟</span>
+        <span>كيف اقدم على منحة؟</span>
         <span class="faq-icon">+</span>
       </div>
       <div class="faq-answer">
@@ -207,37 +209,33 @@
         أغلب المنح تشترط معدلاً لا يقل عن 70% كتقدير جيد. بعض المنح ترفع هذا الحد إلى 80% جيد جداً أو 90% ممتاز. راجع تفاصيل كل منحة لمعرفة الحد الأدنى المطلوب.
       </div>
     </div>
-    
+
   </section>
 
   <!-- الفوتر -->
   <footer>
-  <div class="footer-content">
-
-    <div class="footer-brand">
-      <img src="static/logo.png" alt="مُلم" class="footer-logo"/>
-      <p>منصتك الأولى لاكتشاف المنح الدراسية حول العالم</p>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <img src="static/logo.png" alt="مُلم" class="footer-logo"/>
+        <p>منصتك الأولى لاكتشاف المنح الدراسية حول العالم</p>
+      </div>
+      <div class="footer-links">
+        <h4>روابط سريعة</h4>
+        <a href="index.html">الرئيسية</a>
+        <a href="scholarships.html">جميع المنح</a>
+        <a href="faq.html">الأسئلة الشائعة</a>
+        <a href="contact.html">تواصل معنا</a>
+      </div>
+      <div class="footer-social">
+        <h4>تواصل معنا</h4>
+        <a href="https://t.me/Molim_Team/4" target="_blank">✈️ تليجرام</a>
+        <a href="mailto:molim.team@gmail.com">📧 molim.team@gmail.com</a>
+      </div>
     </div>
-
-    <div class="footer-links">
-      <h4>روابط سريعة</h4>
-      <a href="index.html">الرئيسية</a>
-      <a href="scholarships.html">جميع المنح</a>
-      <a href="faq.html">الأسئلة الشائعة</a>
-      <a href="contact.html">تواصل معنا</a>
+    <div class="footer-bottom">
+      <p>مُلم © 2026 | جميع الحقوق محفوظة</p>
     </div>
-
-    <div class="footer-social">
-      <h4>تواصل معنا</h4>
-      <a href="https://t.me/Molim_Team/4" target="_blank">✈️ تليجرام</a>
-      <a href="mailto:molim.team@gmail.com">📧 molim.team@gmail.com</a>
-    </div>
-
-  </div>
-  <div class="footer-bottom">
-    <p>مُلم © 2026 | جميع الحقوق محفوظة</p>
-  </div>
-</footer>
+  </footer>
 
   <script>
     function toggleFaq(el) {
@@ -253,7 +251,7 @@
     }
   </script>
 
-<script src="static/js/shared.js"></script>
+  <script src="static/js/shared.js"></script>
 
 </body>
 </html>

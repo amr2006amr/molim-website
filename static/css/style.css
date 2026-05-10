@@ -38,7 +38,6 @@
   --countdown-urgent-bg: #4a1a1a;
   --countdown-urgent-color: #ff6b6b;
 
-  /* Admin-specific colors */
   --admin-container-bg: transparent;
   --admin-token-bar-bg: white;
   --admin-token-bar-border: #ff4500;
@@ -69,65 +68,64 @@
 }
 
 [data-theme="dark"] {
-  --bg-color: #1a1a2e;
+  --bg-color: #0d1b2a;
   --text-color: #eaeaea;
-  --header-bg: #2a2a3e;
-  --header-border-bottom: #00bcd4; /* A contrasting color for dark mode */
-  --card-bg: #2d2d42;
-  --card-border: #44445c;
-  --primary-color: #00bcd4; /* A contrasting color for dark mode */
-  --secondary-color: #a0a0b8;
-  --hero-bg-gradient: linear-gradient(135deg, rgba(20,20,40,0.85), rgba(0,0,0,0.7));
-  --hero-logo-shadow: rgba(0, 188, 212, 0.7);
-  --hero-logo-hover-shadow: rgba(0, 188, 212, 1);
-  --page-hero-bg: linear-gradient(135deg, #1f1a2e, #2b1a3e, #00bcd4);
-  --footer-bg: #0a0a1e;
-  --footer-border-top: #00bcd4;
+  --header-bg: #0f2140;
+  --header-border-bottom: #1a3a6e;
+  --card-bg: #132035;
+  --card-border: #1e3a6e;
+  --primary-color: #ff4500;
+  --secondary-color: #7a9cc4;
+  --hero-bg-gradient: linear-gradient(135deg, rgba(5,15,35,0.90), rgba(10,20,45,0.80));
+  --hero-logo-shadow: rgba(26, 58, 110, 0.8);
+  --hero-logo-hover-shadow: rgba(26, 58, 110, 1);
+  --page-hero-bg: linear-gradient(135deg, #0a1628, #0f2140, #1a3a6e);
+  --footer-bg: #080f1a;
+  --footer-border-top: #1a3a6e;
   --footer-text-color: #ccc;
-  --footer-link-color: #a0a0b8;
-  --footer-bottom-border: #1a1a2e;
+  --footer-link-color: #7a9cc4;
+  --footer-bottom-border: #0d1b2a;
   --footer-bottom-text: #555;
-  --faq-hover-bg: #3a3a4e;
+  --faq-hover-bg: #0f2140;
   --status-open-bg: #004d40;
   --status-open-color: #80cbc4;
   --status-closed-bg: #4a0000;
   --status-closed-color: #ef9a9a;
-  --skeleton-bg-start: #33334c;
-  --skeleton-bg-middle: #44445c;
-  --countdown-bg: #2d2d42;
-  --countdown-border: #00bcd4;
-  --countdown-color: #00bcd4;
+  --skeleton-bg-start: #132035;
+  --skeleton-bg-middle: #1e3a6e;
+  --countdown-bg: #0f2140;
+  --countdown-border: #1a3a6e;
+  --countdown-color: #7a9cc4;
   --countdown-urgent-bg: #4a0000;
   --countdown-urgent-color: #ef9a9a;
 
-  /* Admin-specific dark colors */
   --admin-container-bg: transparent;
-  --admin-token-bar-bg: #2d2d42;
-  --admin-token-bar-border: #00bcd4;
-  --admin-input-border: #00bcd4;
-  --admin-tab-btn-active-bg: #00bcd4;
-  --admin-tab-btn-active-color: black;
-  --admin-tab-btn-inactive-bg: #44445c;
+  --admin-token-bar-bg: #132035;
+  --admin-token-bar-border: #1a3a6e;
+  --admin-input-border: #1a3a6e;
+  --admin-tab-btn-active-bg: #1a3a6e;
+  --admin-tab-btn-active-color: white;
+  --admin-tab-btn-inactive-bg: #0f2140;
   --admin-tab-btn-inactive-color: #eaeaea;
-  --admin-scholarship-item-bg: #2d2d42;
-  --admin-scholarship-item-border: #44445c;
+  --admin-scholarship-item-bg: #132035;
+  --admin-scholarship-item-border: #1e3a6e;
   --admin-scholarship-item-shadow: rgba(0,0,0,0.2);
-  --admin-scholarship-item-h3: #00bcd4;
-  --admin-scholarship-item-p: #a0a0b8;
-  --admin-btn-edit-bg: #44445c;
+  --admin-scholarship-item-h3: #ff4500;
+  --admin-scholarship-item-p: #7a9cc4;
+  --admin-btn-edit-bg: #1a3a6e;
   --admin-btn-delete-bg: #880000;
   --admin-modal-overlay-bg: rgba(0,0,0,0.7);
-  --admin-modal-box-bg: #2d2d42;
+  --admin-modal-box-bg: #132035;
   --admin-modal-box-shadow: rgba(0,0,0,0.5);
-  --admin-modal-close-color: #a0a0b8;
+  --admin-modal-close-color: #7a9cc4;
   --admin-modal-close-hover: #ef9a9a;
-  --admin-btn-save-bg: #44445c;
-  --admin-files-section-bg: #3a3a4e;
-  --admin-files-section-border: #00bcd4;
-  --admin-file-row-input-border: #555;
-  --admin-btn-add-file-bg: #44445c;
+  --admin-btn-save-bg: #1a3a6e;
+  --admin-files-section-bg: #0f2140;
+  --admin-files-section-border: #1a3a6e;
+  --admin-file-row-input-border: #1e3a6e;
+  --admin-btn-add-file-bg: #1a3a6e;
   --admin-btn-remove-file-bg: #880000;
-  --admin-section-divider-border: #00bcd4;
+  --admin-section-divider-border: #1a3a6e;
 }
 
 body {
@@ -137,7 +135,7 @@ body {
   color: var(--text-color);
   direction: rtl;
   min-height: 100vh;
-  transition: background 0.5s ease, color 0.5s ease; /* Smooth transition for dark mode */
+  transition: background 0.5s ease, color 0.5s ease;
 }
 
 /* ===== HEADER ===== */
@@ -159,14 +157,15 @@ header {
 .header-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  order: 3;
 }
 
 header.scrolled {
   padding: 8px 30px;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.1); /* This shadow might need to be dynamic for dark mode */
+  box-shadow: 0 2px 15px rgba(0,0,0,0.1);
   transition: all 0.3s ease;
-  }
+}
 
 header.scrolled .logo-img {
   height: 55px;
@@ -176,6 +175,7 @@ header.scrolled .logo-img {
   display: flex;
   flex-direction: row;
   line-height: 1;
+  order: 1;
 }
 
 .logo-img {
@@ -187,6 +187,7 @@ nav {
   display: flex;
   gap: 15px;
   align-items: center;
+  order: 2;
 }
 
 nav a {
@@ -199,7 +200,7 @@ nav a {
 }
 
 nav a:hover {
-  color: var(--primary-color); /* Adjusted for consistency, might need a darker shade */
+  color: var(--primary-color);
   filter: brightness(0.8);
 }
 
@@ -207,13 +208,14 @@ nav a:hover {
 .dark-mode-toggle {
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 22px;
   cursor: pointer;
   color: var(--primary-color);
   transition: color 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 4px;
 }
 
 .dark-mode-toggle:hover {
@@ -228,7 +230,7 @@ nav a:hover {
   background:
     var(--hero-bg-gradient),
     url('../images/hero-bg.jpg') center center / cover no-repeat;
-    background-attachment: scroll;
+  background-attachment: scroll;
   position: relative;
   transition: background 0.5s ease;
 }
@@ -260,7 +262,7 @@ nav a:hover {
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   width: 300px; height: 300px;
-  background: radial-gradient(circle, var(--hero-logo-shadow) 0%, transparent 70%); /* Uses hero-logo-shadow */
+  background: radial-gradient(circle, var(--hero-logo-shadow) 0%, transparent 70%);
   border-radius: 50%;
   z-index: 1;
   animation: pulseGlow 3s ease-in-out infinite;
@@ -279,7 +281,7 @@ nav a:hover {
 
 .hero-sub {
   font-size: 22px;
-  color: var(--footer-text-color); /* Reusing a suitable color */
+  color: var(--footer-text-color);
   margin-bottom: 35px;
   transition: color 0.5s ease;
 }
@@ -329,14 +331,13 @@ nav a:hover {
   transition: transform 0.3s, border-color 0.3s, background 0.5s ease, color 0.5s ease;
 }
 
-/*لظهور طرف بطاقة المنح المفتوحة*/
-#open-scholarships-grid .card{
+#open-scholarships-grid .card {
   opacity: 1 !important;
 }
 
 .card:hover {
   transform: translateY(-5px);
-  border-color: var(--primary-color); /* Consistent hover border */
+  border-color: var(--primary-color);
 }
 
 .card-flag {
@@ -390,7 +391,7 @@ nav a:hover {
 .card a {
   display: block;
   text-align: center;
-  background: rgba(255, 255, 255, 0.5); /* This will need to be dynamic */
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   color: var(--primary-color);
@@ -398,21 +399,21 @@ nav a:hover {
   border-radius: 10px;
   text-decoration: none;
   font-weight: 700;
-  border: 1px solid rgba(255, 255, 255, 0.8); /* This will need to be dynamic */
+  border: 1px solid rgba(255, 255, 255, 0.8);
   margin-top: 8px;
   transition: all 0.3s;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* This will need to be dynamic */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 [data-theme="dark"] .card a {
-  background: rgba(0, 0, 0, 0.3); /* Darker transparent background */
-  border: 1px solid rgba(0, 188, 212, 0.5); /* Dark mode specific border */
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(26, 58, 110, 0.6);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  color: var(--primary-color); /* Use primary color */
+  color: var(--primary-color);
 }
 
 .card a:hover {
-  background: var(--card-bg); /* Use card background for hover */
+  background: var(--card-bg);
   transform: translateX(-3px);
   filter: brightness(0.9);
 }
@@ -434,11 +435,10 @@ nav a:hover {
 
 /* ===== FOOTER ===== */
 footer {
-  text-align: center;
-  padding: 40px 20px;
   background: var(--footer-bg);
   border-top: 2px solid var(--footer-border-top);
   margin-top: 60px;
+  padding: 0;
   transition: background 0.5s ease, border-color 0.5s ease;
 }
 
@@ -490,7 +490,7 @@ footer p {
   display: flex;
   gap: 15px;
   padding: 25px 40px;
-  background: var(--card-border); /* Reusing a subtle background */
+  background: var(--card-border);
   flex-wrap: wrap;
   transition: background 0.5s ease;
 }
@@ -524,7 +524,6 @@ footer p {
   max-width: 600px;
   margin: 50px auto;
   padding: 0 20px;
-  /* لا تضيف background هنا */
 }
 
 .contact-card {
@@ -534,7 +533,7 @@ footer p {
   padding: 20px 25px;
   border-radius: 12px;
   text-decoration: none;
-  color: white; /* Maintain white text for these colored cards */
+  color: white;
   font-family: 'Tajawal', sans-serif;
   transition: transform 0.3s, opacity 0.3s;
   border: 1px solid transparent;
@@ -573,7 +572,7 @@ footer p {
   display: block;
   text-align: center;
   background: transparent;
-  color: var(--footer-text-color); /* Changed to use variable */
+  color: var(--footer-text-color);
   padding: 10px;
   border-radius: 8px;
   text-decoration: none;
@@ -585,7 +584,7 @@ footer p {
 
 .btn-details:hover {
   background: var(--primary-color);
-  color: white; /* Text color becomes white on hover */
+  color: white;
 }
 
 /* ===== DETAILS PAGE ===== */
@@ -607,13 +606,13 @@ footer p {
 .details-hero h1 {
   font-size: 36px;
   font-weight: 900;
-  color: var(--footer-text-color); /* White text in hero */
+  color: var(--footer-text-color);
   margin-bottom: 8px;
   transition: color 0.5s ease;
 }
 
 .details-hero p {
-  color: var(--footer-link-color); /* Lighter text for description */
+  color: var(--footer-link-color);
   margin-bottom: 15px;
   transition: color 0.5s ease;
 }
@@ -660,6 +659,7 @@ footer p {
   font-weight: 700;
   transition: color 0.5s ease;
 }
+
 /* ===== FAQ PAGE ===== */
 .faq-section {
   max-width: 800px;
@@ -728,27 +728,34 @@ footer p {
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
 }
+
 .about-card {
-  background: var(--card-bg); /* Using card-bg for consistency */
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 30px;
   border: 1px solid var(--card-border);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s, box-shadow 0.3s, background 0.5s ease, border-color 0.5s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease, background 0.5s ease, border-color 0.5s ease;
 }
 
 .about-card:hover {
   transform: translateY(-5px);
-  border-color: var(--primary-color); /* Consistent hover border */
+  border-color: var(--primary-color);
+}
+
+.about-card.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .about-icon {
   font-size: 36px;
   display: block;
   margin-bottom: 15px;
-  color: var(--primary-color); /* Ensures icons are visible */
   transition: color 0.5s ease;
 }
 
@@ -767,33 +774,7 @@ footer p {
   transition: color 0.5s ease;
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  header {
-    gap: 12px;
-    padding: 12px 10px;
-  }
-  #open-scholarships-grid .card{
-    min-width: 82%;
-    max-width: 82%;
-    scroll-snap-align: start;
-    flex-shrink: 0;
-  }
-
-  nav {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    width: 100%;
-  }
-
-  nav a {
-    font-size: 0.8rem;
-    padding: 4px 6px;
-    white-space: nowrap;
-  }
-}
-/* cssاحصائيات المنحة */
+/* ===== STATS ===== */
 .stats-section {
   display: flex;
   justify-content: center;
@@ -818,86 +799,10 @@ footer p {
 
 .stat-label {
   font-size: 16px;
-  color: var(--footer-text-color); /* Reusing for consistency */
+  color: var(--footer-text-color);
   margin-top: 5px;
   transition: color 0.5s ease;
 }
-
-/* زر مشاركة المنحة*/
-.btn-share-general {
-  width: 100%;
-  padding: 10px;
-  background: var(--secondary-color);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: 'Tajawal', sans-serif;
-  margin-top: 8px;
-  transition: background 0.3s;
-}
-
-.btn-share-general:hover {
-  background: var(--secondary-color);
-  filter: brightness(0.8);
-}
-
-.open-scholarships-section {
-  padding: 40px 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.section-title {
-  text-align: right;
-  color: var(--primary-color);
-  font-size: 28px;
-  margin-bottom: 30px;
-  padding-right: 0%;
-  transition: color 0.5s ease;
-}
-
-#open-scholarships-grid {
-  display: flex;
-  flex-direction: row;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  gap: 20px;
-  padding: 0 20px 20px 20px;
-  direction: rtl;
-}
-
-#open-scholarships-grid::-webkit-scrollbar {
-  display: none;
-}
-
-#open-scholarships-grid .card {
-  min-width: 300px;
-  max-width: 300px;
-  flex-shrink: 0;
-  scroll-snap-align: end;
-  flex-shrink: 0;
-}
-
-#open-scholarships-grid .btn-details {
-  display: block;
-  width: 100%;
-  margin: 5px 0;
-  text-align: center;
-  box-sizing: border-box;
-  background: var(--card-bg) !important; /* Override with card-bg */
-  color: var(--primary-color) !important; /* Override with primary color */
-  border: 1px solid var(--primary-color) !important; /* Override with primary color */
-}
-
-#open-scholarships-grid .btn-details:hover {
-  background: var(--primary-color) !important;
-  color: white !important;
-}
-
 
 /* ===== HAMBURGER MENU ===== */
 .menu-toggle {
@@ -919,23 +824,30 @@ footer p {
   transition: background-color 0.5s ease;
 }
 
+/* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .menu-toggle {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  header {
+    padding: 10px 15px;
+    flex-wrap: wrap;
   }
-  .logo-img{
-    height: 90px;
+
+  .logo {
+    order: 1;
+  }
+
+  .header-left {
+    order: 2;
+    gap: 6px;
   }
 
   nav {
+    order: 3;
     display: none;
     flex-direction: column;
     width: 100%;
-    background: var(--header-bg); /* Consistent with header bg */
+    background: var(--header-bg);
     padding: 10px 0;
-    border-top: 1px solid var(--card-border); /* Consistent with card border */
+    border-top: 1px solid var(--card-border);
     transition: background 0.5s ease, border-color 0.5s ease;
   }
 
@@ -947,17 +859,41 @@ footer p {
     padding: 12px 20px;
     border-bottom: 1px solid var(--card-border);
     margin-right: 0;
+    font-size: 15px;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  .logo-img {
+    height: 90px;
+  }
+
+  #open-scholarships-grid .card {
+    min-width: 82%;
+    max-width: 82%;
+    scroll-snap-align: start;
+    flex-shrink: 0;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 30px 20px;
+    gap: 30px;
+  }
+
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
 
 /* ===== SCROLL ANIMATION ===== */
-.about-card {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.card.visible, .about-card.visible {
+.card.visible {
   opacity: 1;
   transform: translateY(0);
 }
@@ -977,7 +913,7 @@ footer p {
   cursor: pointer;
   display: none;
   z-index: 999;
-  box-shadow: 0 4px 15px var(--hero-logo-shadow); /* Reusing a shadow variable */
+  box-shadow: 0 4px 15px var(--hero-logo-shadow);
   transition: opacity 0.3s, background 0.5s ease, box-shadow 0.5s ease;
 }
 
@@ -1034,14 +970,6 @@ footer p {
 }
 
 /* ===== FOOTER REDESIGN ===== */
-footer {
-  background: var(--footer-bg);
-  border-top: 2px solid var(--footer-border-top);
-  margin-top: 60px;
-  padding: 0;
-  transition: background 0.5s ease, border-color 0.5s ease;
-}
-
 .footer-content {
   display: flex;
   justify-content: space-between;
@@ -1108,30 +1036,7 @@ footer {
   transition: color 0.5s ease;
 }
 
-@media (max-width: 768px) {
-  .footer-content {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 30px 20px;
-    gap: 30px;
-  }
-
-  .footer-brand {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-.menu-toggle span {
-  display: block;
-  width: 25px;
-  height: 3px;
-  background-color: var(--primary-color); /* Updated to use variable */
-  border-radius: 3px;
-}
-}
-/*ازرار التمرير الافقي */
+/* ===== SLIDER BUTTONS ===== */
 .slider-wrapper {
   position: relative;
   display: flex;
@@ -1158,8 +1063,81 @@ footer {
 .slider-btn.prev { right: -15px; }
 .slider-btn.next { left: -15px; }
 
+/* ===== OPEN SCHOLARSHIPS ===== */
+.open-scholarships-section {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
-/* Admin Panel Specific Styles */
+.section-title {
+  text-align: right;
+  color: var(--primary-color);
+  font-size: 28px;
+  margin-bottom: 30px;
+  transition: color 0.5s ease;
+}
+
+#open-scholarships-grid {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 20px;
+  padding: 0 20px 20px 20px;
+  direction: rtl;
+}
+
+#open-scholarships-grid::-webkit-scrollbar {
+  display: none;
+}
+
+#open-scholarships-grid .card {
+  min-width: 300px;
+  max-width: 300px;
+  flex-shrink: 0;
+  scroll-snap-align: end;
+}
+
+#open-scholarships-grid .btn-details {
+  display: block;
+  width: 100%;
+  margin: 5px 0;
+  text-align: center;
+  box-sizing: border-box;
+  background: var(--card-bg) !important;
+  color: var(--primary-color) !important;
+  border: 1px solid var(--primary-color) !important;
+}
+
+#open-scholarships-grid .btn-details:hover {
+  background: var(--primary-color) !important;
+  color: white !important;
+}
+
+/* ===== SHARE BUTTON ===== */
+.btn-share-general {
+  width: 100%;
+  padding: 10px;
+  background: var(--secondary-color);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Tajawal', sans-serif;
+  margin-top: 8px;
+  transition: background 0.3s;
+}
+
+.btn-share-general:hover {
+  background: var(--secondary-color);
+  filter: brightness(0.8);
+}
+
+/* ===== ADMIN PANEL ===== */
 .admin-container { max-width: 700px; margin: 40px auto; padding: 20px; background: var(--admin-container-bg); transition: background 0.5s ease; }
 .admin-container h1 { color: var(--primary-color); text-align: center; margin-bottom: 20px; transition: color 0.5s ease; }
 .form-group label { display: block; font-weight: 700; color: var(--secondary-color); margin-bottom: 5px; transition: color 0.5s ease; }
@@ -1198,24 +1176,22 @@ footer {
 .btn-edit {
   padding: 7px 15px; background: var(--admin-btn-edit-bg); color: white;
   border: none; border-radius: 8px; cursor: pointer;
-  font-family: 'Tajawal', sans-serif; font-weight: 700;
-  transition: background 0.3s;
+  font-family: 'Tajawal', sans-serif; font-weight: 700; transition: background 0.3s;
 }
-.btn-edit:hover { background: var(--admin-btn-edit-bg); filter: brightness(0.8); }
+.btn-edit:hover { filter: brightness(0.8); }
 .btn-delete {
   padding: 7px 15px; background: var(--admin-btn-delete-bg); color: white;
   border: none; border-radius: 8px; cursor: pointer;
-  font-family: 'Tajawal', sans-serif; font-weight: 700;
-  transition: background 0.3s;
+  font-family: 'Tajawal', sans-serif; font-weight: 700; transition: background 0.3s;
 }
-.btn-delete:hover { background: var(--admin-btn-delete-bg); filter: brightness(0.8); }
+.btn-delete:hover { filter: brightness(0.8); }
 .token-bar {
   background: var(--admin-token-bar-bg); border-radius: 12px; padding: 15px;
   margin-bottom: 20px; border: 1px solid var(--admin-token-bar-border);
   transition: background 0.5s ease, border-color 0.5s ease;
 }
-.token-bar label { font-weight:700; color:var(--secondary-color); transition: color 0.5s ease;}
-.token-bar input { border:1px solid var(--admin-input-border); background: var(--card-bg); color: var(--text-color); transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease;}
+.token-bar label { font-weight: 700; color: var(--secondary-color); transition: color 0.5s ease; }
+.token-bar input { border: 1px solid var(--admin-input-border); background: var(--card-bg); color: var(--text-color); transition: background 0.5s ease, color 0.5s ease, border-color 0.5s ease; }
 .modal-overlay {
   display: none; position: fixed; top: 0; left: 0;
   width: 100%; height: 100%; background: var(--admin-modal-overlay-bg);
@@ -1227,60 +1203,50 @@ footer {
 .modal-box {
   background: var(--admin-modal-box-bg); border-radius: 16px; padding: 30px;
   width: 100%; max-width: 650px; margin: auto;
-  box-shadow: 0 10px 40px var(--admin-modal-box-shadow);
-  position: relative;
+  box-shadow: 0 10px 40px var(--admin-modal-box-shadow); position: relative;
   transition: background 0.5s ease, box-shadow 0.5s ease;
 }
 .modal-box h2 { color: var(--primary-color); text-align: center; margin-bottom: 20px; transition: color 0.5s ease; }
 .modal-close {
   position: absolute; top: 15px; left: 15px;
   background: none; border: none; font-size: 24px;
-  cursor: pointer; color: var(--admin-modal-close-color); line-height: 1;
-  transition: color 0.5s ease;
+  cursor: pointer; color: var(--admin-modal-close-color); line-height: 1; transition: color 0.5s ease;
 }
 .modal-close:hover { color: var(--admin-modal-close-hover); }
 .btn-save {
   width: 100%; padding: 15px; background: var(--admin-btn-save-bg); color: white;
   border: none; border-radius: 10px; font-size: 18px;
   font-weight: 700; cursor: pointer; font-family: 'Tajawal', sans-serif;
-  margin-top: 5px;
-  transition: background 0.3s;
+  margin-top: 5px; transition: background 0.3s;
 }
-.btn-save:hover { background: var(--admin-btn-save-bg); filter: brightness(0.8); }
+.btn-save:hover { filter: brightness(0.8); }
 #edit-msg { text-align: center; margin-top: 12px; font-weight: 700; font-size: 15px; color: var(--text-color); transition: color 0.5s ease; }
 .files-section {
   border: 1px solid var(--admin-files-section-border); border-radius: 10px;
   padding: 15px; margin-bottom: 15px; background: var(--admin-files-section-bg);
   transition: border-color 0.5s ease, background 0.5s ease;
 }
-.files-section h4 {
-  color: var(--primary-color); margin: 0 0 12px 0; font-size: 15px;
-  transition: color 0.5s ease;
-}
-.files-section p {color: var(--secondary-color); transition: color 0.5s ease;}
+.files-section h4 { color: var(--primary-color); margin: 0 0 12px 0; font-size: 15px; transition: color 0.5s ease; }
+.files-section p { color: var(--secondary-color); transition: color 0.5s ease; }
 .file-row input {
   flex: 1; padding: 8px; border-radius: 8px;
   border: 1px solid var(--admin-file-row-input-border); font-family: 'Tajawal', sans-serif;
-  font-size: 14px; box-sizing: border-box;
-  background: var(--card-bg); color: var(--text-color);
+  font-size: 14px; box-sizing: border-box; background: var(--card-bg); color: var(--text-color);
   transition: border-color 0.5s ease, background 0.5s ease, color 0.5s ease;
 }
 .btn-add-file {
   padding: 7px 14px; background: var(--admin-btn-add-file-bg); color: white;
   border: none; border-radius: 8px; cursor: pointer;
   font-family: 'Tajawal', sans-serif; font-size: 13px; font-weight: 700;
-  margin-top: 5px;
-  transition: background 0.3s;
+  margin-top: 5px; transition: background 0.3s;
 }
-.btn-add-file:hover { background: var(--admin-btn-add-file-bg); filter: brightness(0.8); }
+.btn-add-file:hover { filter: brightness(0.8); }
 .btn-remove-file {
   padding: 6px 10px; background: var(--admin-btn-remove-file-bg); color: white;
-  border: none; border-radius: 7px; cursor: pointer; font-size: 13px;
-  transition: background 0.3s;
+  border: none; border-radius: 7px; cursor: pointer; font-size: 13px; transition: background 0.3s;
 }
-.btn-remove-file:hover { background: var(--admin-btn-remove-file-bg); filter: brightness(0.8); }
+.btn-remove-file:hover { filter: brightness(0.8); }
 .section-divider {
   border: none; border-top: 1px dashed var(--admin-section-divider-border);
-  margin: 15px 0;
-  transition: border-color 0.5s ease;
+  margin: 15px 0; transition: border-color 0.5s ease;
 }
