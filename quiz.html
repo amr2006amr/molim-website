@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مُلم | اكتشف تخصصك</title>
+  <style>
+    :root {
+      --primary-color: #ff4500;
+      --secondary-color: #1a3a6e;
+      --bg-color: #f0f4ff;
+      --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #ffe8e0 100%);
+      --text-color: #1a1a2e;
+      --header-bg: rgba(255,255,255,0.95);
+      --header-border: rgba(255,69,0,0.15);
+      --card-bg: #ffffff;
+      --card-border: rgba(255,69,0,0.12);
+      --card-shadow: 0 4px 24px rgba(255,69,0,0.08);
+      --muted: #6b7280;
+      --transition: 0.3s ease;
+    }
+    [data-theme="dark"] {
+      --bg-color: #1a1a2e;
+      --bg-gradient: #1a1a2e;
+      --text-color: #eaeaea;
+      --header-bg: rgba(26,26,46,0.97);
+      --header-border: rgba(255,69,0,0.2);
+      --card-bg: #22223a;
+      --card-border: rgba(255,69,0,0.18);
+      --card-shadow: 0 4px 24px rgba(0,0,0,0.3);
+      --muted: #9ca3af;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-color);
+      min-height: 100vh;
+      transition: background var(--transition), color var(--transition);
+    }
+    header {
+      background: var(--header-bg);
+      border-bottom: 1px solid var(--header-border);
+      backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 100;
+      padding: 0 1.5rem;
+    }
+    .header-inner {
+  width: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+  padding: 0 20px;
+    }
+    .logo {
+      display: flex; align-items: center; gap: 0.5rem;
+      text-decoration: none; font-size: 1.3rem; font-weight: 800;
+      color: var(--primary-color);
+    }
+    .logo img { height: 44px; width: auto; object-fit: contain;}
+    .logo-emoji { font-size: 1.5rem; line-height: 1; }
+    nav { display: flex; gap: 0.25rem; }
+    nav a {
+      text-decoration: none; color: var(--text-color);
+      font-size: 0.9rem; font-weight: 500;
+      padding: 0.4rem 0.75rem; border-radius: 8px;
+      transition: background var(--transition), color var(--transition);
+    }
+    nav a:hover, nav a.active { background: rgba(255,69,0,0.1); color: var(--primary-color); }
+    .header-left { display: flex; align-items: center; gap: 0.5rem; }
+    .dark-mode-toggle {
+      background: none; border: 1.5px solid var(--card-border);
+      border-radius: 50%; width: 38px; height: 38px;
+      cursor: pointer; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--transition); color: var(--text-color);
+    }
+    .dark-mode-toggle:hover { background: rgba(255,69,0,0.1); border-color: var(--primary-color); }
+    .hamburger {
+      display: none; background: none; border: none;
+      cursor: pointer; font-size: 1.5rem; color: var(--text-color); padding: 0.25rem;
+    }
+    @media (max-width: 768px) {
+      nav {
+        display: none; flex-direction: column;
+        position: absolute; top: 64px; right: 0; left: 0;
+        background: var(--header-bg); padding: 1rem;
+        border-bottom: 1px solid var(--header-border); gap: 0.25rem;
+      }
+      nav.open { display: flex; }
+      .hamburger { display: block; }
+    }
+    main { max-width: 780px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+
+    /* INTRO */
+    .intro-screen { text-align: center; padding: 3rem 1rem; }
+    .intro-icon { font-size: 4rem; margin-bottom: 1rem; display: block; animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    .intro-screen h1 { font-size: 2rem; font-weight: 800; color: var(--primary-color); margin-bottom: 0.75rem; }
+    .intro-screen p { font-size: 1.05rem; color: var(--muted); max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; }
+    .intro-features { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
+    .intro-feature {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 12px; padding: 0.75rem 1.25rem; font-size: 0.9rem;
+      color: var(--text-color); display: flex; align-items: center; gap: 0.5rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    /* QUIZ */
+    .quiz-screen { display: none; }
+    .progress-bar-wrap { background: var(--card-border); border-radius: 99px; height: 8px; margin-bottom: 0.6rem; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary-color), #ff6a35); border-radius: 99px; transition: width 0.5s cubic-bezier(.4,0,.2,1); }
+    .progress-label { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.75rem; text-align: left; }
+    .question-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 2rem 2rem 1.5rem; box-shadow: var(--card-shadow); animation: slideIn 0.35s ease; }
+    @keyframes slideIn { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+    .q-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,69,0,0.08); color: var(--primary-color); border-radius: 99px; padding: 0.25rem 0.75rem; font-size: 0.78rem; font-weight: 700; margin-bottom: 1rem; }
+    .q-text { font-size: 1.2rem; font-weight: 700; color: var(--text-color); margin-bottom: 1.75rem; line-height: 1.5; }
+    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    @media (max-width: 520px) { .options-grid { grid-template-columns: 1fr; } }
+    .option-btn {
+      background: var(--bg-color); border: 2px solid var(--card-border);
+      border-radius: 14px; padding: 1rem 1.1rem;
+      text-align: right; cursor: pointer; transition: all 0.22s ease;
+      color: var(--text-color); font-size: 0.93rem; font-weight: 500; line-height: 1.5;
+    }
+    .option-btn:hover { border-color: var(--primary-color); background: rgba(255,69,0,0.06); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(255,69,0,0.12); }
+    .option-btn.selected { border-color: var(--primary-color); background: rgba(255,69,0,0.1); color: var(--primary-color); font-weight: 700; }
+    .quiz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1.75rem; gap: 1rem; }
+    .btn-primary { background: var(--primary-color); color: #fff; border: none; border-radius: 12px; padding: 0.85rem 2rem; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-primary:hover { background: #e03d00; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,69,0,0.3); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-secondary { background: transparent; color: var(--muted); border: 1.5px solid var(--card-border); border-radius: 12px; padding: 0.85rem 1.5rem; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+    .btn-secondary:hover { border-color: var(--primary-color); color: var(--primary-color); }
+
+    /* RESULTS */
+    .results-screen { display: none; }
+    .results-header { text-align: center; margin-bottom: 2rem; }
+    .results-header .trophy { font-size: 3.5rem; display: block; margin-bottom: 0.75rem; }
+    .results-header h2 { font-size: 1.7rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .results-header p { color: var(--muted); font-size: 0.95rem; }
+    .majors-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
+    .major-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 1.25rem 1.5rem; box-shadow: var(--card-shadow); display: flex; align-items: center; gap: 1rem; animation: slideIn 0.4s ease both; }
+    .major-card:nth-child(1){animation-delay:.05s} .major-card:nth-child(2){animation-delay:.12s} .major-card:nth-child(3){animation-delay:.19s} .major-card:nth-child(4){animation-delay:.26s} .major-card:nth-child(5){animation-delay:.33s}
+    .major-card.top-pick { border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(255,69,0,0.15), var(--card-shadow); }
+    .major-rank { font-size: 1.6rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .major-info { flex: 1; }
+    .major-field { font-size: 0.73rem; color: var(--primary-color); font-weight: 700; margin-bottom: 0.2rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .major-name { font-size: 1.02rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .major-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+    .pct-bar-wrap { background: var(--card-border); border-radius: 99px; height: 5px; margin-top: 0.5rem; overflow: hidden; }
+    .pct-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary-color), #ff6a35); border-radius: 99px; transition: width 0.9s cubic-bezier(.4,0,.2,1); }
+    .major-pct-wrap { text-align: center; min-width: 54px; }
+    .major-pct { font-size: 1.4rem; font-weight: 800; color: var(--primary-color); display: block; }
+    .major-pct-label { font-size: 0.72rem; color: var(--muted); }
+    .results-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+
+<header>
+ <div class="header-inner">
+    <a href="index.html" class="logo">
+      <img src="static/logo.png" alt="مُلم" style="height:60px; width:auto;">
+    </a>
+    <nav id="mainNav">
+      <a href="index.html">الرئيسية</a>
+      <a href="scholarships.html">المنح</a>
+      <a href="quiz.html" class="active">اكتشف التخصص المناسب لك</a>
+      <a href="faq.html">الأسئلة الشائعة</a>
+      <a href="contact.html">تواصل معنا</a>
+    </nav>
+    <div class="header-left">
+      <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
+      <button class="hamburger" id="hamburger">☰</button>
+    </div>
+</div>
+</header>
+
+<main>
+  <div class="intro-screen" id="introScreen">
+    <span class="intro-icon">🧭</span>
+    <h1>اكتشف تخصصك المثالي</h1>
+    <p>١٥ سؤالاً يقيس كل منها بُعداً مختلفاً في شخصيتك — طريقة تفكيرك، بيئة عملك، ما يحركك داخلياً، وأكثر. النتائج مفصّلة بدقة عالية.</p>
+    <div class="intro-features">
+      <div class="intro-feature">⏱️ دقيقتان فقط</div>
+      <div class="intro-feature">🎯 ١٥ سؤال متنوع</div>
+      <div class="intro-feature">📊 نسب مئوية دقيقة</div>
+      <div class="intro-feature">🔍 تخصصات مفصّلة</div>
+    </div>
+    <button class="btn-primary" onclick="startQuiz()">ابدأ الاختبار ←</button>
+  </div>
+
+  <div class="quiz-screen" id="quizScreen">
+    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel"></div>
+    <div class="question-card" id="questionCard">
+      <div class="q-badge" id="qBadge"></div>
+      <div class="q-text" id="qText"></div>
+      <div class="options-grid" id="optionsGrid"></div>
+    </div>
+    <div class="quiz-nav">
+      <button class="btn-secondary" id="prevBtn" onclick="prevQuestion()">→ السابق</button>
+      <button class="btn-primary" id="nextBtn" onclick="nextQuestion()" disabled>التالي ←</button>
+    </div>
+  </div>
+
+  <div class="results-screen" id="resultsScreen">
+    <div class="results-header">
+      <span class="trophy">🏆</span>
+      <h2>نتائجك جاهزة!</h2>
+      <p>بناءً على إجاباتك، هذه التخصصات الأنسب لك مرتبةً حسب التوافق:</p>
+    </div>
+    <div class="majors-list" id="majorsList"></div>
+    <div class="results-actions">
+      <button class="btn-primary" onclick="goToScholarships()">🎓 استعرض المنح المتاحة</button>
+      <button class="btn-secondary" onclick="restartQuiz()">🔄 أعد الاختبار</button>
+    </div>
+  </div>
+</main>
+
+<script>
+// DARK MODE
+const darkModeToggle = document.getElementById('darkModeToggle');
+function updateIcon(t) { if (darkModeToggle) darkModeToggle.innerHTML = t === 'dark' ? '☀️' : '🌙'; }
+const saved = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', saved);
+updateIcon(saved);
+darkModeToggle.addEventListener('click', () => {
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  updateIcon(next);
+});
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mainNav').classList.toggle('open');
+});
+
+// MAJORS
+const majors = {
+  cs_ai:     { name: 'الذكاء الاصطناعي وعلوم البيانات',      field: 'تقنية المعلومات', desc: 'بناء نماذج التعلم الآلي، تحليل البيانات الضخمة، ومعالجة اللغة الطبيعية' },
+  cs_cyber:  { name: 'الأمن السيبراني والشبكات',             field: 'تقنية المعلومات', desc: 'حماية الأنظمة من الاختراق، تحليل الثغرات، وإدارة البنية التحتية للشبكات' },
+  cs_soft:   { name: 'هندسة البرمجيات وتطوير التطبيقات',    field: 'تقنية المعلومات', desc: 'تصميم وبناء التطبيقات والأنظمة البرمجية الكبيرة' },
+  cs_hw:     { name: 'هندسة الحاسب والأجهزة المدمجة',       field: 'تقنية المعلومات', desc: 'تصميم المعالجات والدوائر المدمجة والأجهزة الإلكترونية الذكية' },
+  eng_civil: { name: 'الهندسة المدنية والبنية التحتية',     field: 'الهندسة',          desc: 'تصميم الجسور والطرق والسدود وشبكات المياه والصرف الصحي' },
+  eng_arch:  { name: 'العمارة والتخطيط العمراني',            field: 'الهندسة',          desc: 'تصميم المباني والمدن الذكية والفراغات المعمارية الوظيفية والجمالية' },
+  eng_elec:  { name: 'الهندسة الكهربائية والإلكترونية',     field: 'الهندسة',          desc: 'أنظمة الطاقة، الدوائر الإلكترونية، والاتصالات اللاسلكية' },
+  eng_chem:  { name: 'الهندسة الكيميائية والصناعية',        field: 'الهندسة',          desc: 'تصميم المصانع، العمليات الكيميائية، وتصنيع المنتجات على نطاق واسع' },
+  eng_mech:  { name: 'الهندسة الميكانيكية والروبوتات',      field: 'الهندسة',          desc: 'تصميم الآلات، المحركات، وأنظمة الروبوتات والأتمتة' },
+  medicine:  { name: 'الطب البشري والتخصصات السريرية',      field: 'الصحة',            desc: 'تشخيص الأمراض وعلاجها والتعامل المباشر مع المرضى في بيئة طبية' },
+  pharmacy:  { name: 'الصيدلة والعلوم الصحية',              field: 'الصحة',            desc: 'الأدوية وتركيبها وتأثيراتها والإشراف على العلاج الدوائي' },
+  business:  { name: 'إدارة الأعمال وريادة الشركات',        field: 'الأعمال',          desc: 'بناء الشركات، التخطيط الاستراتيجي، والإدارة المالية والتسويقية' },
+  economics: { name: 'الاقتصاد والمالية والمحاسبة',         field: 'الأعمال',          desc: 'تحليل الأسواق، إدارة الأصول المالية، والمحاسبة المعتمدة' },
+  law:       { name: 'القانون والعلوم السياسية',             field: 'القانون والمجتمع', desc: 'التقاضي، صياغة الأنظمة، والدبلوماسية والسياسات العامة' },
+  social:    { name: 'علم النفس والخدمة الاجتماعية',        field: 'القانون والمجتمع', desc: 'فهم السلوك الإنساني وتقديم الدعم النفسي والاجتماعي' },
+  media:     { name: 'الإعلام والصحافة والعلاقات العامة',   field: 'الآداب والإعلام',  desc: 'صناعة المحتوى الإعلامي، الصحافة الاستقصائية، وإدارة السمعة' },
+  arts:      { name: 'الأدب والترجمة واللغويات',            field: 'الآداب والإعلام',  desc: 'الكتابة الإبداعية، الترجمة بين اللغات، والبحث في اللسانيات' },
+  design:    { name: 'التصميم الجرافيكي وتجربة المستخدم',   field: 'التصميم والفنون',  desc: 'تصميم الهوية البصرية، واجهات التطبيقات، وتجربة المستخدم الرقمية' },
+  science:   { name: 'العلوم التطبيقية والبحث العلمي',      field: 'العلوم البحثية',   desc: 'الكيمياء، الفيزياء، علم الأحياء، والبحث في المختبرات' },
+};
+
+// QUESTIONS — بدون إيموجيات داخل خيارات الإجابات
+const questions = [
+  {
+    badge: '🧠 طريقة الإدراك',
+    text: 'عندما تواجه مشكلة جديدة تماماً، ما أول شيء يحدث في ذهنك؟',
+    options: [
+      { label: 'أبحث عن القانون أو المبدأ العلمي الذي يحكمها', traits: { science:3, eng_elec:2, cs_ai:2 } },
+      { label: 'أكسّرها لأجزاء صغيرة وأحلل كل جزء بمنطق متسلسل', traits: { cs_soft:3, cs_cyber:2, law:2 } },
+      { label: 'أتخيل الشكل النهائي المثالي ثم أعمل عكسياً نحوه', traits: { eng_arch:3, design:3, arts:1 } },
+      { label: 'أجرّب مباشرة بيدي وأتعلم من ردة فعل الواقع', traits: { eng_mech:3, eng_civil:2, cs_hw:2 } },
+    ]
+  },
+  {
+    badge: '⚗️ الميول الدراسية',
+    text: 'في الثانوية، أي مادة كنت تستغرق فيها بدون أن تشعر بالوقت؟',
+    options: [
+      { label: 'الكيمياء والأحياء — التفاعلات والخلايا وآليات جسم الإنسان', traits: { medicine:3, pharmacy:3, eng_chem:2, science:2 } },
+      { label: 'الفيزياء والرياضيات — القوانين والمعادلات والقوى', traits: { eng_elec:3, eng_mech:3, cs_hw:2, science:2 } },
+      { label: 'الحاسب والمنطق — الخوارزميات وحل المسائل البرمجية', traits: { cs_soft:3, cs_ai:3, cs_cyber:2 } },
+      { label: 'اللغة والتاريخ والعلوم الاجتماعية والفلسفة', traits: { law:3, arts:3, media:2, social:2 } },
+    ]
+  },
+  {
+    badge: '🌍 الأثر الذي تسعى إليه',
+    text: 'ما الجملة التي تريد أن يقولها الناس عنك بعد ٢٠ سنة؟',
+    options: [
+      { label: 'بنى مشاريع حقيقية صمدت وأفادت مجتمعات بأكملها', traits: { eng_civil:3, eng_arch:3, eng_mech:2 } },
+      { label: 'أضاف للعلم والطب ما غيّر حياة الناس وأنقذ أرواحاً', traits: { science:3, medicine:3, cs_ai:2 } },
+      { label: 'دافع عن حقوق الناس وأسهم في تغيير قوانين ظالمة', traits: { law:3, social:3, media:1 } },
+      { label: 'أسّس مشاريع ناجحة وخلق فرص عمل للآخرين', traits: { business:3, economics:2, cs_soft:1 } },
+    ]
+  },
+  {
+    badge: '🏗️ بيئة العمل المثالية',
+    text: 'في أي بيئة تشعر أنك تعمل بكامل طاقتك؟',
+    options: [
+      { label: 'الميدان والطبيعة — مواقع بناء أو بيئات متغيرة ومتجددة', traits: { eng_civil:3, eng_mech:2, science:2 } },
+      { label: 'البيئة الصحية — مستشفى أو عيادة أو مختبر طبي', traits: { medicine:3, pharmacy:3, science:1 } },
+      { label: 'الفضاء الرقمي — شاشة وبيانات سواء في مكتب أو عن بُعد', traits: { cs_soft:3, cs_ai:3, cs_cyber:3, economics:2 } },
+      { label: 'المؤسسات الكبرى — شركات أو جهات حكومية أو قانونية', traits: { law:3, business:2, economics:2 } },
+    ]
+  },
+  {
+    badge: '🤝 نوع التفاعل الإنساني',
+    text: 'أي نوع من التفاعل مع الناس يمنحك شعوراً حقيقياً بالقيمة؟',
+    options: [
+      { label: 'مساعدة شخص بعينه ورؤية تحسّن ملموس في حياته مباشرة', traits: { medicine:3, pharmacy:2, social:3 } },
+      { label: 'الدفاع عن موقف أمام جمهور أو إقناع الآخرين بحجج منطقية', traits: { law:3, media:2, business:1 } },
+      { label: 'نقل فكرة أو رواية قصة تؤثر في قناعات الناس وآرائهم', traits: { media:3, arts:2, social:1 } },
+      { label: 'بناء منتج أو نظام يخدم آلاف الأشخاص يومياً بشكل تلقائي', traits: { cs_soft:3, cs_ai:2, cs_cyber:2, eng_civil:1 } },
+    ]
+  },
+  {
+    badge: '🎲 تحمّل الغموض',
+    text: 'كيف تتعامل مع موقف ليس له إجابة صحيحة واحدة واضحة؟',
+    options: [
+      { label: 'يحمّسني — الغموض يعني مساحة للإبداع واكتشاف حلول جديدة', traits: { business:3, design:2, media:2 } },
+      { label: 'أضع فرضيات، أجمع بيانات، ثم أختبرها بأسلوب منهجي', traits: { cs_ai:3, science:3, economics:2 } },
+      { label: 'أرجع للأطر والقواعد المعمول بها وأطبّقها بدقة', traits: { law:3, eng_civil:2, pharmacy:2 } },
+      { label: 'أفضّل أن تكون التوقعات ومعايير النجاح واضحة منذ البداية', traits: { cs_soft:2, medicine:2, social:2, economics:1 } },
+    ]
+  },
+  {
+    badge: '⏱️ تحت الضغط الشديد',
+    text: 'أنت في موقف حرج — مهلة ضيقة وقرار مصيري لا يحتمل التأجيل. ما ردة فعلك الطبيعية؟',
+    options: [
+      { label: 'أركّز بهدوء تام، أحدد الأولويات، وأنفذ خطوة خطوة بدقة', traits: { cs_cyber:3, eng_elec:2, cs_soft:2 } },
+      { label: 'أتحرك فوراً وأتعامل مع المشكلة في الميدان بشكل مباشر', traits: { medicine:3, eng_civil:2, social:2 } },
+      { label: 'أتوقف لحظة وأحاول رؤية الصورة الأكبر قبل أي خطوة', traits: { economics:3, business:2, law:2, arts:2 } },
+      { label: 'أوزّع المهام على الفريق بسرعة وأنسّق الجهود المشتركة', traits: { business:3, social:2, media:2 } },
+    ]
+  },
+  {
+    badge: '🔬 أسلوب البحث',
+    text: 'إذا كُلّفت بالبحث في موضوع مجهول عليك، ما الذي يستهلك جهدك الأكبر؟',
+    options: [
+      { label: 'ضبط المنهجية العلمية وضمان دقة النتائج وموثوقيتها', traits: { science:3, medicine:3, cs_ai:2 } },
+      { label: 'العثور على الثغرة أو نقطة الضعف الخفية في النظام', traits: { cs_cyber:3, law:2, cs_hw:1 } },
+      { label: 'تقييم الجدوى الاقتصادية وقياس العائد الفعلي من الجهد', traits: { economics:3, business:3, eng_chem:1 } },
+      { label: 'فهم السياق الإنساني والاجتماعي الكامن وراء المشكلة', traits: { social:3, law:2, arts:2, media:1 } },
+    ]
+  },
+  {
+    badge: '💡 مصدر الرضا الداخلي',
+    text: 'أي من هذه اللحظات تجعلك تشعر بالرضا الأعمق؟',
+    options: [
+      { label: 'أنهيت نظاماً أو كوداً يعمل بكفاءة تامة بدون أخطاء', traits: { cs_soft:3, cs_ai:2, cs_hw:2 } },
+      { label: 'رأيت تصميماً أو بناءً يجمع بين الجمال والوظيفة بدقة', traits: { design:3, eng_arch:3, arts:1 } },
+      { label: 'فهمت ظاهرة أو قضية كانت غامضة وباتت واضحة أمامك', traits: { science:3, social:2, economics:2, law:2 } },
+      { label: 'نجح مشروع كنت تقوده من الصفر حتى التنفيذ الفعلي', traits: { business:3, economics:2, media:1 } },
+    ]
+  },
+  {
+    badge: '👁️ كيف يصفك من حولك',
+    text: 'ما الوصف الذي يتكرر كثيراً حين يتحدث عنك زملاؤك في مشاريع جماعية؟',
+    options: [
+      { label: 'من يحلّ المشاكل التقنية المعقدة التي يعجز عنها الآخرون', traits: { cs_hw:3, eng_elec:3, cs_cyber:2 } },
+      { label: 'من يجعل الأشياء المعقدة تبدو واضحة ومنظمة وجميلة', traits: { design:3, eng_arch:3, media:1 } },
+      { label: 'من يُعبّر عن الأفكار بوضوح ويُقنع الفريق بالاتجاه الصحيح', traits: { law:3, media:3, business:2 } },
+      { label: 'من يلاحظ التفاصيل الدقيقة التي يتجاهلها الجميع وتُحدث فرقاً', traits: { cs_ai:2, science:3, pharmacy:3, economics:2 } },
+    ]
+  },
+  {
+    badge: '🎧 ما تتابعه في وقت فراغك',
+    text: 'ما نوع المحتوى الذي تجد نفسك تتابعه تلقائياً بدون أي سبب خارجي؟',
+    options: [
+      { label: 'أخبار التقنية والذكاء الاصطناعي وتطورات عالم البرمجة', traits: { cs_ai:3, cs_soft:3, cs_cyber:2 } },
+      { label: 'وثائقيات البناء والهندسة والمشاريع الكبرى حول العالم', traits: { eng_civil:3, eng_mech:3, eng_arch:2 } },
+      { label: 'قصص طبية واكتشافات علمية وموضوعات علم النفس', traits: { medicine:3, social:2, science:2, pharmacy:2 } },
+      { label: 'تحليلات اقتصادية وسياسية وقضايا اجتماعية راهنة', traits: { law:3, economics:3, media:2, business:1 } },
+    ]
+  },
+  {
+    badge: '✍️ ساعة حرة بلا توقعات',
+    text: 'أُعطيت ساعة فراغ مفاجئة — ماذا ستجد نفسك تفعل تلقائياً دون تفكير؟',
+    options: [
+      { label: 'أبدأ مشروعاً برمجياً صغيراً أو أحل تحدياً تقنياً من فضولي', traits: { cs_soft:3, cs_ai:2, cs_hw:2 } },
+      { label: 'أرسم أو أصمم أو أكتب شيئاً إبداعياً يعبّر عن فكرة', traits: { design:3, arts:3, eng_arch:2 } },
+      { label: 'أقرأ مقالاً علمياً أو أتعمق في بيانات من باب الفضول', traits: { science:3, cs_ai:2, economics:2, medicine:2 } },
+      { label: 'أتواصل مع أشخاص أو أبادر بترتيب لقاء أو نشاط جماعي', traits: { social:3, media:2, business:2, law:1 } },
+    ]
+  },
+  {
+    badge: '⚖️ اتخاذ القرار الصعب',
+    text: 'اضطررت لاتخاذ قرار مصيري لا يمكن تأجيله — ما الذي يُرجّح كفّتك في النهاية؟',
+    options: [
+      { label: 'الأرقام والبيانات الموضوعية — ما تقوله الإحصاءات بوضوح', traits: { cs_ai:3, economics:3, science:2 } },
+      { label: 'السوابق والأنظمة المعمول بها — ما ثبت نجاحه سابقاً', traits: { law:3, medicine:2, pharmacy:2 } },
+      { label: 'التأثير الإنساني المباشر — من سيتأثر وما حجم ذلك التأثير', traits: { social:3, medicine:2, media:2 } },
+      { label: 'الفرصة والتوقيت الاستراتيجي — ما يصنع ميزة تنافسية حقيقية', traits: { business:3, cs_soft:2, eng_mech:1 } },
+    ]
+  },
+  {
+    badge: '💪 بعد الفشل',
+    text: 'فشل مشروعك بعد أشهر من العمل والجهد. ما ردة فعلك الأكثر طبيعية؟',
+    options: [
+      { label: 'أحلل الأسباب بموضوعية وأعيد المحاولة بمنهجية مختلفة', traits: { science:3, cs_ai:3, medicine:2 } },
+      { label: 'أبحث فيما يمكن بناؤه مجدداً من المكونات والدروس المتبقية', traits: { business:3, eng_mech:2, cs_soft:2 } },
+      { label: 'أوثّق التجربة بصدق وأشاركها لينتفع منها غيري', traits: { media:3, arts:2, social:2 } },
+      { label: 'أراجع مسار القرارات المتخذة وأحدد أين وأين أخطأت تحديداً', traits: { law:3, economics:2, business:1 } },
+    ]
+  },
+  {
+    badge: '🎯 طموحك بعد ١٠ سنوات',
+    text: 'بعد ١٠ سنوات من الآن، أين تريد أن تكون تحديداً؟',
+    options: [
+      { label: 'مرجع متخصص في مجاله يُستشار ويُستند لرأيه على مستوى واسع', traits: { medicine:3, cs_ai:3, science:3, law:2 } },
+      { label: 'أقود فريقاً أو مؤسسة تبني منتجاً أو خدمة ذات أثر ملموس', traits: { business:3, economics:2, eng_civil:1 } },
+      { label: 'أملك أسلوباً إبداعياً مميزاً يُعرف ويُحترم في مجاله', traits: { design:3, eng_arch:3, arts:2 } },
+      { label: 'أؤثر في سياسات ومنظومات تمس حياة المجتمع وتحمي حقوقه', traits: { law:3, social:2, media:2 } },
+    ]
+  },
+];
+
+const rankEmojis = ['🥇','🥈','🥉','4️⃣','5️⃣'];
+let current = 0;
+let answers = {};
+
+function startQuiz() {
+  document.getElementById('introScreen').style.display = 'none';
+  document.getElementById('quizScreen').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[current];
+  document.getElementById('progressFill').style.width = (current / questions.length * 100) + '%';
+  document.getElementById('progressLabel').textContent = `السؤال ${current + 1} من ${questions.length}`;
+  document.getElementById('qBadge').textContent = q.badge;
+  document.getElementById('qText').textContent = q.text;
+
+  const card = document.getElementById('questionCard');
+  card.style.animation = 'none'; card.offsetHeight; card.style.animation = '';
+
+  const grid = document.getElementById('optionsGrid');
+  grid.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn' + (answers[current] === i ? ' selected' : '');
+    btn.innerHTML = `<span>${opt.label}</span>`;
+    btn.onclick = () => selectOption(i);
+    grid.appendChild(btn);
+  });
+
+  document.getElementById('prevBtn').style.visibility = current === 0 ? 'hidden' : 'visible';
+  const isLast = current === questions.length - 1;
+  const nextBtn = document.getElementById('nextBtn');
+  nextBtn.innerHTML = isLast ? '🎯 عرض نتائجي' : 'التالي ←';
+  nextBtn.disabled = answers[current] === undefined;
+}
+
+function selectOption(i) {
+  answers[current] = i;
+  document.querySelectorAll('.option-btn').forEach((b, idx) => b.classList.toggle('selected', idx === i));
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion() {
+  if (answers[current] === undefined) return;
+  if (current < questions.length - 1) { current++; renderQuestion(); }
+  else showResults();
+}
+
+function prevQuestion() {
+  if (current > 0) { current--; renderQuestion(); }
+}
+
+function showResults() {
+  const scores = {};
+  Object.keys(majors).forEach(k => scores[k] = 0);
+  questions.forEach((q, qi) => {
+    const ai = answers[qi];
+    if (ai === undefined) return;
+    Object.entries(q.options[ai].traits).forEach(([k, v]) => {
+      if (scores[k] !== undefined) scores[k] += v;
+    });
+  });
+
+  const maxPossible = questions.length * 3;
+  const pcts = {};
+  Object.keys(scores).forEach(k => {
+    pcts[k] = Math.min(100, Math.round((scores[k] / maxPossible) * 100));
+  });
+
+  const top5 = Object.entries(pcts).sort((a, b) => b[1] - a[1]).slice(0, 5);
+
+  document.getElementById('quizScreen').style.display = 'none';
+  document.getElementById('resultsScreen').style.display = 'block';
+
+  const list = document.getElementById('majorsList');
+  list.innerHTML = '';
+  top5.forEach(([key, pct], i) => {
+    const m = majors[key];
+    const card = document.createElement('div');
+    card.className = 'major-card' + (i === 0 ? ' top-pick' : '');
+    card.innerHTML = `
+      <div class="major-rank">${rankEmojis[i]}</div>
+      <div class="major-info">
+        <div class="major-field">${m.field}</div>
+        <div class="major-name">${m.name}</div>
+        <div class="major-desc">${m.desc}</div>
+        <div class="pct-bar-wrap"><div class="pct-bar-fill" style="width:0%" data-pct="${pct}"></div></div>
+      </div>
+      <div class="major-pct-wrap">
+        <span class="major-pct">${pct}%</span>
+        <span class="major-pct-label">توافق</span>
+      </div>
+    `;
+    list.appendChild(card);
+  });
+
+  setTimeout(() => {
+    document.querySelectorAll('.pct-bar-fill').forEach(bar => {
+      bar.style.width = bar.dataset.pct + '%';
+    });
+  }, 120);
+}
+
+function goToScholarships() { window.location.href = 'scholarships.html'; }
+function restartQuiz() {
+  current = 0; answers = {};
+  document.getElementById('resultsScreen').style.display = 'none';
+  document.getElementById('introScreen').style.display = 'block';
+}
+</script>
+</body>
+</html>
