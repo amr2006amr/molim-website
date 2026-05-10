@@ -5,9 +5,6 @@ if (!id) {
   const pathParts = window.location.pathname.split('/');
   id = pathParts[pathParts.length - 1];
 }
-console.log('pathname:', window.location.pathname);
-console.log('search:', window.location.search);
-console.log('id:', id);
 
 fetch('/data/scholarships.json?v=' + Date.now())
   .then(res => res.json())

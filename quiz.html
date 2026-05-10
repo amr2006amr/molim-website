@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>مُلم | اكتشف تخصصك</title>
+  <title>مُلم | اكتشف التخصص المناسب لك</title>
   <style>
     :root {
       --primary-color: #ff4500;
@@ -38,6 +38,8 @@
       min-height: 100vh;
       transition: background var(--transition), color var(--transition);
     }
+
+    /* ===== HEADER ===== */
     header {
       background: var(--header-bg);
       border-bottom: 1px solid var(--header-border);
@@ -46,18 +48,15 @@
       padding: 0 1.5rem;
     }
     .header-inner {
-  width: 100%;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 64px;
-  padding: 0 20px;
+      width: 100%; display: flex; align-items: center;
+      justify-content: space-between; height: 64px; padding: 0 20px;
     }
     .logo {
       display: flex; align-items: center; gap: 0.5rem;
       text-decoration: none; font-size: 1.3rem; font-weight: 800;
       color: var(--primary-color);
     }
-    .logo img { height: 44px; width: auto; object-fit: contain;}
-    .logo-emoji { font-size: 1.5rem; line-height: 1; }
+    .logo img { height: 44px; width: auto; object-fit: contain; }
     nav { display: flex; gap: 0.25rem; }
     nav a {
       text-decoration: none; color: var(--text-color);
@@ -89,14 +88,16 @@
       nav.open { display: flex; }
       .hamburger { display: block; }
     }
-    main { max-width: 780px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
 
-    /* INTRO */
+    /* ===== MAIN ===== */
+    main { max-width: 800px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+
+    /* ===== INTRO ===== */
     .intro-screen { text-align: center; padding: 3rem 1rem; }
     .intro-icon { font-size: 4rem; margin-bottom: 1rem; display: block; animation: float 3s ease-in-out infinite; }
     @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
     .intro-screen h1 { font-size: 2rem; font-weight: 800; color: var(--primary-color); margin-bottom: 0.75rem; }
-    .intro-screen p { font-size: 1.05rem; color: var(--muted); max-width: 500px; margin: 0 auto 2rem; line-height: 1.7; }
+    .intro-screen p { font-size: 1.05rem; color: var(--muted); max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
     .intro-features { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.5rem; }
     .intro-feature {
       background: var(--card-bg); border: 1px solid var(--card-border);
@@ -105,49 +106,154 @@
       box-shadow: var(--card-shadow);
     }
 
-    /* QUIZ */
+    /* ===== QUIZ ===== */
     .quiz-screen { display: none; }
-    .progress-bar-wrap { background: var(--card-border); border-radius: 99px; height: 8px; margin-bottom: 0.6rem; overflow: hidden; }
-    .progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary-color), #ff6a35); border-radius: 99px; transition: width 0.5s cubic-bezier(.4,0,.2,1); }
+    .progress-bar-wrap {
+      background: var(--card-border); border-radius: 99px;
+      height: 8px; margin-bottom: 0.6rem; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-color), #ff6a35);
+      border-radius: 99px;
+      transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    }
     .progress-label { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.75rem; text-align: left; }
-    .question-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 20px; padding: 2rem 2rem 1.5rem; box-shadow: var(--card-shadow); animation: slideIn 0.35s ease; }
-    @keyframes slideIn { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
-    .q-badge { display: inline-flex; align-items: center; gap: 0.4rem; background: rgba(255,69,0,0.08); color: var(--primary-color); border-radius: 99px; padding: 0.25rem 0.75rem; font-size: 0.78rem; font-weight: 700; margin-bottom: 1rem; }
-    .q-text { font-size: 1.2rem; font-weight: 700; color: var(--text-color); margin-bottom: 1.75rem; line-height: 1.5; }
-    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
-    @media (max-width: 520px) { .options-grid { grid-template-columns: 1fr; } }
+
+    .question-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 20px; padding: 2rem 2rem 1.5rem;
+      box-shadow: var(--card-shadow); animation: slideIn 0.35s ease;
+    }
+    @keyframes slideIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+    .q-badge {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(255,69,0,0.08); color: var(--primary-color);
+      border-radius: 99px; padding: 0.25rem 0.75rem;
+      font-size: 0.78rem; font-weight: 700; margin-bottom: 0.75rem;
+    }
+    .q-text {
+      font-size: 1.18rem; font-weight: 700;
+      color: var(--text-color); margin-bottom: 0.5rem; line-height: 1.5;
+    }
+    /* hint for multi-select */
+    .q-hint {
+      font-size: 0.8rem; color: var(--muted);
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.35rem;
+    }
+    .q-hint-dot {
+      display: inline-block; width: 16px; height: 16px; border-radius: 4px;
+      border: 2px solid var(--primary-color); background: rgba(255,69,0,0.12);
+      flex-shrink: 0;
+    }
+
+    /* Options — full width list for readability */
+    .options-list { display: flex; flex-direction: column; gap: 0.7rem; }
+
     .option-btn {
       background: var(--bg-color); border: 2px solid var(--card-border);
-      border-radius: 14px; padding: 1rem 1.1rem;
-      text-align: right; cursor: pointer; transition: all 0.22s ease;
-      color: var(--text-color); font-size: 0.93rem; font-weight: 500; line-height: 1.5;
+      border-radius: 13px; padding: 0.9rem 1.15rem;
+      text-align: right; cursor: pointer; transition: all 0.2s ease;
+      color: var(--text-color); font-size: 0.93rem; font-weight: 500;
+      line-height: 1.5; width: 100%;
+      display: flex; align-items: flex-start; gap: 0.75rem;
     }
-    .option-btn:hover { border-color: var(--primary-color); background: rgba(255,69,0,0.06); transform: translateY(-2px); box-shadow: 0 4px 16px rgba(255,69,0,0.12); }
-    .option-btn.selected { border-color: var(--primary-color); background: rgba(255,69,0,0.1); color: var(--primary-color); font-weight: 700; }
-    .quiz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 1.75rem; gap: 1rem; }
-    .btn-primary { background: var(--primary-color); color: #fff; border: none; border-radius: 12px; padding: 0.85rem 2rem; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .option-btn .check-box {
+      width: 20px; height: 20px; border-radius: 5px;
+      border: 2px solid var(--card-border);
+      flex-shrink: 0; margin-top: 1px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s ease; background: transparent;
+      font-size: 0.75rem; color: #fff;
+    }
+    .option-btn:hover {
+      border-color: var(--primary-color);
+      background: rgba(255,69,0,0.04);
+    }
+    .option-btn:hover .check-box { border-color: var(--primary-color); }
+
+    .option-btn.selected {
+      border-color: var(--primary-color);
+      background: rgba(255,69,0,0.08);
+    }
+    .option-btn.selected .check-box {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    .option-btn.selected .check-box::after { content: '✓'; color: #fff; font-weight: 700; }
+
+    /* when max reached — dim unselected */
+    .option-btn.dimmed {
+      opacity: 0.45;
+      pointer-events: none;
+    }
+
+    .quiz-nav {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-top: 1.75rem; gap: 1rem;
+    }
+    .btn-primary {
+      background: var(--primary-color); color: #fff; border: none;
+      border-radius: 12px; padding: 0.85rem 2rem;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 0.5rem;
+    }
     .btn-primary:hover { background: #e03d00; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(255,69,0,0.3); }
-    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
-    .btn-secondary { background: transparent; color: var(--muted); border: 1.5px solid var(--card-border); border-radius: 12px; padding: 0.85rem 1.5rem; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
+    .btn-primary:disabled { opacity: 0.38; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-secondary {
+      background: transparent; color: var(--muted);
+      border: 1.5px solid var(--card-border); border-radius: 12px;
+      padding: 0.85rem 1.5rem; font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s ease;
+    }
     .btn-secondary:hover { border-color: var(--primary-color); color: var(--primary-color); }
 
-    /* RESULTS */
+    /* ===== RESULTS ===== */
     .results-screen { display: none; }
     .results-header { text-align: center; margin-bottom: 2rem; }
     .results-header .trophy { font-size: 3.5rem; display: block; margin-bottom: 0.75rem; }
     .results-header h2 { font-size: 1.7rem; font-weight: 800; margin-bottom: 0.4rem; }
     .results-header p { color: var(--muted); font-size: 0.95rem; }
     .majors-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
-    .major-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; padding: 1.25rem 1.5rem; box-shadow: var(--card-shadow); display: flex; align-items: center; gap: 1rem; animation: slideIn 0.4s ease both; }
-    .major-card:nth-child(1){animation-delay:.05s} .major-card:nth-child(2){animation-delay:.12s} .major-card:nth-child(3){animation-delay:.19s} .major-card:nth-child(4){animation-delay:.26s} .major-card:nth-child(5){animation-delay:.33s}
-    .major-card.top-pick { border-color: var(--primary-color); box-shadow: 0 0 0 2px rgba(255,69,0,0.15), var(--card-shadow); }
-    .major-rank { font-size: 1.6rem; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .major-card {
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: 16px; padding: 1.25rem 1.5rem;
+      box-shadow: var(--card-shadow);
+      display: flex; align-items: center; gap: 1rem;
+      animation: slideIn 0.4s ease both;
+    }
+    .major-card:nth-child(1){animation-delay:.05s}
+    .major-card:nth-child(2){animation-delay:.12s}
+    .major-card:nth-child(3){animation-delay:.19s}
+    .major-card:nth-child(4){animation-delay:.26s}
+    .major-card:nth-child(5){animation-delay:.33s}
+    .major-card.top-pick {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(255,69,0,0.15), var(--card-shadow);
+    }
+    .major-rank {
+      font-size: 1.6rem; width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
     .major-info { flex: 1; }
-    .major-field { font-size: 0.73rem; color: var(--primary-color); font-weight: 700; margin-bottom: 0.2rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    .major-field {
+      font-size: 0.72rem; color: var(--primary-color); font-weight: 700;
+      margin-bottom: 0.2rem; letter-spacing: 0.04em; text-transform: uppercase;
+    }
     .major-name { font-size: 1.02rem; font-weight: 700; margin-bottom: 0.3rem; }
     .major-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
-    .pct-bar-wrap { background: var(--card-border); border-radius: 99px; height: 5px; margin-top: 0.5rem; overflow: hidden; }
-    .pct-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary-color), #ff6a35); border-radius: 99px; transition: width 0.9s cubic-bezier(.4,0,.2,1); }
+    .pct-bar-wrap {
+      background: var(--card-border); border-radius: 99px;
+      height: 5px; margin-top: 0.5rem; overflow: hidden;
+    }
+    .pct-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-color), #ff6a35);
+      border-radius: 99px;
+      transition: width 0.9s cubic-bezier(.4,0,.2,1);
+    }
     .major-pct-wrap { text-align: center; min-width: 54px; }
     .major-pct { font-size: 1.4rem; font-weight: 800; color: var(--primary-color); display: block; }
     .major-pct-label { font-size: 0.72rem; color: var(--muted); }
@@ -156,10 +262,11 @@
 </head>
 <body>
 
+<!-- ===== HEADER ===== -->
 <header>
- <div class="header-inner">
+  <div class="header-inner">
     <a href="index.html" class="logo">
-      <img src="static/logo.png" alt="مُلم" style="height:60px; width:auto;">
+      <img src="static/logo.png" alt="مُلم" style="height:60px;width:auto;">
     </a>
     <nav id="mainNav">
       <a href="index.html">الرئيسية</a>
@@ -172,30 +279,44 @@
       <button id="darkModeToggle" class="dark-mode-toggle">🌙</button>
       <button class="hamburger" id="hamburger">☰</button>
     </div>
-</div>
+  </div>
 </header>
 
+<!-- ===== MAIN ===== -->
 <main>
+
+  <!-- INTRO -->
   <div class="intro-screen" id="introScreen">
     <span class="intro-icon">🧭</span>
     <h1>اكتشف تخصصك المثالي</h1>
-    <p>١٥ سؤالاً يقيس كل منها بُعداً مختلفاً في شخصيتك — طريقة تفكيرك، بيئة عملك، ما يحركك داخلياً، وأكثر. النتائج مفصّلة بدقة عالية.</p>
+    <p>
+      ١٥ سؤالاً مبنياً على مواقف واقعية — لا توجد إجابة صح أو غلط.
+      لكل سؤال يمكنك اختيار <strong>إجابة أو إجابتين</strong> تعكسان طبيعتك الحقيقية.
+      النتائج تحلّل شخصيتك وترشّح لك التخصصات الأدق توافقاً.
+    </p>
     <div class="intro-features">
-     <div class="intro-feature">⏱️ 4 دقائق فقط</div>
-      <div class="intro-feature">🎯 15 سؤال متنوع</div>
-      <div class="intro-feature">📊 نسب مئوية دقيقة</div>
-      <div class="intro-feature">🔍 تخصصات مفصّلة</div>
+      <div class="intro-feature">⏱️ ٥ دقائق فقط</div>
+      <div class="intro-feature">🎯 ١٥ موقف واقعي</div>
+      <div class="intro-feature">☑️ اختر حتى إجابتين</div>
+      <div class="intro-feature">📊 نسب توافق دقيقة</div>
     </div>
     <button class="btn-primary" onclick="startQuiz()">ابدأ الاختبار ←</button>
   </div>
 
+  <!-- QUIZ -->
   <div class="quiz-screen" id="quizScreen">
-    <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+    </div>
     <div class="progress-label" id="progressLabel"></div>
     <div class="question-card" id="questionCard">
       <div class="q-badge" id="qBadge"></div>
       <div class="q-text" id="qText"></div>
-      <div class="options-grid" id="optionsGrid"></div>
+      <div class="q-hint">
+        <span class="q-hint-dot"></span>
+        اختر الإجابة الأقرب إليك — أو إجابتين إن كانتا تنطبقان عليك بالتساوي
+      </div>
+      <div class="options-list" id="optionsList"></div>
     </div>
     <div class="quiz-nav">
       <button class="btn-secondary" id="prevBtn" onclick="prevQuestion()">→ السابق</button>
@@ -203,11 +324,12 @@
     </div>
   </div>
 
+  <!-- RESULTS -->
   <div class="results-screen" id="resultsScreen">
     <div class="results-header">
       <span class="trophy">🏆</span>
       <h2>نتائجك جاهزة!</h2>
-      <p>بناءً على إجاباتك، هذه التخصصات الأنسب لك مرتبةً حسب التوافق:</p>
+      <p>بناءً على إجاباتك، هذه التخصصات الأنسب لك مرتبةً حسب نسبة التوافق:</p>
     </div>
     <div class="majors-list" id="majorsList"></div>
     <div class="results-actions">
@@ -215,10 +337,11 @@
       <button class="btn-secondary" onclick="restartQuiz()">🔄 أعد الاختبار</button>
     </div>
   </div>
+
 </main>
 
 <script>
-// DARK MODE
+/* ===== DARK MODE ===== */
 const darkModeToggle = document.getElementById('darkModeToggle');
 function updateIcon(t) { if (darkModeToggle) darkModeToggle.innerHTML = t === 'dark' ? '☀️' : '🌙'; }
 const saved = localStorage.getItem('theme') || 'light';
@@ -230,232 +353,316 @@ darkModeToggle.addEventListener('click', () => {
   localStorage.setItem('theme', next);
   updateIcon(next);
 });
-document.getElementById('hamburger').addEventListener('click', () => {
-  document.getElementById('mainNav').classList.toggle('open');
-});
+document.getElementById('hamburger').addEventListener('click', () =>
+  document.getElementById('mainNav').classList.toggle('open')
+);
 
-// MAJORS
+/* ===== MAJORS ===== */
 const majors = {
-  cs_ai:     { name: 'الذكاء الاصطناعي وعلوم البيانات',      field: 'تقنية المعلومات', desc: 'بناء نماذج التعلم الآلي، تحليل البيانات الضخمة، ومعالجة اللغة الطبيعية' },
-  cs_cyber:  { name: 'الأمن السيبراني والشبكات',             field: 'تقنية المعلومات', desc: 'حماية الأنظمة من الاختراق، تحليل الثغرات، وإدارة البنية التحتية للشبكات' },
-  cs_soft:   { name: 'هندسة البرمجيات وتطوير التطبيقات',    field: 'تقنية المعلومات', desc: 'تصميم وبناء التطبيقات والأنظمة البرمجية الكبيرة' },
-  cs_hw:     { name: 'هندسة الحاسب والأجهزة المدمجة',       field: 'تقنية المعلومات', desc: 'تصميم المعالجات والدوائر المدمجة والأجهزة الإلكترونية الذكية' },
-  eng_civil: { name: 'الهندسة المدنية والبنية التحتية',     field: 'الهندسة',          desc: 'تصميم الجسور والطرق والسدود وشبكات المياه والصرف الصحي' },
-  eng_arch:  { name: 'العمارة والتخطيط العمراني',            field: 'الهندسة',          desc: 'تصميم المباني والمدن الذكية والفراغات المعمارية الوظيفية والجمالية' },
-  eng_elec:  { name: 'الهندسة الكهربائية والإلكترونية',     field: 'الهندسة',          desc: 'أنظمة الطاقة، الدوائر الإلكترونية، والاتصالات اللاسلكية' },
-  eng_chem:  { name: 'الهندسة الكيميائية والصناعية',        field: 'الهندسة',          desc: 'تصميم المصانع، العمليات الكيميائية، وتصنيع المنتجات على نطاق واسع' },
-  eng_mech:  { name: 'الهندسة الميكانيكية والروبوتات',      field: 'الهندسة',          desc: 'تصميم الآلات، المحركات، وأنظمة الروبوتات والأتمتة' },
-  medicine:  { name: 'الطب البشري والتخصصات السريرية',      field: 'الصحة',            desc: 'تشخيص الأمراض وعلاجها والتعامل المباشر مع المرضى في بيئة طبية' },
-  pharmacy:  { name: 'الصيدلة والعلوم الصحية',              field: 'الصحة',            desc: 'الأدوية وتركيبها وتأثيراتها والإشراف على العلاج الدوائي' },
-  business:  { name: 'إدارة الأعمال وريادة الشركات',        field: 'الأعمال',          desc: 'بناء الشركات، التخطيط الاستراتيجي، والإدارة المالية والتسويقية' },
-  economics: { name: 'الاقتصاد والمالية والمحاسبة',         field: 'الأعمال',          desc: 'تحليل الأسواق، إدارة الأصول المالية، والمحاسبة المعتمدة' },
-  law:       { name: 'القانون والعلوم السياسية',             field: 'القانون والمجتمع', desc: 'التقاضي، صياغة الأنظمة، والدبلوماسية والسياسات العامة' },
-  social:    { name: 'علم النفس والخدمة الاجتماعية',        field: 'القانون والمجتمع', desc: 'فهم السلوك الإنساني وتقديم الدعم النفسي والاجتماعي' },
-  media:     { name: 'الإعلام والصحافة والعلاقات العامة',   field: 'الآداب والإعلام',  desc: 'صناعة المحتوى الإعلامي، الصحافة الاستقصائية، وإدارة السمعة' },
-  arts:      { name: 'الأدب والترجمة واللغويات',            field: 'الآداب والإعلام',  desc: 'الكتابة الإبداعية، الترجمة بين اللغات، والبحث في اللسانيات' },
-  design:    { name: 'التصميم الجرافيكي وتجربة المستخدم',   field: 'التصميم والفنون',  desc: 'تصميم الهوية البصرية، واجهات التطبيقات، وتجربة المستخدم الرقمية' },
-  science:   { name: 'العلوم التطبيقية والبحث العلمي',      field: 'العلوم البحثية',   desc: 'الكيمياء، الفيزياء، علم الأحياء، والبحث في المختبرات' },
+  cs_ai:     { name: 'الذكاء الاصطناعي وعلوم البيانات',    field: 'علوم الحاسب', desc: 'بناء نماذج التعلم الآلي، تحليل البيانات الضخمة، ومعالجة اللغة الطبيعية' },
+  cs_cyber:  { name: 'الأمن السيبراني والشبكات',           field: 'علوم الحاسب', desc: 'حماية الأنظمة من الاختراق، تحليل الثغرات، وإدارة البنية التحتية للشبكات' },
+  cs_soft:   { name: 'هندسة البرمجيات وتطوير التطبيقات',  field: 'علوم الحاسب', desc: 'تصميم وبناء التطبيقات والأنظمة البرمجية الكبيرة' },
+  cs_hw:     { name: 'هندسة الحاسب والأجهزة المدمجة',     field: 'علوم الحاسب', desc: 'تصميم المعالجات والدوائر المدمجة والأجهزة الإلكترونية الذكية' },
+  eng_civil: { name: 'الهندسة المدنية والبنية التحتية',   field: 'الهندسة',          desc: 'تصميم الجسور والطرق والسدود وشبكات المياه والصرف الصحي' },
+  eng_arch:  { name: 'العمارة والتخطيط العمراني',          field: 'الهندسة',          desc: 'تصميم المباني والمدن الذكية والفراغات المعمارية الوظيفية والجمالية' },
+  eng_elec:  { name: 'الهندسة الكهربائية والإلكترونية',   field: 'الهندسة',          desc: 'أنظمة الطاقة، الدوائر الإلكترونية، والاتصالات اللاسلكية' },
+  eng_chem:  { name: 'الهندسة الكيميائية والصناعية',      field: 'الهندسة',          desc: 'تصميم المصانع، العمليات الكيميائية، وتصنيع المنتجات على نطاق واسع' },
+  eng_mech:  { name: 'الهندسة الميكانيكية والروبوتات',    field: 'الهندسة',          desc: 'تصميم الآلات، المحركات، وأنظمة الروبوتات والأتمتة' },
+  medicine:  { name: 'الطب البشري والتخصصات السريرية',    field: 'الصحة',            desc: 'تشخيص الأمراض وعلاجها والتعامل المباشر مع المرضى في بيئة طبية' },
+  pharmacy:  { name: 'الصيدلة والعلوم الصحية',            field: 'الصحة',            desc: 'الأدوية وتركيبها وتأثيراتها والإشراف على العلاج الدوائي' },
+  business:  { name: 'إدارة الأعمال وريادة الشركات',      field: 'الأعمال',          desc: 'بناء الشركات، التخطيط الاستراتيجي، والإدارة المالية والتسويقية' },
+  economics: { name: 'الاقتصاد والمالية والمحاسبة',       field: 'الأعمال',          desc: 'تحليل الأسواق، إدارة الأصول المالية، والمحاسبة المعتمدة' },
+  law:       { name: 'القانون والعلوم السياسية',           field: 'القانون والمجتمع', desc: 'التقاضي، صياغة الأنظمة، والدبلوماسية والسياسات العامة' },
+  social:    { name: 'علم النفس والخدمة الاجتماعية',      field: 'القانون والمجتمع', desc: 'فهم السلوك الإنساني وتقديم الدعم النفسي والاجتماعي' },
+  media:     { name: 'الإعلام والصحافة والعلاقات العامة', field: 'الآداب والإعلام',  desc: 'صناعة المحتوى الإعلامي، الصحافة الاستقصائية، وإدارة السمعة' },
+  arts:      { name: 'الأدب والترجمة واللغويات',          field: 'الآداب والإعلام',  desc: 'الكتابة الإبداعية، الترجمة بين اللغات، والبحث في اللسانيات' },
+  design:    { name: 'التصميم الجرافيكي وتجربة المستخدم', field: 'التصميم والفنون',  desc: 'تصميم الهوية البصرية، واجهات التطبيقات، وتجربة المستخدم الرقمية' },
+  science:   { name: 'العلوم التطبيقية والبحث العلمي',    field: 'العلوم البحثية',   desc: 'الكيمياء، الفيزياء، علم الأحياء، والبحث في المختبرات' },
 };
 
-// QUESTIONS — بدون إيموجيات داخل خيارات الإجابات
+/*
+  ===== QUESTIONS =====
+  كل سؤال عبارة عن موقف واقعي ضيّق يجبر المستخدم على اختيار ما يصفه فعلاً.
+  كل خيار يمثل دافعاً داخلياً مختلفاً تماماً — وليس مجرد "ماذا تحب".
+  الخيارات مكتوبة بأسلوب "أنا" حتى يشعر المستخدم أنه يصف نفسه.
+  MAX_SELECT = 2
+*/
+const MAX_SELECT = 2;
+
 const questions = [
+
+  // ١ — الدافع الحقيقي وراء قرار التخصص
   {
-    badge: '🧠 طريقة الإدراك',
-    text: 'عندما تواجه مشكلة جديدة تماماً، ما أول شيء يحدث في ذهنك؟',
+    badge: '🔍 نقطة البداية',
+    text: 'لو أنك تختار تخصصك اليوم من الصفر — ما الذي سيدفعك للاختيار؟',
     options: [
-      { label: 'أبحث عن القانون أو المبدأ العلمي الذي يحكمها', traits: { science:3, eng_elec:2, cs_ai:2 } },
-      { label: 'أكسّرها لأجزاء صغيرة وأحلل كل جزء بمنطق متسلسل', traits: { cs_soft:3, cs_cyber:2, law:2 } },
-      { label: 'أتخيل الشكل النهائي المثالي ثم أعمل عكسياً نحوه', traits: { eng_arch:3, design:3, arts:1 } },
-      { label: 'أجرّب مباشرة بيدي وأتعلم من ردة فعل الواقع', traits: { eng_mech:3, eng_civil:2, cs_hw:2 } },
+      { label: 'أريد مجالاً أُثبت فيه أن بإمكاني حل مشكلة معقدة لم يحلها أحد قبلي', traits: { science:3, cs_ai:3, eng_elec:2 } },
+      { label: 'أريد مجالاً أخرج منه كل يوم وأنا أرى بيدي شيئاً بُني أو أُنجز', traits: { eng_civil:3, eng_mech:3, eng_arch:2 } },
+      { label: 'أريد مجالاً يجعلني أفهم الناس وأؤثر في قراراتهم ومشاعرهم', traits: { social:3, media:3, law:2 } },
+      { label: 'أريد مجالاً أبني فيه شيئاً يخصّني — مشروعاً أو نظاماً أو علامة', traits: { business:3, cs_soft:3, design:2 } },
     ]
   },
+
+  // ٢ — موقف: وقت الفراغ الحقيقي (سلوك لا ادعاء)
   {
-    badge: '⚗️ الميول الدراسية',
-    text: 'في الثانوية، أي مادة كنت تستغرق فيها بدون أن تشعر بالوقت؟',
+    badge: '🎧 سلوكك الحقيقي',
+    text: 'في آخر مرة كان عندك وقت حر بدون أي التزام — ماذا فعلت فعلاً؟',
     options: [
-      { label: 'الكيمياء والأحياء — التفاعلات والخلايا وآليات جسم الإنسان', traits: { medicine:3, pharmacy:3, eng_chem:2, science:2 } },
-      { label: 'الفيزياء والرياضيات — القوانين والمعادلات والقوى', traits: { eng_elec:3, eng_mech:3, cs_hw:2, science:2 } },
-      { label: 'الحاسب والمنطق — الخوارزميات وحل المسائل البرمجية', traits: { cs_soft:3, cs_ai:3, cs_cyber:2 } },
-      { label: 'اللغة والتاريخ والعلوم الاجتماعية والفلسفة', traits: { law:3, arts:3, media:2, social:2 } },
+      { label: 'فتحت يوتيوب أو مقالاً تقنياً أو جربت شيئاً برمجياً من فضولي', traits: { cs_soft:3, cs_ai:3, cs_hw:2 } },
+      { label: 'شاهدت وثائقياً عن مشروع هندسي أو كارثة طبيعية أو ظاهرة علمية', traits: { eng_civil:3, science:3, eng_mech:2 } },
+      { label: 'كتبت أو رسمت أو صممت شيئاً — حتى لو ما أكملته', traits: { design:3, arts:3, media:2 } },
+      { label: 'تحدثت مع شخص، استمعت لمشكلته، أو تابعت شيئاً عن الناس والمجتمع', traits: { social:3, medicine:2, law:2 } },
     ]
   },
+
+  // ٣ — حين لا يراك أحد (الكاشف الأقوى للميول الحقيقية)
   {
-    badge: '🌍 الأثر الذي تسعى إليه',
-    text: 'ما الجملة التي تريد أن يقولها الناس عنك بعد ٢٠ سنة؟',
+    badge: '🔒 حين لا يراك أحد',
+    text: 'يوم كامل بدون إنترنت، بدون هاتف، بدون أي شخص — ماذا ستجد نفسك تفعل؟',
     options: [
-      { label: 'بنى مشاريع حقيقية صمدت وأفادت مجتمعات بأكملها', traits: { eng_civil:3, eng_arch:3, eng_mech:2 } },
-      { label: 'أضاف للعلم والطب ما غيّر حياة الناس وأنقذ أرواحاً', traits: { science:3, medicine:3, cs_ai:2 } },
-      { label: 'دافع عن حقوق الناس وأسهم في تغيير قوانين ظالمة', traits: { law:3, social:3, media:1 } },
-      { label: 'أسّس مشاريع ناجحة وخلق فرص عمل للآخرين', traits: { business:3, economics:2, cs_soft:1 } },
+      { label: 'أفكّك جهازاً أو أشتري قطعاً وأحاول تركيب أو إصلاح شيء بيدي', traits: { cs_hw:3, eng_mech:3, eng_elec:3 } },
+      { label: 'أجلس وأكتب — تحليلاً لقضية تشغلني، أو خواطر، أو مسودة فكرة', traits: { arts:3, law:3, social:2, media:2 } },
+      { label: 'أرسم مخططات أو أصمم شيئاً على ورق — مبنى أو واجهة أو فكرة منظّمة', traits: { eng_arch:3, design:3, cs_soft:2 } },
+      { label: 'أقرأ في موضوع علمي أو أحل مسائل أو أحلّل أنماطاً وبيانات من فضولي', traits: { science:3, cs_ai:3, economics:3, medicine:2 } },
     ]
   },
+
+  // ٤ — الطموح الحقيقي لا الرومانسي
   {
-    badge: '🏗️ بيئة العمل المثالية',
-    text: 'في أي بيئة تشعر أنك تعمل بكامل طاقتك؟',
+    badge: '🎯 طموحك الحقيقي',
+    text: 'بعيداً عن المكانة والراتب — ما الذي تريد أن تكون متقناً له بشكل لا يضاهيه أحد؟',
     options: [
-      { label: 'الميدان والطبيعة — مواقع بناء أو بيئات متغيرة ومتجددة', traits: { eng_civil:3, eng_mech:2, science:2 } },
-      { label: 'البيئة الصحية — مستشفى أو عيادة أو مختبر طبي', traits: { medicine:3, pharmacy:3, science:1 } },
-      { label: 'الفضاء الرقمي — شاشة وبيانات سواء في مكتب أو عن بُعد', traits: { cs_soft:3, cs_ai:3, cs_cyber:3, economics:2 } },
-      { label: 'المؤسسات الكبرى — شركات أو جهات حكومية أو قانونية', traits: { law:3, business:2, economics:2 } },
+      { label: 'أن أفهم كيف تعمل الأشياء من الداخل — الأجهزة والأنظمة والأكواد', traits: { cs_hw:3, cs_cyber:3, eng_elec:3 } },
+      { label: 'أن أصمم أشياء يراها الناس وتؤثر فيهم — مبنى، تطبيق، أو هوية بصرية', traits: { eng_arch:3, design:3, cs_soft:2 } },
+      { label: 'أن أكون الشخص الذي يُرجع إليه حين يحتاج الناس قراراً دقيقاً أو علاجاً', traits: { medicine:3, pharmacy:3, law:3 } },
+      { label: 'أن أبني شيئاً يستمر ويكبر — شركة أو مشروع أو حركة اجتماعية', traits: { business:3, economics:2, social:2 } },
     ]
   },
+
+  // ٥ — نوع المشكلة التي تُعذّبك (ما يعذّبك يكشف اهتمامك الحقيقي)
   {
-    badge: '🤝 نوع التفاعل الإنساني',
-    text: 'أي نوع من التفاعل مع الناس يمنحك شعوراً حقيقياً بالقيمة؟',
+    badge: '😤 ما يُعذّبك',
+    text: 'أي نوع من المشكلات يستحوذ على تفكيرك رغماً عنك؟',
     options: [
-      { label: 'مساعدة شخص بعينه ورؤية تحسّن ملموس في حياته مباشرة', traits: { medicine:3, pharmacy:2, social:3 } },
-      { label: 'الدفاع عن موقف أمام جمهور أو إقناع الآخرين بحجج منطقية', traits: { law:3, media:2, business:1 } },
-      { label: 'نقل فكرة أو رواية قصة تؤثر في قناعات الناس وآرائهم', traits: { media:3, arts:2, social:1 } },
-      { label: 'بناء منتج أو نظام يخدم آلاف الأشخاص يومياً بشكل تلقائي', traits: { cs_soft:3, cs_ai:2, cs_cyber:2, eng_civil:1 } },
+      { label: 'لماذا هذا النظام أو البرنامج لا يعمل بشكل صحيح — وكيف يُصلح؟', traits: { cs_soft:3, cs_cyber:3, cs_hw:3 } },
+      { label: 'لماذا هذا المبنى أو الجسر انهار — وكيف نبني أفضل؟', traits: { eng_civil:3, eng_mech:3, eng_arch:2 } },
+      { label: 'لماذا هذا الشخص يتصرف هكذا — وما الذي يمكن فعله لمساعدته؟', traits: { social:3, medicine:3, pharmacy:2 } },
+      { label: 'لماذا هذا القرار السياسي أو الاقتصادي اتُخذ — ومن استفاد منه؟', traits: { law:3, economics:3, media:3 } },
     ]
   },
+
+  // ٦ — طريقة التعلم (كاشفة جداً للتخصص المناسب)
   {
-    badge: '🎲 تحمّل الغموض',
-    text: 'كيف تتعامل مع موقف ليس له إجابة صحيحة واحدة واضحة؟',
+    badge: '📚 طريقة تعلّمك',
+    text: 'حين تريد تعلم شيء جديد بجدية — كيف تبدأ فعلاً؟',
     options: [
-      { label: 'يحمّسني — الغموض يعني مساحة للإبداع واكتشاف حلول جديدة', traits: { business:3, design:2, media:2 } },
-      { label: 'أضع فرضيات، أجمع بيانات، ثم أختبرها بأسلوب منهجي', traits: { cs_ai:3, science:3, economics:2 } },
-      { label: 'أرجع للأطر والقواعد المعمول بها وأطبّقها بدقة', traits: { law:3, eng_civil:2, pharmacy:2 } },
-      { label: 'أفضّل أن تكون التوقعات ومعايير النجاح واضحة منذ البداية', traits: { cs_soft:2, medicine:2, social:2, economics:1 } },
+      { label: 'أجد كتاباً أو مقالاً علمياً محكّماً وأقرأه من البداية للنهاية', traits: { science:3, medicine:3, law:2, pharmacy:2 } },
+      { label: 'أبحث عن مشروع صغير أو مشكلة حقيقية وأحاول حلها بنفسي', traits: { cs_soft:3, eng_mech:3, cs_hw:3 } },
+      { label: 'أشاهد كيف يفعله المحترفون ثم أقلّد وأطور الأسلوب تدريجياً', traits: { design:3, arts:3, media:2, eng_arch:2 } },
+      { label: 'أتحدث مع ناس متخصصين وأطرح أسئلة واستمع لتجاربهم', traits: { social:3, business:3, economics:2 } },
     ]
   },
+
+  // ٧ — الموقف الذي تشعر فيه أنك في غير مكانك
   {
-    badge: '⏱️ تحت الضغط الشديد',
-    text: 'أنت في موقف حرج — مهلة ضيقة وقرار مصيري لا يحتمل التأجيل. ما ردة فعلك الطبيعية؟',
+    badge: '😣 حين تشعر أنك في غير مكانك',
+    text: 'أي من هذه المواقف يجعلك تشعر أن هذا العمل ليس لك؟',
     options: [
-      { label: 'أركّز بهدوء تام، أحدد الأولويات، وأنفذ خطوة خطوة بدقة', traits: { cs_cyber:3, eng_elec:2, cs_soft:2 } },
-      { label: 'أتحرك فوراً وأتعامل مع المشكلة في الميدان بشكل مباشر', traits: { medicine:3, eng_civil:2, social:2 } },
-      { label: 'أتوقف لحظة وأحاول رؤية الصورة الأكبر قبل أي خطوة', traits: { economics:3, business:2, law:2, arts:2 } },
-      { label: 'أوزّع المهام على الفريق بسرعة وأنسّق الجهود المشتركة', traits: { business:3, social:2, media:2 } },
+      { label: 'حين يُطلب مني تقديم فكرة دون أن أملك بيانات كافية لدعمها بالأرقام', traits: { cs_ai:3, science:3, economics:3, pharmacy:2 } },
+      { label: 'حين يكون كل عملي رقمياً على شاشة ولا أرى له أثراً مادياً حقيقياً', traits: { eng_mech:3, eng_civil:3, medicine:3 } },
+      { label: 'حين أُكلَّف بمهمة وحيداً لفترة طويلة دون أي تواصل أو تفاعل مع ناس', traits: { social:3, media:3, law:2, arts:2 } },
+      { label: 'حين يكون المنتج أو الناتج قبيحاً أو مربكاً بصرياً ولا أحد يكترث', traits: { design:3, eng_arch:3, cs_soft:2, media:2 } },
     ]
   },
+
+  // ٨ — الدور الطبيعي في الفريق
   {
-    badge: '🔬 أسلوب البحث',
-    text: 'إذا كُلّفت بالبحث في موضوع مجهول عليك، ما الذي يستهلك جهدك الأكبر؟',
+    badge: '👥 دورك الطبيعي',
+    text: 'في مجموعة تعمل على مشروع — أي دور تجد نفسك فيه تلقائياً حتى لو لم يُطلب منك؟',
     options: [
-      { label: 'ضبط المنهجية العلمية وضمان دقة النتائج وموثوقيتها', traits: { science:3, medicine:3, cs_ai:2 } },
-      { label: 'العثور على الثغرة أو نقطة الضعف الخفية في النظام', traits: { cs_cyber:3, law:2, cs_hw:1 } },
-      { label: 'تقييم الجدوى الاقتصادية وقياس العائد الفعلي من الجهد', traits: { economics:3, business:3, eng_chem:1 } },
-      { label: 'فهم السياق الإنساني والاجتماعي الكامن وراء المشكلة', traits: { social:3, law:2, arts:2, media:1 } },
+      { label: 'أحلل المعطيات وأكتشف الأخطاء والثغرات التي يتجاهلها البقية', traits: { cs_cyber:3, cs_ai:3, science:2, economics:2 } },
+      { label: 'أترجم الأفكار إلى خطة تنفيذية واضحة الخطوات والمواعيد', traits: { eng_civil:2, cs_soft:3, business:3 } },
+      { label: 'أهتم بالجانب البصري والتقديمي — كيف سيبدو المنتج النهائي؟', traits: { design:3, eng_arch:3, media:2 } },
+      { label: 'أتابع كيف يشعر أعضاء الفريق وأحرص على تماسك العلاقات والتواصل', traits: { social:3, medicine:2, arts:2, law:1 } },
     ]
   },
+
+  // ٩ — عرض وظيفي: أيها تختار؟ (الكاشف الأقوى للقيمة الحقيقية)
   {
-    badge: '💡 مصدر الرضا الداخلي',
-    text: 'أي من هذه اللحظات تجعلك تشعر بالرضا الأعمق؟',
+    badge: '💼 عرض وظيفي',
+    text: 'عُرضت عليك أربع وظائف بنفس الراتب تماماً — أيها تقبل؟',
     options: [
-      { label: 'أنهيت نظاماً أو كوداً يعمل بكفاءة تامة بدون أخطاء', traits: { cs_soft:3, cs_ai:2, cs_hw:2 } },
-      { label: 'رأيت تصميماً أو بناءً يجمع بين الجمال والوظيفة بدقة', traits: { design:3, eng_arch:3, arts:1 } },
-      { label: 'فهمت ظاهرة أو قضية كانت غامضة وباتت واضحة أمامك', traits: { science:3, social:2, economics:2, law:2 } },
-      { label: 'نجح مشروع كنت تقوده من الصفر حتى التنفيذ الفعلي', traits: { business:3, economics:2, media:1 } },
+      { label: 'باحث في مختبر أو شركة تقنية — تحلّل بيانات وتبني نماذج وتكتشف أنماطاً لم يرها أحد', traits: { cs_ai:3, science:3, economics:3, pharmacy:2 } },
+      { label: 'مهندس ميداني في مشاريع البنية التحتية — تُشرف على التنفيذ وترى ما تبنيه أمامك يومياً', traits: { eng_civil:3, eng_mech:3, cs_hw:3 } },
+      { label: 'مستشار أو محامٍ في شركة — تحلّل عقوداً وتدافع عن مواقف وتُقنع صانعي القرار', traits: { law:3, business:3, economics:2, media:2 } },
+      { label: 'مصمم أو مطور منتج في شركة ناشئة — تبني ما يستخدمه الناس وتتحكم في شكله وتجربته', traits: { design:3, cs_soft:3, eng_arch:2, media:2 } },
     ]
   },
+
+  // ١٠ — ما الذي يجعلك تتحدث دون توقف؟
   {
-    badge: '👁️ كيف يصفك من حولك',
-    text: 'ما الوصف الذي يتكرر كثيراً حين يتحدث عنك زملاؤك في مشاريع جماعية؟',
+    badge: '🗣️ شغفك الحقيقي',
+    text: 'أي من هذه المواضيع يجعلك تتحدث لساعات دون أن تشعر بالملل؟',
     options: [
-      { label: 'من يحلّ المشاكل التقنية المعقدة التي يعجز عنها الآخرون', traits: { cs_hw:3, eng_elec:3, cs_cyber:2 } },
-      { label: 'من يجعل الأشياء المعقدة تبدو واضحة ومنظمة وجميلة', traits: { design:3, eng_arch:3, media:1 } },
-      { label: 'من يُعبّر عن الأفكار بوضوح ويُقنع الفريق بالاتجاه الصحيح', traits: { law:3, media:3, business:2 } },
-      { label: 'من يلاحظ التفاصيل الدقيقة التي يتجاهلها الجميع وتُحدث فرقاً', traits: { cs_ai:2, science:3, pharmacy:3, economics:2 } },
+      { label: 'كيف يعمل الدماغ أو جهاز معين أو خوارزمية معقدة من الداخل', traits: { cs_ai:3, science:3, cs_hw:3, medicine:2 } },
+      { label: 'تصميم المدن والمباني وتطور العمارة وأثرها على حياة الناس', traits: { eng_arch:3, eng_civil:3, design:2 } },
+      { label: 'قضايا العدالة والحقوق والسياسة وتأثيرها على حياة الفرد', traits: { law:3, social:3, media:3 } },
+      { label: 'كيف تبدأ الشركات، تفشل أو تنجح، وما الذي يصنع فارقاً', traits: { business:3, economics:3, cs_soft:2 } },
     ]
   },
+
+  // ١١ — نوع الذكاء المهيمن (بشكل غير مباشر)
   {
-    badge: '🎧 ما تتابعه في وقت فراغك',
-    text: 'ما نوع المحتوى الذي تجد نفسك تتابعه تلقائياً بدون أي سبب خارجي؟',
+    badge: '🧩 نوع تفكيرك',
+    text: 'وُضعت أمام مشروع لأول مرة — ما أول شيء يخطر ببالك تلقائياً؟',
     options: [
-      { label: 'أخبار التقنية والذكاء الاصطناعي وتطورات عالم البرمجة', traits: { cs_ai:3, cs_soft:3, cs_cyber:2 } },
-      { label: 'وثائقيات البناء والهندسة والمشاريع الكبرى حول العالم', traits: { eng_civil:3, eng_mech:3, eng_arch:2 } },
-      { label: 'قصص طبية واكتشافات علمية وموضوعات علم النفس', traits: { medicine:3, social:2, science:2, pharmacy:2 } },
-      { label: 'تحليلات اقتصادية وسياسية وقضايا اجتماعية راهنة', traits: { law:3, economics:3, media:2, business:1 } },
+      { label: 'كم يكلف؟ ما العائد؟ وهل المشروع قابل للتوسع مستقبلاً؟', traits: { business:3, economics:3, cs_soft:2 } },
+      { label: 'هل المعطيات صحيحة؟ وما نسبة الخطأ المحتملة في النتائج؟', traits: { science:3, cs_ai:3, medicine:3 } },
+      { label: 'كيف سيبدو في النهاية؟ وهل التجربة ستكون جيدة للمستخدم؟', traits: { design:3, eng_arch:3, media:2 } },
+      { label: 'هل هناك ثغرة قانونية أو أخلاقية؟ ومن سيتأثر سلباً إن حدث خطأ؟', traits: { law:3, social:3, cs_cyber:2 } },
     ]
   },
+
+  // ١٢ — مؤشر الرضا: ما الذي يجعلك تنام مرتاحاً؟
   {
-    badge: '✍️ ساعة حرة بلا توقعات',
-    text: 'أُعطيت ساعة فراغ مفاجئة — ماذا ستجد نفسك تفعل تلقائياً دون تفكير؟',
+    badge: '✅ ما يُريحك',
+    text: 'أي إنجاز في نهاية اليوم يجعلك تشعر فعلاً بأنك فعلت شيئاً يستحق؟',
     options: [
-      { label: 'أبدأ مشروعاً برمجياً صغيراً أو أحل تحدياً تقنياً من فضولي', traits: { cs_soft:3, cs_ai:2, cs_hw:2 } },
-      { label: 'أرسم أو أصمم أو أكتب شيئاً إبداعياً يعبّر عن فكرة', traits: { design:3, arts:3, eng_arch:2 } },
-      { label: 'أقرأ مقالاً علمياً أو أتعمق في بيانات من باب الفضول', traits: { science:3, cs_ai:2, economics:2, medicine:2 } },
-      { label: 'أتواصل مع أشخاص أو أبادر بترتيب لقاء أو نشاط جماعي', traits: { social:3, media:2, business:2, law:1 } },
+      { label: 'أصلحت خطأً برمجياً أو تقنياً كان يُعطّل النظام بأكمله', traits: { cs_soft:3, cs_cyber:3, cs_hw:3 } },
+      { label: 'رأيت شيئاً مادياً يتشكل أو مريضاً يتحسن أمامي بشكل مباشر', traits: { eng_civil:3, eng_mech:3, medicine:3 } },
+      { label: 'خرجت بفهم أعمق لظاهرة أو بيانات كانت غامضة في البداية', traits: { science:3, cs_ai:3, economics:2, law:2 } },
+      { label: 'تواصلت مع شخص جديد أو أثرت في موقف إنساني أو اجتماعي', traits: { social:3, media:3, arts:2 } },
     ]
   },
+
+  // ١٣ — الخوف الكامن (كاشف قوي جداً)
   {
-    badge: '⚖️ اتخاذ القرار الصعب',
-    text: 'اضطررت لاتخاذ قرار مصيري لا يمكن تأجيله — ما الذي يُرجّح كفّتك في النهاية؟',
+    badge: '😰 ما تخاف منه',
+    text: 'أي من هذه المواقف يجعلك تشعر بأنك في غير مكانك؟',
     options: [
-      { label: 'الأرقام والبيانات الموضوعية — ما تقوله الإحصاءات بوضوح', traits: { cs_ai:3, economics:3, science:2 } },
-      { label: 'السوابق والأنظمة المعمول بها — ما ثبت نجاحه سابقاً', traits: { law:3, medicine:2, pharmacy:2 } },
-      { label: 'التأثير الإنساني المباشر — من سيتأثر وما حجم ذلك التأثير', traits: { social:3, medicine:2, media:2 } },
-      { label: 'الفرصة والتوقيت الاستراتيجي — ما يصنع ميزة تنافسية حقيقية', traits: { business:3, cs_soft:2, eng_mech:1 } },
+      { label: 'أن تُجبر على العمل في وظيفة مكتبية روتينية لا تتغير لسنوات', traits: { eng_mech:3, eng_civil:3, medicine:2, cs_hw:2 } },
+      { label: 'أن تُجبر على التعامل مع ناس كثيرين يومياً دون وقت للتركيز منفرداً', traits: { cs_soft:3, cs_ai:3, science:3 } },
+      { label: 'أن تعمل في مجال رقمي بحت بعيداً عن الناس والمجتمع الحقيقي', traits: { social:3, medicine:3, law:2, arts:2 } },
+      { label: 'أن تعمل في مجال بلا طموح مالي أو فرص نمو واضحة للمستقبل', traits: { business:3, economics:3, media:2, design:2 } },
     ]
   },
+
+  // ١٤ — الميول الدراسية (لكن بطريقة أكثر دقة)
   {
-    badge: '💪 بعد الفشل',
-    text: 'فشل مشروعك بعد أشهر من العمل والجهد. ما ردة فعلك الأكثر طبيعية؟',
+    badge: '📖 المادة التي هوستَ بها',
+    text: 'أي مادة من هذه كنت تشعر أن الوقت يمر سريعاً حين تدرسها؟',
     options: [
-      { label: 'أحلل الأسباب بموضوعية وأعيد المحاولة بمنهجية مختلفة', traits: { science:3, cs_ai:3, medicine:2 } },
-      { label: 'أبحث فيما يمكن بناؤه مجدداً من المكونات والدروس المتبقية', traits: { business:3, eng_mech:2, cs_soft:2 } },
-      { label: 'أوثّق التجربة بصدق وأشاركها لينتفع منها غيري', traits: { media:3, arts:2, social:2 } },
-      { label: 'أراجع مسار القرارات المتخذة وأحدد أين وأين أخطأت تحديداً', traits: { law:3, economics:2, business:1 } },
+      { label: 'الكيمياء أو الأحياء — التفاعلات والجسيمات وآليات جسم الإنسان', traits: { medicine:3, pharmacy:3, eng_chem:3, science:2 } },
+      { label: 'الفيزياء أو الرياضيات — القوانين والمعادلات والمسائل المنطقية', traits: { eng_elec:3, eng_mech:3, cs_hw:3, science:2 } },
+      { label: 'الحاسب أو المنطق — حل المسائل البرمجية والخوارزميات', traits: { cs_soft:3, cs_ai:3, cs_cyber:3 } },
+      { label: 'اللغة أو التاريخ أو العلوم الإنسانية — القصص والمجتمعات والأفكار', traits: { law:3, arts:3, media:3, social:2 } },
     ]
   },
+
+  // ١٥ — الصورة الذهنية: من تراك بعد ٢٠ سنة؟
   {
-    badge: '🎯 طموحك بعد ١٠ سنوات',
-    text: 'بعد ١٠ سنوات من الآن، أين تريد أن تكون تحديداً؟',
+    badge: '🔮 صورتك المستقبلية',
+    text: 'لو تخيلت نفسك بعد ٢٠ سنة في قمة مسيرتك — ما الصورة التي تراها؟',
     options: [
-      { label: 'مرجع متخصص في مجاله يُستشار ويُستند لرأيه على مستوى واسع', traits: { medicine:3, cs_ai:3, science:3, law:2 } },
-      { label: 'أقود فريقاً أو مؤسسة تبني منتجاً أو خدمة ذات أثر ملموس', traits: { business:3, economics:2, eng_civil:1 } },
-      { label: 'أملك أسلوباً إبداعياً مميزاً يُعرف ويُحترم في مجاله', traits: { design:3, eng_arch:3, arts:2 } },
-      { label: 'أؤثر في سياسات ومنظومات تمس حياة المجتمع وتحمي حقوقه', traits: { law:3, social:2, media:2 } },
+      { label: 'في مختبر أو غرفة خوادم أو موقع تقني — أحل مشكلة لم يحلها أحد بعد', traits: { cs_ai:3, cs_cyber:3, science:3, cs_hw:2 } },
+      { label: 'في موقع بناء أو عيادة أو ميدان — أرى بعيني أثر عملي على الأرض', traits: { eng_civil:3, eng_mech:3, medicine:3, eng_arch:2 } },
+      { label: 'أمام جمهور أو في قاعة محكمة أو استوديو — أقدم وأقنع وأؤثر', traits: { law:3, media:3, arts:2, business:2 } },
+      { label: 'في اجتماع استراتيجي أو مكتب إدارة — أحرك موارد وأبني قرارات تؤثر على كثيرين', traits: { business:3, economics:3, eng_chem:2 } },
     ]
   },
+
 ];
 
+/* ===== STATE ===== */
 const rankEmojis = ['🥇','🥈','🥉','4️⃣','5️⃣'];
 let current = 0;
+// answers[i] = Set of selected indices
 let answers = {};
 
+/* ===== QUIZ LOGIC ===== */
 function startQuiz() {
   document.getElementById('introScreen').style.display = 'none';
   document.getElementById('quizScreen').style.display = 'block';
   renderQuestion();
 }
 
+function getSelected() {
+  return answers[current] || new Set();
+}
+
 function renderQuestion() {
   const q = questions[current];
-  document.getElementById('progressFill').style.width = (current / questions.length * 100) + '%';
-  document.getElementById('progressLabel').textContent = `السؤال ${current + 1} من ${questions.length}`;
+  const pct = (current / questions.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent =
+    `السؤال ${current + 1} من ${questions.length}`;
   document.getElementById('qBadge').textContent = q.badge;
   document.getElementById('qText').textContent = q.text;
 
+  // animate card
   const card = document.getElementById('questionCard');
   card.style.animation = 'none'; card.offsetHeight; card.style.animation = '';
 
-  const grid = document.getElementById('optionsGrid');
-  grid.innerHTML = '';
-  q.options.forEach((opt, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'option-btn' + (answers[current] === i ? ' selected' : '');
-    btn.innerHTML = `<span>${opt.label}</span>`;
-    btn.onclick = () => selectOption(i);
-    grid.appendChild(btn);
-  });
+  renderOptions();
 
   document.getElementById('prevBtn').style.visibility = current === 0 ? 'hidden' : 'visible';
   const isLast = current === questions.length - 1;
   const nextBtn = document.getElementById('nextBtn');
   nextBtn.innerHTML = isLast ? '🎯 عرض نتائجي' : 'التالي ←';
-  nextBtn.disabled = answers[current] === undefined;
+  updateNextBtn();
 }
 
-function selectOption(i) {
-  answers[current] = i;
-  document.querySelectorAll('.option-btn').forEach((b, idx) => b.classList.toggle('selected', idx === i));
-  document.getElementById('nextBtn').disabled = false;
+function renderOptions() {
+  const q = questions[current];
+  const selected = getSelected();
+  const maxReached = selected.size >= MAX_SELECT;
+  const list = document.getElementById('optionsList');
+  list.innerHTML = '';
+
+  q.options.forEach((opt, i) => {
+    const isSelected = selected.has(i);
+    const btn = document.createElement('button');
+    let cls = 'option-btn';
+    if (isSelected) cls += ' selected';
+    else if (maxReached) cls += ' dimmed';
+    btn.className = cls;
+
+    const box = document.createElement('span');
+    box.className = 'check-box';
+    if (isSelected) box.setAttribute('data-checked', '1');
+
+    const txt = document.createElement('span');
+    txt.textContent = opt.label;
+
+    btn.appendChild(box);
+    btn.appendChild(txt);
+
+    if (!maxReached || isSelected) {
+      btn.onclick = () => toggleOption(i);
+    }
+    list.appendChild(btn);
+  });
+}
+
+function toggleOption(i) {
+  if (!answers[current]) answers[current] = new Set();
+  const sel = answers[current];
+  if (sel.has(i)) {
+    sel.delete(i);
+  } else {
+    if (sel.size < MAX_SELECT) sel.add(i);
+  }
+  renderOptions();
+  updateNextBtn();
+}
+
+function updateNextBtn() {
+  const sel = getSelected();
+  document.getElementById('nextBtn').disabled = sel.size === 0;
 }
 
 function nextQuestion() {
-  if (answers[current] === undefined) return;
+  if (getSelected().size === 0) return;
   if (current < questions.length - 1) { current++; renderQuestion(); }
   else showResults();
 }
@@ -464,17 +671,26 @@ function prevQuestion() {
   if (current > 0) { current--; renderQuestion(); }
 }
 
+/* ===== RESULTS ===== */
 function showResults() {
+  // Accumulate scores
   const scores = {};
   Object.keys(majors).forEach(k => scores[k] = 0);
+
   questions.forEach((q, qi) => {
-    const ai = answers[qi];
-    if (ai === undefined) return;
-    Object.entries(q.options[ai].traits).forEach(([k, v]) => {
-      if (scores[k] !== undefined) scores[k] += v;
+    const sel = answers[qi];
+    if (!sel || sel.size === 0) return;
+    // When user picks 2, each gets 0.6× weight to avoid double-boosting
+    const weight = sel.size === 1 ? 1 : 0.65;
+    sel.forEach(ai => {
+      Object.entries(q.options[ai].traits).forEach(([k, v]) => {
+        if (scores[k] !== undefined) scores[k] += v * weight;
+      });
     });
   });
 
+  // Normalise to %
+  // Theoretical max: 15 questions × 3 points × 1.0 weight = 45
   const maxPossible = questions.length * 3;
   const pcts = {};
   Object.keys(scores).forEach(k => {
@@ -498,7 +714,9 @@ function showResults() {
         <div class="major-field">${m.field}</div>
         <div class="major-name">${m.name}</div>
         <div class="major-desc">${m.desc}</div>
-        <div class="pct-bar-wrap"><div class="pct-bar-fill" style="width:0%" data-pct="${pct}"></div></div>
+        <div class="pct-bar-wrap">
+          <div class="pct-bar-fill" style="width:0%" data-pct="${pct}"></div>
+        </div>
       </div>
       <div class="major-pct-wrap">
         <span class="major-pct">${pct}%</span>
