@@ -145,7 +145,7 @@ header {
   transition: transform 0.3s ease, background 0.5s ease, border-color 0.5s ease;
   display: flex;
   justify-content: space-between;
-    align-items: center;
+  align-items: center;
   padding: 8px 20px;
   background: var(--header-bg);
   border-bottom: 2px solid var(--header-border-bottom);
@@ -154,7 +154,13 @@ header {
   z-index: 100;
   width: 100%;
   box-sizing: border-box;
-  }
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
 header.scrolled {
   padding: 8px 30px;
@@ -204,8 +210,10 @@ nav a:hover {
   font-size: 24px;
   cursor: pointer;
   color: var(--primary-color);
-  margin-left: 20px; /* Adjust spacing as needed */
   transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .dark-mode-toggle:hover {
