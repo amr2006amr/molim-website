@@ -7,21 +7,27 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { message, history } = req.body;
+    const { history } = req.body;
 
-    const contents = [];
-    if (history && history.length > 0) {
-      history.forEach(m => {
+    if (!history || history.length === 0) {
+      return res.status(400).json({ error: 'لا توجد رسائل' });
+    }
+
+    const contents = history
+      .map(m => {
         const text = Array.isArray(m.content)
           ? m.content.find(c => c.type === 'text')?.text || ''
           : m.content;
-        if (text) contents.push({
+        return {
           role: m.role === 'assistant' ? 'model' : 'user',
           parts: [{ text }]
-        });
-      });
-    } else {
-      contents.push({ role: 'user', parts: [{ text: message }] });
+        };
+      })
+      .filter(m => m.parts[0].text);
+
+    // تأكد إن أول رسالة دائماً user
+    if (contents[0]?.role !== 'user') {
+      return res.status(400).json({ error: 'ترتيب الرسائل غلط' });
     }
 
     const response = await fetch(
@@ -44,9 +50,11 @@ export default async function handler(req, res) {
     if (reply) {
       res.status(200).json({ content: [{ text: reply }] });
     } else {
+      console.error('Gemini error:', JSON.stringify(data));
       throw new Error('no reply');
     }
   } catch (error) {
+    console.error('Handler error:', error);
     res.status(500).json({ error: 'حدث خطأ في السيرفر' });
   }
 }
