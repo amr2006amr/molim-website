@@ -248,8 +248,9 @@ async function sendToLlamam() {
     return;
   }
 
+  const userDisplayText = text || (llamamFile ? '📎 تم إرفاق ملف' : '');
   input.value = '';
-  addLlamamMessage(text, 'user');
+  addLlamamMessage(userDisplayText, 'user');
 
   // FIX: Build message content — support file attachments
   let userContent;
@@ -282,11 +283,15 @@ async function sendToLlamam() {
   document.getElementById('llamam-messages').appendChild(typingEl);
 
   try {
-    const response = await fetch('https://molim.team/api/chat', {
+    const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ history: llamamHistory })
     });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
 
     document.getElementById('llamam-typing')?.remove();
 
@@ -311,6 +316,10 @@ async function sendToLlamam() {
 
   } catch (err) {
     document.getElementById('llamam-typing')?.remove();
-    addLlamamMessage('عذراً، حدث خطأ في الاتصال. حاول مرة أخرى.', 'ai');
+    console.error('Chat error:', err);
+    const errorMsg = err.message.includes('fetch') 
+      ? 'عذراً، حدث خطأ في الاتصال بالخادم. تحقق من اتصال الإنترنت وحاول مرة أخرى.'
+      : 'عذراً، حدث خطأ غير متوقع. حاول مرة أخرى.';
+    addLlamamMessage(errorMsg, 'ai');
   }
 }
