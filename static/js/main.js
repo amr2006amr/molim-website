@@ -174,3 +174,36 @@ function slideCards(direction) {
   const cardWidth = card.offsetWidth + 20;
   grid.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
 }
+
+// للتمرير بالماوس افقيا
+const dragGrid = document.getElementById('open-scholarships-grid');
+if (dragGrid) {
+  let isDown = false;
+  let startX;
+  let scrollLeft;
+
+  dragGrid.addEventListener('mousedown', e => {
+    isDown = true;
+    dragGrid.style.cursor = 'grabbing';
+    startX = e.pageX - dragGrid.offsetLeft;
+    scrollLeft = dragGrid.scrollLeft;
+  });
+
+  dragGrid.addEventListener('mouseleave', () => {
+    isDown = false;
+    dragGrid.style.cursor = 'grab';
+  });
+
+  dragGrid.addEventListener('mouseup', () => {
+    isDown = false;
+    dragGrid.style.cursor = 'grab';
+  });
+
+  dragGrid.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - dragGrid.offsetLeft;
+    const walk = (x - startX) *3;
+    dragGrid.scrollLeft = scrollLeft - walk;
+  });
+}

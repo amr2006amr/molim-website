@@ -129,7 +129,7 @@
 }
 
 body {
-  padding-top: 80px;
+  padding-top: 0;
   font-family: 'Tajawal', sans-serif;
   background: var(--bg-color);
   color: var(--text-color);
@@ -147,7 +147,7 @@ header {
   padding: 8px 20px;
   background: var(--header-bg);
   border-bottom: 2px solid var(--header-border-bottom);
-  position: fixed;
+  position: relative;
   top: 0;
   z-index: 100;
   width: 100%;
@@ -224,7 +224,7 @@ nav a:hover {
 
 /* ===== HERO ===== */
 .hero {
-  margin-top: 76px;
+  margin-top: 0;
   text-align: center;
   padding: 80px 20px;
   background:
@@ -466,7 +466,7 @@ footer p {
 
 /* ===== SCHOLARSHIPS PAGE ===== */
 .page-hero {
-  margin-top: 76px;
+  margin-top: 0;
   text-align: center;
   padding: 50px 20px 30px;
   background: var(--page-hero-bg);
@@ -1089,6 +1089,8 @@ footer p {
   padding: 0 20px 20px 80px;
   direction: rtl;
   scroll-behavior: smooth;
+  cursor: grab;
+  user-select: none;
 }
 
 #open-scholarships-grid::-webkit-scrollbar {
