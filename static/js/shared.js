@@ -48,7 +48,9 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
+// ============================================
 // ===== لمام AI =====
+// ============================================
 const llamamBtn = document.createElement('button');
 llamamBtn.id = 'llamam-btn';
 llamamBtn.innerHTML = '🤖 لمام';
@@ -120,7 +122,7 @@ llamamBtn.addEventListener('click', () => {
   const box = document.getElementById('llamam-box');
   box.style.display = box.style.display === 'none' ? 'flex' : 'none';
   if (box.style.display === 'flex' && document.getElementById('llamam-messages').children.length === 0) {
-    addLamamMessage('مرحباً! أنا لمام، مساعدك الذكي في منصة مُلم 🎓\nيمكنني مساعدتك في:\n• كتابة وتقييم خطاب الحافز\n• نصائح للـ CV\n• تحليل الصور والملفات\n• توجيهك لأفضل منحة تناسبك\n\n⚠️ الحد الأقصى 15 رسالة لكل محادثة، انتقِ أسئلتك بعناية.', 'ai');
+    addLlamamMessage('مرحباً! أنا لمام، مساعدك الذكي في منصة مُلم 🎓\nيمكنني مساعدتك في:\n• كتابة وتقييم خطاب الحافز\n• نصائح للـ CV\n• تحليل الصور والملفات\n• توجيهك لأفضل منحة تناسبك\n\n⚠️ الحد الأقصى 15 رسالة لكل محادثة، انتقِ أسئلتك بعناية.', 'ai');
 
     const quickDiv = document.getElementById('llamam-quick');
     quickDiv.innerHTML = '';
@@ -147,9 +149,16 @@ llamamBtn.addEventListener('click', () => {
   }
 });
 
+// ============================================
+// State
+// ============================================
 let llamamHistory = [];
 let llamamFile = null;
+const MAX_MESSAGES = 15;
 
+// ============================================
+// Preview attached file
+// ============================================
 function previewLlamamFile(input) {
   const file = input.files[0];
   if (!file) return;
@@ -159,9 +168,14 @@ function previewLlamamFile(input) {
   preview.textContent = `📎 ${file.name}`;
 }
 
-function addLamamMessage(text, sender) {
+// ============================================
+// Add message bubble to chat
+// Returns the inner text element (msg) for streaming updates
+// ============================================
+function addLlamamMessage(text, sender) {
   const msgs = document.getElementById('llamam-messages');
   const msg = document.createElement('div');
+
   msg.style.cssText = `
     padding: 10px 14px;
     border-radius: 12px;
@@ -173,6 +187,7 @@ function addLamamMessage(text, sender) {
       ? 'background:#ff4500; color:white; align-self:flex-end; border-bottom-right-radius:4px;'
       : 'background:var(--card-border); color:var(--text-color); align-self:flex-start; border-bottom-left-radius:4px;'}
   `;
+
   msg.textContent = text;
 
   if (sender === 'ai') {
@@ -182,6 +197,7 @@ function addLamamMessage(text, sender) {
       <button onclick="rateLlamam(this, '👍')" style="background:none; border:none; cursor:pointer; font-size:16px; opacity:0.6;">👍</button>
       <button onclick="rateLlamam(this, '👎')" style="background:none; border:none; cursor:pointer; font-size:16px; opacity:0.6;">👎</button>
     `;
+
     const wrapper = document.createElement('div');
     wrapper.style.cssText = 'display:flex; flex-direction:column; align-self:flex-start; max-width:85%;';
     wrapper.appendChild(msg);
@@ -192,13 +208,22 @@ function addLamamMessage(text, sender) {
   }
 
   msgs.scrollTop = msgs.scrollHeight;
+
+  // Return msg element so streaming can update its text directly
+  return msg;
 }
 
+// ============================================
+// Rating buttons — FIX: consistent name (rateLlamam)
+// ============================================
 function rateLlamam(btn, rating) {
   const parent = btn.parentElement;
   parent.innerHTML = `<span style="font-size:12px; color:#aaa;">${rating === '👍' ? '✅ شكراً على تقييمك!' : '🙏 سنحاول التحسين!'}</span>`;
 }
 
+// ============================================
+// Convert file to base64
+// ============================================
 async function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -208,66 +233,84 @@ async function fileToBase64(file) {
   });
 }
 
+// ============================================
+// Send message to backend
+// ============================================
 async function sendToLlamam() {
-  const userMessages = llamamHistory.filter(m => m.role === 'user').length;
-  if (userMessages >= 15) {
-    addLamamMessage('وصلت للحد الأقصى 15 رسالة. أعد تحميل الصفحة لمحادثة جديدة.', 'ai');
-    return;
-  }
-
   const input = document.getElementById('llamam-input');
   const text = input.value.trim();
   if (!text && !llamamFile) return;
 
-  input.value = '';
-  document.getElementById('llamam-quick').innerHTML = '';
-  const displayText = llamamFile ? `${text || ''} 📎 ${llamamFile.name}` : text;
-  addLamamMessage(displayText, 'user');
-
-  let userContent = [];
-  if (llamamFile) {
-    const base64 = await fileToBase64(llamamFile);
-    const isImage = llamamFile.type.startsWith('image/');
-    userContent.push({
-      type: isImage ? 'image' : 'document',
-      source: { type: 'base64', media_type: llamamFile.type, data: base64 }
-    });
-    document.getElementById('llamam-file-preview').style.display = 'none';
-    llamamFile = null;
-    document.getElementById('llamam-file').value = '';
+  // FIX: Enforce 15-message limit
+  const userMsgCount = llamamHistory.filter(m => m.role === 'user').length;
+  if (userMsgCount >= MAX_MESSAGES) {
+    addLlamamMessage('⚠️ وصلت للحد الأقصى (15 رسالة). يرجى تحديث الصفحة لبدء محادثة جديدة.', 'ai');
+    return;
   }
-  if (text) userContent.push({ type: 'text', text: text });
+
+  input.value = '';
+  addLlamamMessage(text, 'user');
+
+  // FIX: Build message content — support file attachments
+  let userContent;
+  if (llamamFile) {
+    const base64Data = await fileToBase64(llamamFile);
+    const isImage = llamamFile.type.startsWith('image/');
+    userContent = [
+      isImage
+        ? { type: 'image', source: { type: 'base64', media_type: llamamFile.type, data: base64Data } }
+        : { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: base64Data } },
+      { type: 'text', text: text || 'حلل هذا الملف' }
+    ];
+    // Reset file after sending
+    llamamFile = null;
+    const preview = document.getElementById('llamam-file-preview');
+    preview.style.display = 'none';
+    preview.textContent = '';
+    document.getElementById('llamam-file').value = '';
+  } else {
+    userContent = text;
+  }
 
   llamamHistory.push({ role: 'user', content: userContent });
 
-  const typing = document.createElement('div');
-  typing.id = 'llamam-typing';
-  typing.style.cssText = 'padding:10px 14px; border-radius:12px; background:var(--card-border); color:var(--text-color); align-self:flex-start; font-size:14px;';
-  typing.textContent = '...يكتب';
-  document.getElementById('llamam-messages').appendChild(typing);
-  document.getElementById('llamam-messages').scrollTop = document.getElementById('llamam-messages').scrollHeight;
+  // Show typing indicator
+  const typingEl = document.createElement('div');
+  typingEl.id = 'llamam-typing';
+  typingEl.textContent = '...يكتب';
+  typingEl.style.cssText = 'font-size:13px; color:#aaa; align-self:flex-start;';
+  document.getElementById('llamam-messages').appendChild(typingEl);
 
   try {
     const response = await fetch('https://molim.team/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        history: llamamHistory
-      })
+      body: JSON.stringify({ history: llamamHistory })
     });
 
-    const data = await response.json();
     document.getElementById('llamam-typing')?.remove();
 
-    if (data.content && data.content[0]) {
-      const reply = data.content[0].text;
-      llamamHistory.push({ role: 'assistant', content: reply });
-      addLamamMessage(reply, 'ai');
-    } else {
-      throw new Error('invalid response');
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let fullReply = '';
+
+    // FIX: addLlamamMessage returns the msg element directly — update it in the stream loop
+    const messageElement = addLlamamMessage('', 'ai');
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      const chunk = decoder.decode(value, { stream: true });
+      fullReply += chunk;
+      // Update the text node directly — no querySelector needed
+      messageElement.textContent = fullReply;
+      document.getElementById('llamam-messages').scrollTop = document.getElementById('llamam-messages').scrollHeight;
     }
+
+    llamamHistory.push({ role: 'assistant', content: fullReply });
+
   } catch (err) {
     document.getElementById('llamam-typing')?.remove();
-    addLamamMessage('عذراً، حدث خطأ في الاتصال. حاول مرة ثانية.', 'ai');
+    addLlamamMessage('عذراً، حدث خطأ في الاتصال. حاول مرة أخرى.', 'ai');
   }
 }

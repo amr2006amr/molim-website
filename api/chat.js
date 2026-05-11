@@ -9,52 +9,154 @@ export default async function handler(req, res) {
   try {
     const { history } = req.body;
 
-    if (!history || history.length === 0) {
-      return res.status(400).json({ error: 'لا توجد رسائل' });
+    if (!history || !Array.isArray(history) || history.length === 0) {
+      return res.status(400).json({ error: 'history مطلوب ويجب أن يكون مصفوفة' });
     }
 
+    // ============================================
+    // FIX: بناء contents بشكل صحيح يدعم النصوص والصور والـ PDF
+    // ============================================
     const contents = history
       .map(m => {
-        const text = Array.isArray(m.content)
-          ? m.content.find(c => c.type === 'text')?.text || ''
-          : m.content;
-        return {
-          role: m.role === 'assistant' ? 'model' : 'user',
-          parts: [{ text }]
-        };
-      })
-      .filter(m => m.parts[0].text);
+        const role = m.role === 'assistant' ? 'model' : 'user';
 
-    // تأكد إن أول رسالة دائماً user
-    if (contents[0]?.role !== 'user') {
-      return res.status(400).json({ error: 'ترتيب الرسائل غلط' });
+        // إذا المحتوى مصفوفة (صورة أو PDF مرفق)
+        if (Array.isArray(m.content)) {
+          const parts = m.content.map(item => {
+            if (item.type === 'text') {
+              return { text: item.text };
+            }
+            if (item.type === 'image' && item.source?.type === 'base64') {
+              return {
+                inlineData: {
+                  mimeType: item.source.media_type,
+                  data: item.source.data
+                }
+              };
+            }
+            if (item.type === 'document' && item.source?.type === 'base64') {
+              // Gemini يدعم PDF كـ inlineData
+              return {
+                inlineData: {
+                  mimeType: 'application/pdf',
+                  data: item.source.data
+                }
+              };
+            }
+            return null;
+          }).filter(Boolean);
+
+          if (parts.length === 0) return null;
+          return { role, parts };
+        }
+
+        // إذا المحتوى نص عادي
+        if (typeof m.content === 'string' && m.content.trim()) {
+          return { role, parts: [{ text: m.content }] };
+        }
+
+        return null;
+      })
+      .filter(Boolean);
+
+    if (contents.length === 0) {
+      return res.status(400).json({ error: 'لا يوجد محتوى صالح في history' });
     }
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+    // ============================================
+    // FIX: Gemini لا يقبل أن تبدأ المحادثة بدور "model"
+    // ============================================
+    if (contents[0].role === 'model') {
+      contents.shift();
+    }
+
+    // ============================================
+    // طلب Gemini
+    // ============================================
+    const geminiRes = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?key=${process.env.GEMINI_API_KEY}&alt=sse`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           system_instruction: {
-            parts: [{ text: 'أنت مساعد ذكي اسمك لمام في منصة مُلم. ردودك ودودة وباللهجة البيضاء وتهتم بالمنح الدراسية.' }]
+            parts: [{
+              text: 'أنت مساعد ذكي اسمك لمام في منصة مُلم. ردودك ودودة وباللهجة البيضاء. تساعد الطلاب في المنح الدراسية وكتابة خطابات الحافز والـ CV.'
+            }]
           },
-          contents
+          contents,
+          generationConfig: {
+            temperature: 0.7,
+            maxOutputTokens: 1024
+          }
         })
       }
     );
 
-    const data = await response.json();
-    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text;
-
-    if (reply) {
-      res.status(200).json({ content: [{ text: reply }] });
-    } else {
-      console.error('Gemini error:', JSON.stringify(data));
-      throw new Error('no reply');
+    if (!geminiRes.ok) {
+      const errText = await geminiRes.text();
+      console.error('Gemini error:', errText);
+      return res.status(502).json({ error: 'خطأ من Gemini API' });
     }
+
+    // ============================================
+    // FIX: قراءة SSE بشكل صحيح — كل سطر data: {...}
+    // بدلاً من split('\n') العشوائي على الـ chunks
+    // ============================================
+    res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+    res.setHeader('Transfer-Encoding', 'chunked');
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+
+    const reader = geminiRes.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true });
+
+      // معالجة كل سطر كامل في الـ buffer
+      const lines = buffer.split('\n');
+      // آخر عنصر قد يكون سطر غير مكتمل — نحتفظ به في الـ buffer
+      buffer = lines.pop();
+
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || !trimmed.startsWith('data:')) continue;
+
+        const jsonStr = trimmed.replace(/^data:\s*/, '');
+        if (jsonStr === '[DONE]') continue;
+
+        try {
+          const json = JSON.parse(jsonStr);
+          const text = json.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          if (text) res.write(text);
+        } catch (e) {
+          // سطر غير صالح — نتجاهله
+        }
+      }
+    }
+
+    // معالجة ما تبقى في الـ buffer
+    if (buffer.trim().startsWith('data:')) {
+      const jsonStr = buffer.trim().replace(/^data:\s*/, '');
+      if (jsonStr && jsonStr !== '[DONE]') {
+        try {
+          const json = JSON.parse(jsonStr);
+          const text = json.candidates?.[0]?.content?.parts?.[0]?.text || '';
+          if (text) res.write(text);
+        } catch (e) {}
+      }
+    }
+
+    res.end();
+
   } catch (error) {
-    console.error('Handler error:', error);
-    res.status(500).json({ error: 'حدث خطأ في السيرفر' });
+    console.error('Server error:', error);
+    if (!res.headersSent) {
+      res.status(500).json({ error: 'خطأ في السيرفر' });
+    }
   }
 }
