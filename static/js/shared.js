@@ -120,7 +120,7 @@ llamamBtn.addEventListener('click', () => {
   const box = document.getElementById('llamam-box');
   box.style.display = box.style.display === 'none' ? 'flex' : 'none';
   if (box.style.display === 'flex' && document.getElementById('llamam-messages').children.length === 0) {
-    addLamamMessage('مرحباً! أنا لمام، مساعدك الذكي في منصة مُلم 🎓\nيمكنني مساعدتك في:\n• كتابة وتقييم خطاب الحافز\n• نصائح للـ CV\n• تحليل الصور والملفات\n• الإجابة عن اي سؤال يتعلق بموضوع المنح الدراسية\n\n⚠️ الحد الأقصى 15 رسالة لكل محادثة، انتقِ أسئلتك بعناية.', 'ai');
+    addLamamMessage('مرحباً! أنا لمام، مساعدك الذكي في منصة مُلم 🎓\nيمكنني مساعدتك في:\n• كتابة وتقييم خطاب الحافز\n• نصائح للـ CV\n• تحليل الصور والملفات\n• توجيهك لأفضل منحة تناسبك\n\n⚠️ الحد الأقصى 15 رسالة لكل محادثة، انتقِ أسئلتك بعناية.', 'ai');
 
     const quickDiv = document.getElementById('llamam-quick');
     quickDiv.innerHTML = '';
@@ -208,7 +208,6 @@ async function fileToBase64(file) {
   });
 }
 
-// تعديل الدالة لتعمل مع ملف السيرفر chat.js
 async function sendToLlamam() {
   const userMessages = llamamHistory.filter(m => m.role === 'user').length;
   if (userMessages >= 15) {
@@ -225,7 +224,6 @@ async function sendToLlamam() {
   const displayText = llamamFile ? `${text || ''} 📎 ${llamamFile.name}` : text;
   addLamamMessage(displayText, 'user');
 
-  // إعداد المحتوى (Text / Files)
   let userContent = [];
   if (llamamFile) {
     const base64 = await fileToBase64(llamamFile);
@@ -242,7 +240,6 @@ async function sendToLlamam() {
 
   llamamHistory.push({ role: 'user', content: userContent });
 
-  // إضافة علامة "يكتب..."
   const typing = document.createElement('div');
   typing.id = 'llamam-typing';
   typing.style.cssText = 'padding:10px 14px; border-radius:12px; background:var(--card-border); color:var(--text-color); align-self:flex-start; font-size:14px;';
@@ -251,29 +248,27 @@ async function sendToLlamam() {
   document.getElementById('llamam-messages').scrollTop = document.getElementById('llamam-messages').scrollHeight;
 
   try {
-    // الخطوة الثانية: إرسال الطلب لملف السيرفر المحلي بدلاً من Anthropic مباشرة
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-          message: text, // إرسال النص الأساسي
-          history: llamamHistory // إرسال التاريخ إذا أردت دعمه في السيرفر لاحقاً
+      body: JSON.stringify({
+        message: text,
+        history: llamamHistory
       })
     });
 
     const data = await response.json();
     document.getElementById('llamam-typing')?.remove();
 
-    // استخراج الرد وعرضه
     if (data.content && data.content[0]) {
       const reply = data.content[0].text;
       llamamHistory.push({ role: 'assistant', content: reply });
       addLamamMessage(reply, 'ai');
     } else {
-      throw new Error("Invalid response format");
+      throw new Error('invalid response');
     }
   } catch (err) {
     document.getElementById('llamam-typing')?.remove();
-    addLamamMessage('عذراً، حدث خطأ في الاتصال بـ "لمام". تأكد من رفع الموقع على Vercel وإضافة الـ API Key.', 'ai');
+    addLamamMessage('عذراً، حدث خطأ في الاتصال. حاول مرة ثانية.', 'ai');
   }
 }

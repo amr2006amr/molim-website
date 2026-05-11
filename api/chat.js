@@ -12,7 +12,23 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message } = req.body;
+    const { message, history } = req.body;
+
+    const messages = [];
+    if (history && history.length > 0) {
+      history.forEach(m => {
+        if (m.role === 'user') {
+          const textContent = Array.isArray(m.content)
+            ? m.content.find(c => c.type === 'text')?.text || ''
+            : m.content;
+          if (textContent) messages.push({ role: 'user', content: textContent });
+        } else if (m.role === 'assistant') {
+          messages.push({ role: 'assistant', content: m.content });
+        }
+      });
+    } else {
+      messages.push({ role: 'user', content: message });
+    }
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -22,10 +38,10 @@ export default async function handler(req, res) {
         'content-type': 'application/json',
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-5",
+        model: 'claude-haiku-4-5-20251001',
         max_tokens: 1024,
-        system: "أنت مساعد ذكي اسمك لمام في منصة مُلم. ردودك ودودة وباللهجة البيضاء وتهتم بالمنح الدراسية.",
-        messages: [{ role: "user", content: message }],
+        system: 'أنت مساعد ذكي اسمك لمام في منصة مُلم. ردودك ودودة وباللهجة البيضاء وتهتم بالمنح الدراسية.',
+        messages: messages,
       }),
     });
 
