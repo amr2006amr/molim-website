@@ -23,6 +23,18 @@ fetch('/data/scholarships.json?v=' + Date.now())
       ? `<img src="${s.flag}" alt="flag" class="details-flag"/>`
       : `<span class="details-flag" style="font-size:60px; line-height:1;">${s.flag || ''}</span>`;
 
+    // زر القروبات — يظهر بس لو المنحة عندها groupLink و discussionLink
+    const groupsBtnHtml = (s.groupLink && s.discussionLink) ? `
+      <div class="btn-split" style="display:flex; gap:8px; margin-top:20px;">
+        <a href="${s.groupLink}" target="_blank" class="btn-main btn-split-half">
+          👥 قروب المنحة
+        </a>
+        <a href="${s.discussionLink}" target="_blank" class="btn-main btn-split-half">
+          💬 قروب النقاش
+        </a>
+      </div>
+    ` : '';
+
     container.innerHTML = `
       <div class="details-hero">
         ${flagHtml}
@@ -90,7 +102,9 @@ fetch('/data/scholarships.json?v=' + Date.now())
         </div>
         ` : ''}
 
-        <a href="${s.link}" target="_blank" class="btn-main" style="display:block; text-align:center; margin-top:20px;">
+        ${groupsBtnHtml}
+
+        <a href="${s.link}" target="_blank" class="btn-main" style="display:block; text-align:center; margin-top:10px;">
           🌐 زيارة الموقع الرسمي للتقديم
         </a>
 

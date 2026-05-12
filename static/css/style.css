@@ -1254,3 +1254,11 @@ footer p {
   border: none; border-top: 1px dashed var(--admin-section-divider-border);
   margin: 15px 0; transition: border-color 0.5s ease;
 }
+
+/* ازرار المنحة المقسمة*/
+.btn-split-half {
+  flex: 1;
+  text-align: center;
+  margin-top: 0 !important;
+  display: block;
+}
