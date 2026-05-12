@@ -1,5 +1,5 @@
 export default async function handler(req, res) {
-  const GEMINI_API_KEY = 'AIzaSyCBQow6rPm-xenlk1LtrUPkYof9srq4d-o';
+  const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
