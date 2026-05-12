@@ -79,7 +79,7 @@ export default async function handler(req, res) {
         return res.status(500).json({ error: 'GEMINI_API_KEY غير معرف. أضفه في إعدادات البيئة.' });
       }
     const geminiRes = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent?key=${GEMINI_API_KEY}&alt=sse`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?key=${GEMINI_API_KEY}&alt=sse`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
