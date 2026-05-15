@@ -270,8 +270,8 @@
     "majors": [
       "جميع التخصصات متاحة في منحة اوبن دورز"
     ],
-   "groupLink": "https://t.me/sc2026h",
-   "discussionLink": "https://t.me/sc2026hh"
+    "groupLink": "https://t.me/sc2026h",
+    "discussionLink": "https://t.me/sc2026hh"
   },
   {
     "id": "kazakhstan-gov",
@@ -322,8 +322,8 @@
     "majors": [
       "جميع التخصصات متاحة في منحة كازاخستان"
     ],
-   "groupLink": "https://t.me/sc2026h",
-   "discussionLink": "https://t.me/sc2026hh"
+    "groupLink": "https://t.me/sc2026h",
+    "discussionLink": "https://t.me/sc2026hh"
   },
   {
     "id": "romania-gov",
@@ -487,8 +487,8 @@
       "البيئة والاقتصاد",
       "علم البيئة والإدارة العامة"
     ],
-  "groupLink": "https://t.me/sc2026h",
-  "discussionLink": "https://t.me/sc2026hh"
+    "groupLink": "https://t.me/sc2026h",
+    "discussionLink": "https://t.me/sc2026hh"
   },
   {
     "id": "study-in-hungary",
@@ -694,7 +694,7 @@
     "open": false,
     "notes": "",
     "groupLink": "https://t.me/sc2026h",
-   "discussionLink": "https://t.me/sc2026hh"
+    "discussionLink": "https://t.me/sc2026hh"
   },
   {
     "id": "colombia-gov",
@@ -822,5 +822,44 @@
     "notes": "رغم ان شهادة اللغة متطلب إجباري الا انه تم قبول بعض الطلاب في العام الماضي بدون هذا المتطلب",
     "groupLink": "https://t.me/sc2026h",
     "discussionLink": "https://t.me/sc2026hh"
+  },
+  {
+    "id": "slovakia-government-scholarship",
+    "name": "منحة الحكومة السلوفاكية",
+    "name_en": "Slovakia Government Scholarship",
+    "country": "سلوفاكيا",
+    "flag": "https://flagcdn.com/w40/sk.png",
+    "degree": "بكالوريوس, ماجستير, دكتوراه",
+    "language": "اللغة السلوفاكية",
+    "description": "منحة دراسية مقدمة من الحكومة السلوفاكية لتعزيز التعاون التنموي طويل الامد للجمهورية السلوفاكية",
+    "benefits": [
+      "تغطية الرسوم الدراسية",
+      "راتب شهري",
+      "بدلات اخرى عند القدوم والمغادرة"
+    ],
+    "requirements": [
+      "معدل لا يقل عن 80%"
+    ],
+    "majors": [
+      "جميع الكليات متاحة في منحة الحكومة السلوفاكية"
+    ],
+    "open_date": "2026-03-24",
+    "deadline": "2026-05-25",
+    "documents": {
+      "required": [
+        "جواز لسفر",
+        "شهادة ميلاد و صورة شخصية",
+        "شهادة تخرج مع كشف الدرجات لاخر مرحلة دراسية",
+        "CV",
+        "خطابان توصية"
+      ],
+      "optional": [
+        "المنشورات السابقة للمتقدمين على درجة الدكتوراه",
+        "خطاب قبول من جامعة سلوفاكية حكومية"
+      ]
+    },
+    "link": "https://www.vladnestipendia.sk/en/",
+    "open": true,
+    "notes": "الدول العربية المتاح التقديم لها : العراق الاردن السودان سوريا فلسطين لبنان تونس اثيوبيا"
   }
 ]
