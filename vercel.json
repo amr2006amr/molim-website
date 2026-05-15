@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/scholarship/:id", "destination": "/scholarship.html?id=:id" },
-    { "source": "/api/(.*)", "destination": "/api/$1" }
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/amr/aseal/2608", "destination": "/admin.html" }
   ]
 }
