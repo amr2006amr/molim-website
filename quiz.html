@@ -1193,7 +1193,7 @@ async function saveQuizResult(results) {
       results, createdAt: serverTimestamp()
     });
     const notice = document.getElementById('saveNotice');
-    notice.textContent = 'تم حفظ نتائجك تلقائياً في حسابك الشقسي.';
+    notice.textContent = 'تم حفظ نتائجك تلقائياً في حسابك الشخصي.';
     notice.style.display = 'block';
   } catch(e) { console.warn('لم يتم حفظ النتائج:', e); }
 }
